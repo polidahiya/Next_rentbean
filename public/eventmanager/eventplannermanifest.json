@@ -1,0 +1,17 @@
+{
+    "name": "Rentbean.in Event planners",
+    "short_name": "Rentbean.in EPs",
+    "description": "Turning Moments into Memories.",
+    "icons": [
+      {
+        "src": "/eventmanager/favicon.png",
+        "sizes": "295x295",
+        "type": "image/png"
+      }
+    ],
+    "start_url": "/eventplanner",
+    "display": "standalone",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff"
+  }
+  
