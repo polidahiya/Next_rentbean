@@ -85,7 +85,7 @@ function Settings({ product, typeofprices, link }) {
                 typeofprices[product.pricetype - 1].time[productdata.time]
             )}
           </div>
-          <div className="text-[10px] text-center">Monthly rent</div>
+          <div className="text-[10px] text-center">{typeofprices[product.pricetype - 1].name}</div>
         </div>
         <p className="w-[2px] bg-gray-400 min-h-[30px] my-auto"></p>
         <div className="w-full flex flex-col items-center">
