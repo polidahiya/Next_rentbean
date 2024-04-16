@@ -15,7 +15,7 @@ function Relatedproducts({ products, typeofprices, params }) {
   };
 
   return (
-    <div className="p-[10px] md:p-[40px] bg-bg1">
+    <div className="p-[10px] md:p-[40px] bg-white">
       <div className="flex items-end px-[10px] lg:px-0">
         <h2 className="flex items-center gap-[10px] text-[22px] font-semibold whitespace-nowrap">
           <Relatedprosvg />
@@ -87,7 +87,7 @@ function Imagecard({ product, i, params, typeofprices }) {
       href={
         "/" + params.category + "/" + params.subcategory + "/" + product.pid
       }
-      className={`min-w-[250px] p-[10px] flex flex-col justify-between gap-[10px] bg-white object-cover ${
+      className={`min-w-[250px] p-[10px] flex flex-col justify-between gap-[10px] bg-bg1 object-cover ${
         i % 2 == 0 ? "snap-start" : ""
       }`}
       key={i}
@@ -99,7 +99,7 @@ function Imagecard({ product, i, params, typeofprices }) {
           alt={product.name}
           width={230}
           height={230}
-          className="absolute h-full w-full object-cover"
+          className="absolute h-full w-full object-cover bg-white"
           onLoad={() => {
             setimgloading(false);
           }}

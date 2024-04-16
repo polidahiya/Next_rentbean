@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Pickups from "./components/pickups/Pickups";
 import { Data, typeofprices } from "./Data";
-
+import Posteradds from "./components/Posterads";
 
 let data = Data();
 let randomproducts = Object.keys(data.data)
@@ -51,7 +51,8 @@ const commnets = [
 export default async function Home() {
   return (
     <>
-      <div className="h-[200px] bg-slate-500 mt-5"></div>
+      {/* poster ads */}
+      <Posteradds />
       {/* tiles */}
       <div className="flex items-center justify-center gap-[10px] md:gap-[20px] px-[10px] py-[40px] md:px-[40px] flex-wrap">
         {Object.keys(data.data).map((categories, i) => {
@@ -68,13 +69,15 @@ export default async function Home() {
                 src={data.data[categories].image}
                 alt={data.data[categories].image}
               />
-              <p className="text-[8px] md:text-[11px] text-center md:whitespace-nowrap">{categories}</p>
+              <p className="text-[8px] md:text-[11px] text-center md:whitespace-nowrap">
+                {categories}
+              </p>
             </Link>
           );
         })}
       </div>
       {/* pickups */}
-      <Pickups randomproducts={randomproducts} typeofprices={typeofprices}/>
+      <Pickups randomproducts={randomproducts} typeofprices={typeofprices} />
       {/* commnets */}
       <div className="py-[50px] commentscontainer ">
         <p className="text-center text-[30px]">What our clients say!</p>
