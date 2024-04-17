@@ -100,6 +100,11 @@ nav .cartcounter {
     min-width: calc(50% - 5px);
   }
 }
+/* home page ads */
+.adscontrolbuttons:hover{
+  opacity: 1 !important;
+  background: white !important;
+}
 /* commnets */
 .commentname::before {
   position: absolute;
