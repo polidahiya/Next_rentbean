@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
-import { AppContextfn } from "../../Context/Index";
-import Usersvg from "../../components/(svgs)/User";
-import Checkoutsvg from "../../components/(svgs)/Checkout";
-import Paymentmodesvg from "../../components/(svgs)/Paymentmode";
-import Upisvg from "../../components/(svgs)/Upi";
-import Cashsvg from "../../components/(svgs)/Cash";
-import Placeordersvg from "../../components/(svgs)/Placeorder";
+import { AppContextfn } from "../../../Context/Index";
+import Usersvg from "../../../components/(svgs)/User";
+import Checkoutsvg from "../../../components/(svgs)/Checkout";
+import Paymentmodesvg from "../../../components/(svgs)/Paymentmode";
+import Upisvg from "../../../components/(svgs)/Upi";
+import Cashsvg from "../../../components/(svgs)/Cash";
+import Placeordersvg from "../../../components/(svgs)/Placeorder";
 
 function Userdetails({ placeorder, total }) {
   const { cartproducts, settoggleorderplacedmenu } = AppContextfn();

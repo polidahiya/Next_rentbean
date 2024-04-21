@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import Emptycart from "./components/Emptycart";
 import Cartitems from "./components/Cartitems";
-import { Data, typeofprices } from "../Data";
-import { AppContextfn } from "../Context/Index";
+import { Data, typeofprices } from "../../Data";
+import { AppContextfn } from "../../Context/Index";
 import Userdetails from "./components/Userdetails";
 
 function Publicpage({ placeorder }) {

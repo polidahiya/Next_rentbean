@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { AppContextfn } from "../../Context/Index";
+import { AppContextfn } from "../../../Context/Index";
 
 function Cartitems({ item, typeofprices }) {
   const { cartproducts, setcartproducts, notifictionarr, setnotifictionarr } =

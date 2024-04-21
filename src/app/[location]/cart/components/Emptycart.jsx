@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Homesvg from "../../components/(svgs)/Home";
+import Homesvg from "../../../components/(svgs)/Home";
 
 function Emptycart() {
   return (

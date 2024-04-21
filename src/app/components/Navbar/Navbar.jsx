@@ -56,7 +56,7 @@ function Navbar({ data }) {
             />
           </button>
           <Link
-            href="/cart"
+            href={"/" + location + "/cart"}
             className="relative"
             onClick={() => {
               if (togglemobilenav) {
@@ -123,7 +123,7 @@ function Navbar({ data }) {
         </div>
         {/* cart */}
         <Link
-          href="/cart"
+          href={"/" + location + "/cart"}
           className="relative  top-[15px] h-[30px] ml-[5px] hidden lg:flex  items-center px-[20px] rounded-md cursor-pointer border border-theme no-underline text-theme text-sm "
         >
           <svg
