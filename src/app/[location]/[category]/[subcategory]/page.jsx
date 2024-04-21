@@ -1,19 +1,18 @@
 import React from "react";
 import Link from "next/link";
-import { Data, typeofprices } from "../../Data";
+import { Data, typeofprices } from "../../../Data";
 import Loadingimage from "../Loadingimage";
 
 function page({ params }) {
+  let location = params.location.replace(/_/g, " ");
   let category = params.category.replace(/_/g, " ");
   let subcat = params.subcategory.replace(/_/g, " ");
-  let products = Data().data[category].subcat[subcat].products;
+  let products = Data()?.data[category]?.subcat[subcat]?.products;
   return (
     <>
-      <div
-        className="text-[20px] relative h-[60px] flex items-center justify-center bg-bg1"
-      >
+      <div className="text-[20px] relative h-[60px] flex items-center justify-center bg-bg1">
         <Link
-          href=".."
+          href={"/" + location.replace(/ /g, "_") + "/" + params.category}
           className="group absolute left-[40px] h-[40px] w-[40px] top-[50%] bg-theme translate-y-[-50%] rounded-full overflow-hidden flex items-center justify-center lg:hover:w-[140px] duration-300"
         >
           <svg
@@ -38,6 +37,8 @@ function page({ params }) {
           return (
             <Link
               href={
+                "/" +
+                location +
                 "/" +
                 category.replace(/ /g, "_") +
                 "/" +

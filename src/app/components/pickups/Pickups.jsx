@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Imageloading from "../Imageloading/Imageloading";
 
-function Pickups({ randomproducts, typeofprices }) {
+function Pickups({ randomproducts, typeofprices, location }) {
   let scrollref = useRef(null);
   let scrollvalue = 400;
   const handleScroll = (amount) => {
@@ -76,6 +76,7 @@ function Pickups({ randomproducts, typeofprices }) {
               i={i}
               key={i}
               typeofprices={typeofprices}
+              location={location}
             />
           );
         })}
@@ -85,7 +86,7 @@ function Pickups({ randomproducts, typeofprices }) {
   );
 }
 
-function Imagecard({ product, i, typeofprices }) {
+function Imagecard({ product, i, typeofprices, location }) {
   const [imgloading, setimgloading] = useState(true);
   return (
     <div
@@ -95,6 +96,8 @@ function Imagecard({ product, i, typeofprices }) {
     >
       <Link
         href={
+          "/" +
+          location.replace(/ /g, "_") +
           "/" +
           product.category.replace(/ /g, "_") +
           "/" +
@@ -135,6 +138,8 @@ function Imagecard({ product, i, typeofprices }) {
         </div>
         <Link
           href={
+            "/" +
+            location.replace(/ /g, "_") +
             "/" +
             product.category.replace(/ /g, "_") +
             "/" +

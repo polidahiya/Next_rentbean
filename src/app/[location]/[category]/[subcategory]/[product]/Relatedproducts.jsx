@@ -2,8 +2,8 @@
 import React, { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Imageloading from "../../../components/Imageloading/Imageloading";
-import Relatedprosvg from "../../../components/(svgs)/Relatedpro";
+import Imageloading from "../../../../components/Imageloading/Imageloading";
+import Relatedprosvg from "../../../../components/(svgs)/Relatedpro";
 
 function Relatedproducts({ products, typeofprices, params }) {
   let scrollref = useRef(null);
@@ -85,7 +85,14 @@ function Imagecard({ product, i, params, typeofprices }) {
   return (
     <Link
       href={
-        "/" + params.category + "/" + params.subcategory + "/" + product.pid
+        "/" +
+        params.location +
+        "/" +
+        params.category +
+        "/" +
+        params.subcategory +
+        "/" +
+        product.pid
       }
       className={`min-w-[250px] p-[10px] flex flex-col justify-between gap-[10px] bg-bg1 object-cover ${
         i % 2 == 0 ? "snap-start" : ""

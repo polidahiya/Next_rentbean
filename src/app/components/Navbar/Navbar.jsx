@@ -9,7 +9,8 @@ import Menusvg from "../(svgs)/Menu";
 import Cartsvg from "../(svgs)/Cartstroke";
 
 function Navbar({ data }) {
-  const { cartproducts, togglelocation, settogglelocation } = AppContextfn();
+  const { cartproducts, togglelocation, settogglelocation, location } =
+    AppContextfn();
   const [togglemobilenav, settogglemobilenav] = useState(false);
 
   useEffect(() => {
@@ -29,7 +30,7 @@ function Navbar({ data }) {
         {/* mobile nav bar */}
         <div className="flex lg:hidden items-center justify-evenly fixed bottom-0 left-0 h-[50px] w-full  bg-white z-[60]">
           <Link
-            href="/"
+            href={"/" + location.replace(/ /g, "_")}
             onClick={() => {
               if (togglemobilenav) {
                 settogglemobilenav(false);
@@ -70,7 +71,7 @@ function Navbar({ data }) {
           </Link>
         </div>
         <Fakenavbg />
-        <Link href="/">
+        <Link href={"/" + location.replace(/ /g, "_")}>
           <Image
             src="/logo&ui/3dlogo.png"
             alt="rentbean.in logo image"
@@ -97,7 +98,7 @@ function Navbar({ data }) {
           >
             <path d="M32 0C18.746 0 8 10.746 8 24c0 5.219 1.711 10.008 4.555 13.93.051.094.059.199.117.289l16 24a4.001 4.001 0 006.656 0l16-24c.059-.09.066-.195.117-.289C54.289 34.008 56 29.219 56 24 56 10.746 45.254 0 32 0zm0 32a8 8 0 110-16 8 8 0 010 16z"></path>
           </svg>
-          <span className="hidden lg:block">Choose location</span>
+          <span className="hidden lg:block">{location}</span>
         </div>
         {/* sidebar */}
         <div
@@ -114,6 +115,7 @@ function Navbar({ data }) {
                 data={data}
                 title={title}
                 listitems={Object.keys(data[title].subcat)}
+                location={location}
                 settogglemobilenav={settogglemobilenav}
               />
             );
@@ -166,7 +168,7 @@ function Navbar({ data }) {
   );
 }
 
-function Navlist({ data, title, listitems, settogglemobilenav }) {
+function Navlist({ data, title, listitems, location, settogglemobilenav }) {
   return (
     <div
       className="navlistcontainer group"
@@ -175,7 +177,9 @@ function Navlist({ data, title, listitems, settogglemobilenav }) {
       }}
     >
       <Link
-        href={"/" + title.replace(/ /g, "_")}
+        href={
+          "/" + location.replace(/ /g, "_") + "/" + title.replace(/ /g, "_")
+        }
         className=" titles flex items-center content-center h-[60px] text-[18px] lg:text-sm px-[10px] font-bold lg:font-normal"
       >
         <svg
@@ -197,7 +201,12 @@ function Navlist({ data, title, listitems, settogglemobilenav }) {
           return (
             <Link
               href={
-                "/" + title.replace(/ /g, "_") + "/" + list.replace(/ /g, "_")
+                "/" +
+                location.replace(/ /g, "_") +
+                "/" +
+                title.replace(/ /g, "_") +
+                "/" +
+                list.replace(/ /g, "_")
               }
               className=" lg:h-0  lg:group-hover:h-[40px] min-w-fit rounded-[10px] lg:rounded-none overflow-hidden text-sm flex px-[10px] lg:px-[5px] py-[5px] lg:py-0 items-center justify-center bg-bg1 whitespace-nowrap no-underline cursor-pointer lg:hover:text-theme"
               key={i}

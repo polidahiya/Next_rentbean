@@ -1,9 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { AppContextfn } from "../../../Context/Index";
-import Deliverytruck from "../../../components/(svgs)/Deliverytruck";
-import Cart from "../../../components/(svgs)/Cart";
-import Delete from "../../../components/(svgs)/Delete";
+import { AppContextfn } from "../../../../Context/Index";
+import Deliverytruck from "../../../../components/(svgs)/Deliverytruck";
+import Cart from "../../../../components/(svgs)/Cart";
+import Delete from "../../../../components/(svgs)/Delete";
 
 function Settings({ product, typeofprices, link }) {
   const { cartproducts, setcartproducts, notifictionarr, setnotifictionarr } =

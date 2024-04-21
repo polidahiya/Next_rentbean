@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-function Posteradds() {
+function Posteradds({ location }) {
   const [activeImage, setActiveImage] = useState(0);
   const imageTimerRef = useRef(null);
 
@@ -47,7 +47,7 @@ function Posteradds() {
         {imageArray.map((item, i) => (
           <Link
             key={i}
-            href={item.link}
+            href={"/" + location.replace(/ /g, "_") + item.link}
             className={`absolute min-w-full min-h-full duration-[1s] ${
               i === activeImage
                 ? "opacity-100"

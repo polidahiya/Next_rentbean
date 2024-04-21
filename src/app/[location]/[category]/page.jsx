@@ -1,8 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import {Data} from "../Data";
+import { Data } from "../../Data";
 import Loadingimage from "./Loadingimage";
 function page({ params }) {
+  let location = params.location.replace(/_/g, " ");
   let category = params.category.replace(/_/g, " ");
   let categorydata = Object.keys(Data().data[category]?.subcat || {}).map(
     (subcategory) => ({
@@ -10,14 +11,12 @@ function page({ params }) {
       img: Data().data[category].subcat[subcategory].image,
     })
   );
-  
+
   return (
     <div>
-      <div
-        className="text-[20px] relative h-[60px] flex items-center justify-center bg-bg1"
-      >
+      <div className="text-[20px] relative h-[60px] flex items-center justify-center bg-bg1">
         <Link
-          href=".."
+          href={"/" + location.replace(/ /g, "_")}
           className="group absolute left-[40px] h-[40px] w-[40px] top-[50%] bg-theme translate-y-[-50%] rounded-full overflow-hidden flex items-center justify-center lg:hover:w-[140px] duration-300"
         >
           <svg
@@ -43,6 +42,8 @@ function page({ params }) {
             <Link
               href={
                 "/" +
+                location.replace(/ /g, "_") +
+                "/" +
                 category.replace(/ /g, "_") +
                 "/" +
                 item.name.replace(/ /g, "_")
@@ -50,7 +51,11 @@ function page({ params }) {
               className="productcards blackshadow1 relative w-[150px] md:w-[200px] rounded-[20px] cursor-pointer p-[10px] flex flex-col gap-[10px] box-content lg:hover:translate-y-[-5px] duration-300"
               key={i}
             >
-              <Loadingimage src={"/" + item.img}  alt={item.name} objectfit="object-contain"/>
+              <Loadingimage
+                src={"/" + item.img}
+                alt={item.name}
+                objectfit="object-contain"
+              />
               <div className=" h-[30px] min-w-[70%] mx-auto px-[10px]  box-content bg-theme text-[16px] whitespace-nowrap text-white rounded-[10px] flex items-center justify-center">
                 {item.name}
               </div>

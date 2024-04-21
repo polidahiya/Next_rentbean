@@ -1,30 +1,32 @@
 "use client";
 import React from "react";
 import Link from "next/link";
+import {AppContextfn} from "../Context/Index";
 import Facebooksvg from "../components/(svgs)/Facebook";
 import Instagramsvg from "../components/(svgs)/Instagram";
 import Twittersvg from "../components/(svgs)/Twitter";
 
 function Footer() {
+  const { location } = AppContextfn();
   return (
     <div className="bg-bg1 px-[10px] md:px-[40px] pt-[0] md:pt-[40px] pb-[90px] lg:pb-[40px]">
       <div className="w-full flex flex-col md:flex-row text-center md:text-left">
         <div className="flex flex-col w-full ">
           <h2 className="font-semibold mt-[40px] md:mt-0">Rentbean.in</h2>
           <Link
-            href="/aboutus"
+            href={"/" + location.replace(/ /g, "_") + "/aboutus"}
             className=" w-full md:w-fit  text-[12px] pt-[10px] lg:hover:underline "
           >
             About us
           </Link>
           <Link
-            href="/contactus"
+            href={"/" + location.replace(/ /g, "_") + "/contactus"}
             className=" w-full md:w-fit  text-[12px] pt-[10px] lg:hover:underline "
           >
             Contact us
           </Link>
           <Link
-            href="/documents_required"
+            href={"/" + location.replace(/ /g, "_") + "/documents_required"}
             className=" w-full md:w-fit  text-[12px] pt-[10px] lg:hover:underline "
           >
             Documents Required
@@ -33,19 +35,23 @@ function Footer() {
         <div className="flex flex-col w-full ">
           <h2 className="font-semibold mt-[40px] md:mt-0">POLICIES</h2>
           <Link
-            href="/shipping_policy"
+            href={"/" + location.replace(/ /g, "_") + "/shipping_policy"}
             className=" w-full md:w-fit  text-[12px] pt-[10px] lg:hover:underline "
           >
             Shipping Policy
           </Link>
           <Link
-            href="/cancleation_and_return_policy"
+            href={
+              "/" +
+              location.replace(/ /g, "_") +
+              "/cancleation_and_return_policy"
+            }
             className=" w-full md:w-fit  text-[12px] pt-[10px] lg:hover:underline "
           >
             Cancellation & Return
           </Link>
           <Link
-            href="/privacy_policy"
+            href={"/" + location.replace(/ /g, "_") + "/privacy_policy"}
             className=" w-full md:w-fit  text-[12px] pt-[10px] lg:hover:underline "
           >
             Privacy Policy
