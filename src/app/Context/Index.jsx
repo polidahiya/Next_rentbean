@@ -1,8 +1,11 @@
 "use client";
+
 import { createContext, useContext, useState } from "react";
 
 const AppContext = createContext({});
+
 export function Appwrapper({ children }) {
+
   const [location, setlocation] = useState("Gurgaon");
   const [cartproducts, setcartproducts] = useState({});
   const [togglelocation, settogglelocation] = useState(false);
@@ -28,6 +31,7 @@ export function Appwrapper({ children }) {
     </AppContext.Provider>
   );
 }
+
 export function AppContextfn() {
   return useContext(AppContext);
 }
