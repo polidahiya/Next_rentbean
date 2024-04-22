@@ -4,9 +4,9 @@ import { Data, typeofprices } from "../../../Data";
 import Loadingimage from "../Loadingimage";
 
 function page({ params }) {
-  let location = params.location.replace(/_/g, " ");
-  let category = params.category.replace(/_/g, " ");
-  let subcat = params.subcategory.replace(/_/g, " ");
+  let location = params?.location?.replace(/_/g, " ");
+  let category = params?.category?.replace(/_/g, " ");
+  let subcat = params?.subcategory?.replace(/_/g, " ");
   let products = Data()?.data[category]?.subcat[subcat]?.products;
   return (
     <>
@@ -46,7 +46,7 @@ function page({ params }) {
                 "/" +
                 item.pid
               }
-              className="productcards blackshadow1 relative lg:w-[250px] rounded-[20px] cursor-pointer p-[10px] flex flex-col gap-[10px] box-content lg:hover:translate-y-[-5px] duration-300"
+              className="productcards blackshadow1 relative lg:w-[250px] rounded-[20px] cursor-pointer p-[10px] flex flex-col gap-[10px] box-content lg:hover:translate-y-[-5px] duration-300 overflow-hidden"
               key={i}
             >
               <Loadingimage
@@ -68,6 +68,18 @@ function page({ params }) {
                 /{typeofprices[item.pricetype - 1].suffix}
               </div>
               <div className="absolute h-[2px] bg-theme w-[50%] rounded-full left-[50%] bottom-[4px] translate-x-[-50%]"></div>
+              {/* if not available */}
+              {item.available == 0 && (
+                <div
+                  className="absolute top-0 left-0 h-full w-full flex items-center justify-center text-white"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(180deg,grey , transparent)",
+                  }}
+                >
+                  Currently Unavailable
+                </div>
+              )}
             </Link>
           );
         })}

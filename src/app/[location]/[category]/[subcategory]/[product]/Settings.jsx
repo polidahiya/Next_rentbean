@@ -85,7 +85,9 @@ function Settings({ product, typeofprices, link }) {
                 typeofprices[product.pricetype - 1].time[productdata.time]
             )}
           </div>
-          <div className="text-[10px] text-center">{typeofprices[product.pricetype - 1].name}</div>
+          <div className="text-[10px] text-center">
+            {typeofprices[product.pricetype - 1].name}
+          </div>
         </div>
         <p className="w-[2px] bg-gray-400 min-h-[30px] my-auto"></p>
         <div className="w-full flex flex-col items-center">
@@ -107,42 +109,73 @@ function Settings({ product, typeofprices, link }) {
         <button
           className="flex items-center justify-center gap-[10px] mt-[20px] p-[5px] w-full h-[35px] rounded-full border-[1px] border-theme   bg-transparent text-theme duration-300"
           onClick={() => {
-            setcartproducts((prevCartProducts) => {
-              const updatedCartProducts = { ...prevCartProducts };
-              if (updatedCartProducts[product.pid]) {
-                // delete
-                delete updatedCartProducts[product.pid];
-                setnotifictionarr([
-                  ...notifictionarr,
-                  {
-                    id: new Date() + new Date().getMilliseconds(),
-                    content: "Removed from the cart",
-                  },
-                ]);
-              } else {
-                // add
-                updatedCartProducts[product.pid] = { ...productdata };
-                setnotifictionarr([
-                  ...notifictionarr,
-                  {
-                    id: new Date() + new Date().getMilliseconds(),
-                    content: "Added to the cart",
-                  },
-                ]);
-              }
-              return updatedCartProducts;
-            });
+            if (product.available == 1) {
+              setcartproducts((prevCartProducts) => {
+                const updatedCartProducts = { ...prevCartProducts };
+                if (updatedCartProducts[product.pid]) {
+                  // delete
+                  delete updatedCartProducts[product.pid];
+                  setnotifictionarr([
+                    ...notifictionarr,
+                    {
+                      id: new Date() + new Date().getMilliseconds(),
+                      content: "Removed from the cart",
+                    },
+                  ]);
+                } else {
+                  // add
+                  updatedCartProducts[product.pid] = { ...productdata };
+                  setnotifictionarr([
+                    ...notifictionarr,
+                    {
+                      id: new Date() + new Date().getMilliseconds(),
+                      content: "Added to the cart",
+                    },
+                  ]);
+                }
+                return updatedCartProducts;
+              });
+            }else{
+              setnotifictionarr([
+                ...notifictionarr,
+                {
+                  id: new Date() + new Date().getMilliseconds(),
+                  content: "This item is currently unavailable",
+                },
+              ]);
+            }
           }}
         >
-          {cartproducts[product.pid] ? (
-            <>
-              <Delete styles="h-[20px]  stroke-theme fill-theme" />
-              <span>Remove from cart</span>
-            </>
+          {product.available == 1 ? (
+            cartproducts[product.pid] ? (
+              <>
+                <Delete styles="h-[20px]  stroke-theme fill-theme" />
+                <span>Remove from cart</span>
+              </>
+            ) : (
+              <>
+                <Cart />
+                <span>Add to cart</span>
+              </>
+            )
           ) : (
             <>
-              <Cart />
-              <span>Add to cart</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                className="fill-theme h-[20px]"
+              >
+                <g>
+                  <path d="M8.5 11a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM17 9.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15.11 16.459a1 1 0 001.782-.906 3.113 3.113 0 00-.297-.466 4.838 4.838 0 00-.848-.868c-.79-.631-2.006-1.219-3.75-1.219-1.742 0-2.96.588-3.749 1.22-.388.31-.664.624-.847.867-.11.148-.211.302-.297.465a1.01 1.01 0 00.446 1.342 1 1 0 001.336-.435c.014-.025.202-.35.611-.678.46-.369 1.244-.781 2.5-.781 1.258 0 2.04.412 2.501.78.41.328.597.654.611.679z"></path>
+                  <path
+                    fillRule="evenodd"
+                    d="M12 23c6.075 0 11-4.925 11-11S18.075 1 12 1 1 5.925 1 12s4.925 11 11 11zm0-2.007a8.993 8.993 0 110-17.986 8.993 8.993 0 010 17.986z"
+                    clipRule="evenodd"
+                  ></path>
+                </g>
+              </svg>
+              <span>Currently Unavailable</span>
             </>
           )}
         </button>

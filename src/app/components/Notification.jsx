@@ -43,7 +43,7 @@ function Notif({ item }) {
       <div
         className={`notification fixed top-[70px] left-[50%] translate-x-[-50%] z-[100] h-[40px] w-[40px] max-w-[40px] bg-bg1 rounded-full flex justify-end p-[5px]  shadow-md pointer-events-none opacity-0 ${activenotif}`}
       >
-        <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-theme opacity-0 text-sm">
+        <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-theme opacity-0 text-sm whitespace-nowrap">
           {item.content}
         </div>
         <button
