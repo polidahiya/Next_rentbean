@@ -107,9 +107,6 @@ function Navbar({ data }) {
               ? "opacity-100 pointer-events-auto"
               : "opacity-0 pointer-events-none"
           }`}
-          // style={{
-          //   bottom: togglemobilenav ? "50px" : "-50px",
-          // }}
         >
           {/* categories */}
           {Object.keys(data).map((title, i) => {
