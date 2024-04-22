@@ -102,8 +102,10 @@ function Navbar({ data }) {
         </div>
         {/* sidebar */}
         <div
-          className={`sidebar fixed bottom-[50px] left-0 w-full lg:w-fit  bg-white flex flex-col lg:static  lg:h-[60px] lg:flex-row  lg:items-start  py-[10px] lg:py-0  z-20 duration-500 lg:duration-0 lg:opacity-1 lg:pointer-events-auto ${
-            togglemobilenav ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          className={`sidebar fixed bottom-[50px] left-0 w-full lg:w-fit  bg-white flex flex-col lg:static  lg:h-[60px] lg:flex-row  lg:items-start  py-[10px] lg:py-0  z-20 duration-[0.3s] lg:duration-0 lg:opacity-100 lg:pointer-events-auto ${
+            togglemobilenav
+              ? "opacity-100 pointer-events-auto"
+              : "opacity-0 pointer-events-none"
           }`}
           // style={{
           //   bottom: togglemobilenav ? "50px" : "-50px",
