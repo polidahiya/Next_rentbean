@@ -7,7 +7,7 @@ import { AppContextfn } from "../../Context/Index";
 import Userdetails from "./components/Userdetails";
 
 function Publicpage({ placeorder }) {
-  const { cartproducts } = AppContextfn();
+  const { cartproducts,location } = AppContextfn();
   // cosnt[(totalprice, settotalprice)] = useState(0);
   let total = 0;
 
@@ -27,7 +27,7 @@ function Publicpage({ placeorder }) {
   });
 
   if (Object.keys(cartproducts).length == 0) {
-    return <Emptycart />;
+    return <Emptycart location={location}/>;
   } else {
     return (
       <div className="gap-[20px] px-[10px] md:px-[40px] mt-[80px] flex flex-col lg:flex-row">
