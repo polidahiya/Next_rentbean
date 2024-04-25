@@ -1,9 +1,9 @@
 import React from "react";
 import { orders, ObjectId } from "@/components/mongodb";
-import Orderscomp from "./Components/Orders";
 import { Data, typeofprices } from "@/app/Data";
 import { revalidatePath } from "next/cache";
 import Navbar from "./Components/Navbar";
+import Ordersmenu from "./Components/Ordersmenu";
 async function page() {
   // all orders
   let allorders = await orders
@@ -125,37 +125,15 @@ async function page() {
     <div className="bg-bg1">
       {/* nav bar */}
       <Navbar />
-      
-      <div className="flex items-start  min-w-full overflow-x-scroll snap-x snap-mandatory ">
-        {/* orders */}
-        <div className=" min-w-full  snap-start px-[10px] md:px-[40px] py-[20px] overflow-y-scroll " style={{height:"calc(100dvh - 60px)"}}>
-          <Orderscomp
-            allorders={allorders}
-            typeofprices={typeofprices}
-            deleteorder={deleteorder}
-            setverifiedorder={setverifiedorder}
-            changestatus={changestatus}
-          />
-        </div>
-        <div className=" min-w-full  snap-start px-[10px] md:px-[40px] py-[20px] overflow-y-scroll " style={{height:"calc(100dvh - 60px)"}}>
-          <Orderscomp
-            allorders={runningorders}
-            typeofprices={typeofprices}
-            deleteorder={deleteorder}
-            setverifiedorder={setverifiedorder}
-            changestatus={changestatus}
-          />
-        </div>
-        <div className=" min-w-full  snap-start px-[10px] md:px-[40px] py-[20px] overflow-y-scroll " style={{height:"calc(100dvh - 60px)"}}>
-          <Orderscomp
-            allorders={completedorders}
-            typeofprices={typeofprices}
-            deleteorder={deleteorder}
-            setverifiedorder={setverifiedorder}
-            changestatus={changestatus}
-          />
-        </div>
-      </div>
+      <Ordersmenu
+        allorders={allorders}
+        typeofprices={typeofprices}
+        deleteorder={deleteorder}
+        setverifiedorder={setverifiedorder}
+        changestatus={changestatus}
+        runningorders={runningorders}
+        completedorders={completedorders}
+      />
     </div>
   );
 }

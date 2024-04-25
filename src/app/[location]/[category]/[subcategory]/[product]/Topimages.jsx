@@ -12,7 +12,7 @@ function Topimages({ images, name }) {
         onScroll={(e) => {
           setdotnum(
             Math.floor(
-              (e.target.scrollLeft + e.target.scrollLeft / 2) /
+              (e.target.scrollLeft + e.target.clientWidth / 2) /
                 e.target.clientWidth
             )
           );

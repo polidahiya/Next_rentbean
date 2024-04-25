@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
+import { AppContextfn } from "../context";
 
 function Navbar() {
-  const [ordersmenu, setordersmenu] = useState(0);
+  const { ordercomps, setordercomps,ordercompsref } = AppContextfn();
   return (
     <nav className="blackshadow1 sticky top-0 left-0 flex w-full h-[60px] bg-white px-[10px] md:px-[40px] ">
       <Image
@@ -16,30 +17,30 @@ function Navbar() {
       <div className="ml-auto w-fit flex items-center justify-center gap-[10px]">
         <span
           className={`py-[2px] px-[10px] text-center border-b-[3px]  cursor-pointer ${
-            ordersmenu == 0 ? "border-theme" : "border-slate-300"
+            ordercomps == 0 ? "border-theme" : "border-slate-300"
           }`}
           onClick={() => {
-            setordersmenu(0);
+            ordercompsref.current.scrollLeft=0
           }}
-        >
+          >
           Orders
         </span>
         <span
           className={`py-[2px] px-[10px] text-center border-b-[3px]  cursor-pointer ${
-            ordersmenu == 1 ? "border-theme" : "border-slate-300"
+            ordercomps == 1 ? "border-theme" : "border-slate-300"
           }`}
           onClick={() => {
-            setordersmenu(1);
+            ordercompsref.current.scrollLeft=window.innerWidth
           }}
-        >
+          >
           Running Orders
         </span>
         <span
           className={`py-[2px] px-[10px] text-center border-b-[3px]  cursor-pointer ${
-            ordersmenu == 2 ? "border-theme" : "border-slate-300"
+            ordercomps == 2 ? "border-theme" : "border-slate-300"
           }`}
           onClick={() => {
-            setordersmenu(2);
+            ordercompsref.current.scrollLeft=window.innerWidth*2
           }}
         >
           Completed Orders

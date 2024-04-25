@@ -1,5 +1,6 @@
 import { Data } from "../Data";
 let data = Data();
+import { Appwrapper } from "./context";
 
 // import { sitedata } from "../components/mongodb";
 // let data = await sitedata.findOne({});
@@ -7,7 +8,9 @@ let data = Data();
 export default async function RootLayout({ children }) {
   return (
     <>
-      <div>{children}</div>
+      <Appwrapper>
+        <div>{children}</div>
+      </Appwrapper>
     </>
   );
 }
