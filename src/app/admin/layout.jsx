@@ -1,14 +1,11 @@
-import { Data } from "../Data";
-let data = Data();
-import { Appwrapper } from "./context";
-
-// import { sitedata } from "../components/mongodb";
-// let data = await sitedata.findOne({});
+import { Appwrapper } from "../Context/Index";
+import Notification from "../components/Notification";
 
 export default async function RootLayout({ children }) {
   return (
     <>
       <Appwrapper>
+        <Notification />
         <div>{children}</div>
       </Appwrapper>
     </>

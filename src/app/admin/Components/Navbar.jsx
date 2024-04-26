@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { AppContextfn } from "../context";
+import { AppContextfn } from "../../Context/Index";
 
 function Navbar() {
   const { ordercomps, setordercomps,ordercompsref } = AppContextfn();
@@ -16,7 +16,7 @@ function Navbar() {
       ></Image>
       <div className="ml-auto w-fit flex items-center justify-center gap-[10px]">
         <span
-          className={`py-[2px] px-[10px] text-center border-b-[3px]  cursor-pointer ${
+          className={`flex items-center justify-center px-[10px] h-full text-center border-b-[3px]  cursor-pointer ${
             ordercomps == 0 ? "border-theme" : "border-slate-300"
           }`}
           onClick={() => {
@@ -26,7 +26,7 @@ function Navbar() {
           Orders
         </span>
         <span
-          className={`py-[2px] px-[10px] text-center border-b-[3px]  cursor-pointer ${
+          className={`flex items-center justify-center px-[10px] h-full text-center border-b-[3px]  cursor-pointer ${
             ordercomps == 1 ? "border-theme" : "border-slate-300"
           }`}
           onClick={() => {
@@ -36,7 +36,7 @@ function Navbar() {
           Running Orders
         </span>
         <span
-          className={`py-[2px] px-[10px] text-center border-b-[3px]  cursor-pointer ${
+          className={`flex items-center justify-center px-[10px] h-full text-center border-b-[3px]  cursor-pointer ${
             ordercomps == 2 ? "border-theme" : "border-slate-300"
           }`}
           onClick={() => {

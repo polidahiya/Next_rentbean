@@ -27,6 +27,7 @@ async function page() {
       });
     });
   });
+  console.log(allorders);
 
   // running orders
   let runningorders = await orders
@@ -50,6 +51,8 @@ async function page() {
       });
     });
   });
+  console.log(runningorders);
+
   // completed orders
   let completedorders = await orders
     .find({ status: "completed" })
@@ -121,6 +124,24 @@ async function page() {
     revalidatePath("/admin");
   };
 
+  // update note
+  const updatenote = async (documentId, note) => {
+    "use server";
+    const filter = { _id: new ObjectId(documentId) };
+    const data = await orders.findOne(filter);
+    const result = await orders.updateOne(filter, {
+      $set: {
+        note: note,
+      },
+    });
+
+    if (result.modifiedCount === 1) {
+      return { message: "Update Successful" };
+    } else {
+      return { message: "Update Failed" };
+    }
+  };
+
   return (
     <div className="bg-bg1">
       {/* nav bar */}
@@ -133,6 +154,7 @@ async function page() {
         changestatus={changestatus}
         runningorders={runningorders}
         completedorders={completedorders}
+        updatenote={updatenote}
       />
     </div>
   );

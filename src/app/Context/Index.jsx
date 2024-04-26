@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useRef } from "react";
 
 const AppContext = createContext({});
 
@@ -19,6 +19,9 @@ export function Appwrapper({ children }) {
     }
   }, []);
 
+  // admin contexts
+  const [ordercomps, setordercomps] = useState(0);
+  const ordercompsref = useRef();
   return (
     <AppContext.Provider
       value={{
@@ -32,6 +35,9 @@ export function Appwrapper({ children }) {
         settoggleorderplacedmenu,
         notifictionarr,
         setnotifictionarr,
+        ordercomps,
+        setordercomps,
+        ordercompsref,
       }}
     >
       {children}

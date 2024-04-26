@@ -2,7 +2,7 @@
 import React from "react";
 import Orderscomp from "../Components/Orders";
 import { typeofprices } from "@/app/Data";
-import { AppContextfn } from "../context";
+import { AppContextfn } from "../../Context/Index";
 
 function Ordersmenu({
   allorders,
@@ -11,12 +11,13 @@ function Ordersmenu({
   changestatus,
   runningorders,
   completedorders,
+  updatenote
 }) {
   const { setordercomps, ordercompsref } = AppContextfn();
 
   return (
     <div
-      className="flex items-start  min-w-full overflow-x-scroll snap-x snap-mandatory scroll-smooth"
+      className="flex items-start  min-w-full overflow-x-scroll snap-x snap-mandatory snap-always scroll-smooth"
       ref={ordercompsref}
       onScroll={(e) => {
         setordercomps(
@@ -31,37 +32,49 @@ function Ordersmenu({
         className=" min-w-full  snap-start px-[10px] md:px-[40px] py-[20px] overflow-y-scroll "
         style={{ height: "calc(100dvh - 60px)" }}
       >
-        <Orderscomp
-          allorders={allorders}
-          typeofprices={typeofprices}
-          deleteorder={deleteorder}
-          setverifiedorder={setverifiedorder}
-          changestatus={changestatus}
-        />
+        {allorders.map((item, i) => (
+          <Orderscomp
+            key={i}
+            item={item}
+            typeofprices={typeofprices}
+            deleteorder={deleteorder}
+            setverifiedorder={setverifiedorder}
+            changestatus={changestatus}
+            updatenote={updatenote}
+          />
+        ))}
       </div>
       <div
         className=" min-w-full  snap-start px-[10px] md:px-[40px] py-[20px] overflow-y-scroll "
         style={{ height: "calc(100dvh - 60px)" }}
       >
-        <Orderscomp
-          allorders={runningorders}
-          typeofprices={typeofprices}
-          deleteorder={deleteorder}
-          setverifiedorder={setverifiedorder}
-          changestatus={changestatus}
-        />
+        {runningorders.map((item, i) => (
+          <Orderscomp
+            key={i}
+            item={item}
+            typeofprices={typeofprices}
+            deleteorder={deleteorder}
+            setverifiedorder={setverifiedorder}
+            changestatus={changestatus}
+            updatenote={updatenote}
+          />
+        ))}
       </div>
       <div
         className=" min-w-full  snap-start px-[10px] md:px-[40px] py-[20px] overflow-y-scroll "
         style={{ height: "calc(100dvh - 60px)" }}
       >
-        <Orderscomp
-          allorders={completedorders}
-          typeofprices={typeofprices}
-          deleteorder={deleteorder}
-          setverifiedorder={setverifiedorder}
-          changestatus={changestatus}
-        />
+        {completedorders.map((item, i) => (
+          <Orderscomp
+            key={i}
+            item={item}
+            typeofprices={typeofprices}
+            deleteorder={deleteorder}
+            setverifiedorder={setverifiedorder}
+            changestatus={changestatus}
+            updatenote={updatenote}
+          />
+        ))}
       </div>
     </div>
   );
