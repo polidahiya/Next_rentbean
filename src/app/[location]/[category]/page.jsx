@@ -1,7 +1,9 @@
 import React from "react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { Data } from "../../Data";
 import Loadingimage from "./Loadingimage";
+
 function page({ params }) {
   let location = params.location.replace(/_/g, " ");
   let category = params.category.replace(/_/g, " ");
@@ -11,6 +13,10 @@ function page({ params }) {
       img: Data().data[category].subcat[subcategory].image,
     })
   );
+
+  if (!Object.keys(Data().data).includes(category)) {
+    notFound();
+  }
 
   return (
     <div>

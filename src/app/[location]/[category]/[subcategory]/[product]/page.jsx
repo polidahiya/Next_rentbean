@@ -1,5 +1,7 @@
 import React from "react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+
 import { Data, typeofprices } from "../../../../Data";
 import Topimages from "./Topimages";
 import Settings from "./Settings";
@@ -24,8 +26,13 @@ function page({ params }) {
   let category = params.category.replace(/_/g, " ");
   let subcat = params.subcategory.replace(/_/g, " ");
   let productid = params.product.replace(/_/g, " ");
-  let products = Data().data[category].subcat[subcat].products;
-  let product = products.filter((item) => item.pid == productid)[0];
+  let products = Data()?.data[category]?.subcat[subcat]?.products;
+  let product = products?.filter((item) => item.pid == productid)[0];
+
+  const isAvailable = products.some((product) => product.pid === productid);
+  if (!isAvailable) {
+    notFound();
+  }
 
   return (
     <div>

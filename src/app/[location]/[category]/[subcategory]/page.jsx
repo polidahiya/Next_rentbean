@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { Data, typeofprices } from "../../../Data";
 import Loadingimage from "../Loadingimage";
 
@@ -8,6 +9,11 @@ function page({ params }) {
   let category = params?.category?.replace(/_/g, " ");
   let subcat = params?.subcategory?.replace(/_/g, " ");
   let products = Data()?.data[category]?.subcat[subcat]?.products;
+
+  if (!Object.keys(Data().data[category].subcat).includes(subcat)) {
+    notFound();
+  }
+
   return (
     <>
       <div className="text-[20px] relative h-[60px] flex items-center justify-center bg-bg1">

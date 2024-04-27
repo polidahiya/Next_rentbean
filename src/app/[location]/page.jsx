@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import Pickups from "../components/pickups/Pickups";
 import { Data, typeofprices } from "../Data";
 import Posteradds from "../components/Posterads";
@@ -54,12 +55,9 @@ const listoflocation = ["Delhi", "Noida", "Gurgaon"];
 export default async function Home({ params }) {
   let location = params.location.replace(/_/g, " ");
   if (!listoflocation.includes(location)) {
-    return (
-      <>
-        <div>not found</div>
-      </>
-    );
+    notFound();
   }
+  
   return (
     <>
       {/* poster ads */}
