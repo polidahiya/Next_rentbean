@@ -48,9 +48,18 @@ const commnets = [
       "Renting from here was a game-changer for my event planning. Affordable rates and top-notch equipment. Will be back!",
   },
 ];
+
+const listoflocation = ["Delhi", "Noida", "Gurgaon"];
+
 export default async function Home({ params }) {
   let location = params.location.replace(/_/g, " ");
-
+  if (!listoflocation.includes(location)) {
+    return (
+      <>
+        <div>not found</div>
+      </>
+    );
+  }
   return (
     <>
       {/* poster ads */}
@@ -84,7 +93,11 @@ export default async function Home({ params }) {
         })}
       </div>
       {/* pickups */}
-      <Pickups location={location} randomproducts={randomproducts} typeofprices={typeofprices} />
+      <Pickups
+        location={location}
+        randomproducts={randomproducts}
+        typeofprices={typeofprices}
+      />
       {/* commnets */}
       <div className="py-[50px] commentscontainer ">
         <p className="text-center text-[30px]">What our clients say!</p>

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { AppContextfn } from "../../Context/Index";
+import Link from "next/link";
 
 function Orders({
   item,
@@ -11,7 +12,7 @@ function Orders({
   changestatus,
   updatenote,
 }) {
-  const { notifictionarr, setnotifictionarr } = AppContextfn();
+  const { notifictionarr, setnotifictionarr, setinvoicedata } = AppContextfn();
   const [note, setnote] = useState(item.note);
 
   const dateformater = (value) => {
@@ -35,7 +36,7 @@ function Orders({
     <div className="blackshadow1 p-[20px] mb-[10px] bg-white">
       <div className="flex flex-wrap-reverse">
         <span>
-          <span className="min-w-[130px] inline-block">Order id </span> :
+          <span className="min-w-[130px] inline-block">Order id </span> :{" "}
           {item._id}
         </span>
         <div className="ml-auto flex gap-[10px]">
@@ -62,7 +63,7 @@ function Orders({
                 }
               }}
             >
-              Add to running orders
+              Start Order
             </button>
           )}
           {/* add to orders button */}
@@ -75,7 +76,7 @@ function Orders({
                 }
               }}
             >
-              Add to orders
+              Set back to Orders
             </button>
           )}
           {/* add to completed orders button */}
@@ -101,7 +102,7 @@ function Orders({
                 }
               }}
             >
-              Add to Running orders
+              Set Not Completed
             </button>
           )}
           {/* delete button */}
@@ -175,8 +176,8 @@ function Orders({
         ></textarea>
         <button
           className="py-[5px] px-[20px] rounded-full bg-green-600 text-white"
-          onClick={async() => {
-            let res =await updatenote(item._id, note);
+          onClick={async () => {
+            let res = await updatenote(item._id, note);
             setnotifictionarr([
               ...notifictionarr,
               {
@@ -191,33 +192,77 @@ function Orders({
       </div>
       <div className="flex flex-wrap gap-[5px]">
         {Object.keys(item.products).map((product, j) => {
+          let eachpro=item.products[product]
           return (
             <div key={j} className="border border-slate-300 my-[10px] p-[5px]">
               <Image
-                src={"/" + item.products[product].image[0]}
+                src={"/" + eachpro.image[0]}
                 className="h-[200px] w-[200px] object-contain"
                 alt="product image"
                 height={200}
                 width={200}
               ></Image>
               <div>
-                <div>Product Name : {item.products[product].name}</div>
-                <div>Product Id : {item.products[product].pid}</div>
+                <div>Product Name : {eachpro.name}</div>
+                <div>Product Id : {eachpro.pid}</div>
                 <div>
                   Duration :{" "}
                   {
-                    typeofprices[item.products[product].pricetype - 1].time[
-                      item.products[product].time
+                    typeofprices[eachpro.pricetype - 1].time[
+                      eachpro.time
                     ]
                   }{" "}
-                  {typeofprices[item.products[product].pricetype - 1].suffix}
+                  {typeofprices[eachpro.pricetype - 1].suffix}
                 </div>
-                <div>Quantity : {item.products[product].Quantity + 1}</div>
+                <div>Quantity : {eachpro.Quantity + 1}</div>
+                <div>
+                  Rent : ₹{" "}
+                  {eachpro.prices[eachpro.time] *
+                    (eachpro.Quantity + 1)}
+                  /-
+                </div>
+                <div>
+                  Security Deposit : ₹{" "}
+                  {eachpro.refundableprice *
+                    (eachpro.Quantity + 1)}
+                  /-
+                </div>
+                <div>
+                  Total : ₹{" "}
+                  {eachpro.prices[eachpro.time] *
+                    (eachpro.Quantity + 1) +
+                    eachpro.refundableprice *
+                      (eachpro.Quantity + 1)}
+                  /-
+                </div>
               </div>
             </div>
           );
         })}
       </div>
+      {/* invoice link */}
+      <Link
+        href="admin/Invoice"
+        onClick={() => {
+          setinvoicedata({
+            ...item,
+            startdate:
+              dateformater(item.orderstartdate).day +
+              "/" +
+              dateformater(item.orderstartdate).month +
+              "/" +
+              dateformater(item.orderstartdate).year,
+            enddate:
+              dateformater(item.orderstartdate).day +
+              "/" +
+              dateformater(item.orderstartdate).month +
+              "/" +
+              dateformater(item.orderstartdate).year,
+          });
+        }}
+      >
+        Generate Invoice
+      </Link>
     </div>
   );
 }

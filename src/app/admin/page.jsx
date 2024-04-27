@@ -27,7 +27,6 @@ async function page() {
       });
     });
   });
-  console.log(allorders);
 
   // running orders
   let runningorders = await orders
@@ -51,7 +50,6 @@ async function page() {
       });
     });
   });
-  console.log(runningorders);
 
   // completed orders
   let completedorders = await orders
@@ -127,18 +125,22 @@ async function page() {
   // update note
   const updatenote = async (documentId, note) => {
     "use server";
-    const filter = { _id: new ObjectId(documentId) };
-    const data = await orders.findOne(filter);
-    const result = await orders.updateOne(filter, {
-      $set: {
-        note: note,
-      },
-    });
+    try {
+      const filter = { _id: new ObjectId(documentId) };
+      const data = await orders.findOne(filter);
+      const result = await orders.updateOne(filter, {
+        $set: {
+          note: note,
+        },
+      });
 
-    if (result.modifiedCount === 1) {
-      return { message: "Update Successful" };
-    } else {
-      return { message: "Update Failed" };
+      if (result.modifiedCount === 1) {
+        return { message: "Update Successful" };
+      } else {
+        return { message: "Update Failed" };
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
