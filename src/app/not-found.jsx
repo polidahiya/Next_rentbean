@@ -13,7 +13,7 @@ function page() {
           alt="not found gif image"
           className="max-w-[400px] m-auto w-full object-contain object-center"
         />
-        <h3 className=" font-bold text-center">Look like you're lost</h3>
+        <h3 className=" font-bold text-center">Look like you&lsquo;re lost</h3>
         <p className="text-center">
           The page you are looking for is not avaible!
         </p>

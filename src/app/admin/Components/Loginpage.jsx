@@ -73,6 +73,11 @@ function Loginpage() {
             onChange={(e) => {
               setpassword(e.target.value);
             }}
+            onKeyPress={(e) => {
+              if (e.key == "Enter") {
+                loginfn();
+              }
+            }}
             autoComplete="current-password"
             className=" outline-none text-center bg-transparent"
           />
@@ -116,7 +121,6 @@ function Loginpage() {
         <button
           className="py-1 px-5 bg-slate-500 rounded-full cursor-pointer"
           onClick={(e) => {
-            // e.preventDefault();
             loginfn();
           }}
         >
