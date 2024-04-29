@@ -5,7 +5,6 @@ import { data } from "@/components/mongodb";
 export async function POST(req) {
   const body = await req.json();
   let password = body.password;
-  //   let token = req.cookies.get("token").value;
   const admindata = await data.findOne({});
   
   if (password == admindata.password) {

@@ -6,7 +6,7 @@ function Publicpage() {
   const { invoicedata } = AppContextfn();
   let totalrent = 0;
   let totalrefundable = 0;
-  if (invoicedata.length>0) {
+  if (Object.keys(invoicedata).length>0) {
     Object.keys(invoicedata?.products)?.forEach((product, j) => {
       let eachpro = invoicedata?.products[product];
       totalrent += eachpro.prices[eachpro.time] * (eachpro.Quantity + 1);
@@ -30,7 +30,7 @@ function Publicpage() {
     Number(secondtabledata.refundabledeposit) +
     Number(secondtabledata.saving);
 
-  if(invoicedata.length>0){
+  if(Object.keys(invoicedata).length>0){
     return (
     <div className="flex flex-col min-h-screen items-end p-[40px]">
       <div className="absolute top-[10px] left-[40px]" contentEditable="true">
