@@ -5,10 +5,9 @@ const db_link =
 
 const client = new MongoClient(db_link);
 
-await client.connect();
+client.connect();
 const db = client.db("rentbeen");
 const data = db.collection("data");
 const orders = db.collection("orders");
 const sitedata = db.collection("sitedata");
 export { data, orders, sitedata, ObjectId };
-//order,verified,running,completed 

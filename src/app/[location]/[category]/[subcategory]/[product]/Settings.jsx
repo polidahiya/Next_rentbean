@@ -47,7 +47,13 @@ function Settings({ product, typeofprices, link }) {
       })}
       <hr className="my-[10px] mx-auto w-[80%] bg-gray-400 min-h-[1px]" />
       {/* tenure */}
-      <div>Choose Tenure</div>
+      <div className="flex items-center gap-[10px]">
+        <span>Choose Tenure</span>{" "}
+        <span className="h-[15px] aspect-square border border-cyan-500 text-cyan-500 text-[12px] rounded-full  flex items-center justify-center cursor-pointer"
+        title="Higher the tenure lower the monthly and daily price">
+          i
+        </span>
+      </div>
       <div className="mt-[10px] flex justify-between items-center">
         {typeofprices[product.pricetype - 1].time.map((item, i) => {
           return (
@@ -135,7 +141,7 @@ function Settings({ product, typeofprices, link }) {
                 }
                 return updatedCartProducts;
               });
-            }else{
+            } else {
               setnotifictionarr([
                 ...notifictionarr,
                 {

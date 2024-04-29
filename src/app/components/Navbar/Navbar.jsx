@@ -71,7 +71,7 @@ function Navbar({ data }) {
           </Link>
         </div>
         <Fakenavbg />
-        <Link href={"/" + location.replace(/ /g, "_")}>
+        <Link href={"/" + location.replace(/ /g, "_")} title="Home">
           <Image
             src="/logo&ui/3dlogo.png"
             alt="rentbean.in logo image"
@@ -87,6 +87,7 @@ function Navbar({ data }) {
             settogglelocation(!togglelocation);
             history.pushState(null, "", "");
           }}
+          title="Choose your location"
         >
           <svg
             className="h-[15px] scale-[1.6] lg:scale-[1]"
@@ -126,6 +127,7 @@ function Navbar({ data }) {
         <Link
           href={"/" + location + "/cart"}
           className="relative  top-[15px] h-[30px] ml-[5px] hidden lg:flex  items-center px-[20px] rounded-md cursor-pointer border border-theme no-underline text-theme text-sm "
+          title="View item in you cart"
         >
           <svg
             className="h-[20px] fill-theme"

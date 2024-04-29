@@ -23,6 +23,8 @@ export function Appwrapper({ children }) {
   const [ordercomps, setordercomps] = useState(0);
   const ordercompsref = useRef();
   const [invoicedata, setinvoicedata] = useState({});
+  const [showlogin, setshowlogin] = useState(true);
+
   return (
     <AppContext.Provider
       value={{
@@ -41,6 +43,8 @@ export function Appwrapper({ children }) {
         ordercompsref,
         invoicedata,
         setinvoicedata,
+        showlogin,
+        setshowlogin,
       }}
     >
       {children}

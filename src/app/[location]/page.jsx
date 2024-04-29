@@ -75,6 +75,7 @@ export default async function Home({ params }) {
                 categories.replace(/ /g, "_")
               }
               key={i}
+              title={Object.keys(data.data[categories].subcat).join(" , ")}
             >
               <Image
                 height={20}

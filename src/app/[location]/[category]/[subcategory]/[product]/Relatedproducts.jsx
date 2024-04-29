@@ -94,7 +94,7 @@ function Imagecard({ product, i, params, typeofprices }) {
         "/" +
         product.pid
       }
-      className={`min-w-[250px] p-[10px] flex flex-col justify-between gap-[10px] bg-bg1 object-cover ${
+      className={`min-w-[250px] max-w-[250px] p-[10px] flex flex-col justify-between gap-[10px] bg-bg1 object-cover ${
         i % 2 == 0 ? "snap-start" : ""
       }`}
       key={i}

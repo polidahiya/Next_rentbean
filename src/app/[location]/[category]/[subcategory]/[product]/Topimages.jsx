@@ -37,7 +37,7 @@ function Topimages({ images, name }) {
             return (
               <div
                 key={i}
-                className="h-[5px] min-w-[5px] bg-gray-600  rounded-full duration-200"
+                className="h-[5px] min-w-[5px] bg-cyan-500  rounded-full duration-200"
                 style={i == dotnum ? { width: "30px" } : { width: "5px" }}
               ></div>
             );

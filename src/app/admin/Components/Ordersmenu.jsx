@@ -1,19 +1,37 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Orderscomp from "../Components/Orders";
-import { typeofprices } from "@/app/Data";
 import { AppContextfn } from "../../Context/Index";
 
-function Ordersmenu({
-  allorders,
-  deleteorder,
-  setverifiedorder,
-  changestatus,
-  runningorders,
-  completedorders,
-  updatenote
-}) {
-  const { setordercomps, ordercompsref } = AppContextfn();
+function Ordersmenu() {
+  const { ordercomps,setordercomps, ordercompsref } = AppContextfn();
+  const [allorders, setallorders] = useState([]);
+  const [runningorders, setrunningorders] = useState([]);
+  const [completedorders, setcompletedorders] = useState([]);
+
+  useEffect(() => {
+    if (ordercomps == 0) {
+      fetch("/api/admin/Orders")
+        .then((res) => res.json())
+        .then((res) => {
+          setallorders(res);
+        });
+    }
+    if (ordercomps == 1) {
+      fetch("/api/admin/Runningorders")
+        .then((res) => res.json())
+        .then((res) => {
+          setrunningorders(res);
+        });
+    }
+    if (ordercomps == 2) {
+      fetch("/api/admin/Completedorders")
+        .then((res) => res.json())
+        .then((res) => {
+          setcompletedorders(res);
+        });
+    }
+  }, [ordercomps]);
 
   return (
     <div
@@ -33,15 +51,7 @@ function Ordersmenu({
         style={{ height: "calc(100dvh - 60px)" }}
       >
         {allorders.map((item, i) => (
-          <Orderscomp
-            key={i}
-            item={item}
-            typeofprices={typeofprices}
-            deleteorder={deleteorder}
-            setverifiedorder={setverifiedorder}
-            changestatus={changestatus}
-            updatenote={updatenote}
-          />
+          <Orderscomp key={i} item={item} />
         ))}
       </div>
       <div
@@ -49,15 +59,7 @@ function Ordersmenu({
         style={{ height: "calc(100dvh - 60px)" }}
       >
         {runningorders.map((item, i) => (
-          <Orderscomp
-            key={i}
-            item={item}
-            typeofprices={typeofprices}
-            deleteorder={deleteorder}
-            setverifiedorder={setverifiedorder}
-            changestatus={changestatus}
-            updatenote={updatenote}
-          />
+          <Orderscomp key={i} item={item} />
         ))}
       </div>
       <div
@@ -65,15 +67,7 @@ function Ordersmenu({
         style={{ height: "calc(100dvh - 60px)" }}
       >
         {completedorders.map((item, i) => (
-          <Orderscomp
-            key={i}
-            item={item}
-            typeofprices={typeofprices}
-            deleteorder={deleteorder}
-            setverifiedorder={setverifiedorder}
-            changestatus={changestatus}
-            updatenote={updatenote}
-          />
+          <Orderscomp key={i} item={item} />
         ))}
       </div>
     </div>

@@ -1,17 +1,18 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { AppContextfn } from "../../Context/Index";
 import Link from "next/link";
-
-function Orders({
-  item,
-  typeofprices,
-  deleteorder,
+import { AppContextfn } from "../../Context/Index";
+import {
   setverifiedorder,
   changestatus,
+  deleteorder,
   updatenote,
-}) {
+} from "../Serveraction";
+import { typeofprices } from "@/app/Data";
+
+
+function Orders({ item }) {
   const { notifictionarr, setnotifictionarr, setinvoicedata } = AppContextfn();
   const [note, setnote] = useState(item.note);
 
@@ -192,7 +193,7 @@ function Orders({
       </div>
       <div className="flex flex-wrap gap-[5px]">
         {Object.keys(item.products).map((product, j) => {
-          let eachpro=item.products[product]
+          let eachpro = item.products[product];
           return (
             <div key={j} className="border border-slate-300 my-[10px] p-[5px]">
               <Image
@@ -207,32 +208,24 @@ function Orders({
                 <div>Product Id : {eachpro.pid}</div>
                 <div>
                   Duration :{" "}
-                  {
-                    typeofprices[eachpro.pricetype - 1].time[
-                      eachpro.time
-                    ]
-                  }{" "}
+                  {typeofprices[eachpro.pricetype - 1].time[eachpro.time]}{" "}
                   {typeofprices[eachpro.pricetype - 1].suffix}
                 </div>
                 <div>Quantity : {eachpro.Quantity + 1}</div>
                 <div>
                   Rent : ₹{" "}
-                  {eachpro.prices[eachpro.time] *
-                    (eachpro.Quantity + 1)}
+                  {eachpro.prices[eachpro.time] * (eachpro.Quantity + 1)}
                   /-
                 </div>
                 <div>
                   Security Deposit : ₹{" "}
-                  {eachpro.refundableprice *
-                    (eachpro.Quantity + 1)}
+                  {eachpro.refundableprice * (eachpro.Quantity + 1)}
                   /-
                 </div>
                 <div>
                   Total : ₹{" "}
-                  {eachpro.prices[eachpro.time] *
-                    (eachpro.Quantity + 1) +
-                    eachpro.refundableprice *
-                      (eachpro.Quantity + 1)}
+                  {eachpro.prices[eachpro.time] * (eachpro.Quantity + 1) +
+                    eachpro.refundableprice * (eachpro.Quantity + 1)}
                   /-
                 </div>
               </div>
