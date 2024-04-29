@@ -24,6 +24,7 @@ export function Appwrapper({ children }) {
   const ordercompsref = useRef();
   const [invoicedata, setinvoicedata] = useState({});
   const [showlogin, setshowlogin] = useState(true);
+  const [refresh, refreshfn] = useState(0);
 
   return (
     <AppContext.Provider
@@ -45,6 +46,8 @@ export function Appwrapper({ children }) {
         setinvoicedata,
         showlogin,
         setshowlogin,
+        refresh,
+        refreshfn,
       }}
     >
       {children}

@@ -6,7 +6,7 @@ import { AppContextfn } from "../../Context/Index";
 
 
 function Ordersmenu() {
-  const { ordercomps,setordercomps, ordercompsref } = AppContextfn();
+  const { ordercomps,setordercomps, ordercompsref,refresh } = AppContextfn();
   const [allorders, setallorders] = useState([]);
   const [runningorders, setrunningorders] = useState([]);
   const [completedorders, setcompletedorders] = useState([]);
@@ -33,7 +33,7 @@ function Ordersmenu() {
           setcompletedorders(res);
         });
     }
-  }, [ordercomps]);
+  }, [ordercomps,refresh]);
 
   return (
     <div

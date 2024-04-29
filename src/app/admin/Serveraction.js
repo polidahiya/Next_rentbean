@@ -30,7 +30,7 @@ export const changestatus = async (documentId, status) => {
     await orders.updateOne(filter, { $set: { orderstartdate: new Date() } });
   }
 
-  revalidatePath("/admin");
+  
 };
 
 // delete orders function
@@ -41,7 +41,7 @@ export const deleteorder = async (documentId) => {
       console.error("Failed to delete document:", deleteErr);
     }
   });
-  revalidatePath("/admin");
+  
 };
 
 // update note

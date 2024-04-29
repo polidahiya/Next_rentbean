@@ -11,9 +11,9 @@ import {
 } from "../Serveraction";
 import { typeofprices } from "@/app/Data";
 
-
 function Orders({ item }) {
-  const { notifictionarr, setnotifictionarr, setinvoicedata } = AppContextfn();
+  const { notifictionarr, setnotifictionarr, setinvoicedata, refreshfn } =
+    AppContextfn();
   const [note, setnote] = useState(item.note);
 
   const dateformater = (value) => {
@@ -47,8 +47,11 @@ function Orders({ item }) {
               className={`px-[10px] py-[5px] border border-slate-300 ${
                 item.verified ? "bg-green-500 text-white" : ""
               }`}
-              onClick={() => {
-                setverifiedorder(item._id);
+              onClick={async () => {
+                await setverifiedorder(item._id);
+                refreshfn((pre) => {
+                  return pre + 1;
+                });
               }}
             >
               Verified
@@ -58,9 +61,12 @@ function Orders({ item }) {
           {item.status == "order" && (
             <button
               className={`px-[10px] py-[5px] border border-slate-300`}
-              onClick={() => {
+              onClick={async () => {
                 if (item.verified) {
-                  changestatus(item._id, "running");
+                  await changestatus(item._id, "running");
+                  refreshfn((pre) => {
+                    return pre + 1;
+                  });
                 }
               }}
             >
@@ -71,9 +77,12 @@ function Orders({ item }) {
           {item.status == "running" && (
             <button
               className={`px-[10px] py-[5px] border border-slate-300`}
-              onClick={() => {
+              onClick={async () => {
                 if (item.verified) {
-                  changestatus(item._id, "order");
+                  await changestatus(item._id, "order");
+                  refreshfn((pre) => {
+                    return pre + 1;
+                  });
                 }
               }}
             >
@@ -84,9 +93,12 @@ function Orders({ item }) {
           {item.status == "running" && (
             <button
               className={`px-[10px] py-[5px] border border-slate-300`}
-              onClick={() => {
+              onClick={async () => {
                 if (item.verified) {
-                  changestatus(item._id, "completed");
+                  await changestatus(item._id, "completed");
+                  refreshfn((pre) => {
+                    return pre + 1;
+                  });
                 }
               }}
             >
@@ -97,9 +109,12 @@ function Orders({ item }) {
           {item.status == "completed" && (
             <button
               className={`px-[10px] py-[5px] border border-slate-300`}
-              onClick={() => {
+              onClick={async () => {
                 if (item.verified) {
-                  changestatus(item._id, "running");
+                  await changestatus(item._id, "running");
+                  refreshfn((pre) => {
+                    return pre + 1;
+                  });
                 }
               }}
             >
@@ -109,8 +124,11 @@ function Orders({ item }) {
           {/* delete button */}
           <button
             className="px-[10px] py-[5px] bg-red-400 text-white border border-slate-300"
-            onClick={() => {
-              deleteorder(item._id);
+            onClick={async () => {
+              await deleteorder(item._id);
+              refreshfn((pre) => {
+                return pre + 1;
+              });
             }}
           >
             Delete Order
