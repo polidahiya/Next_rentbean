@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { AppContextfn } from "../../Context/Index";
 
@@ -6,11 +6,13 @@ function Publicpage() {
   const { invoicedata } = AppContextfn();
   let totalrent = 0;
   let totalrefundable = 0;
-  Object.keys(invoicedata?.products)?.forEach((product, j) => {
-    let eachpro = invoicedata?.products[product];
-    totalrent += eachpro.prices[eachpro.time] * (eachpro.Quantity + 1);
-    totalrefundable += eachpro.refundableprice * (eachpro.Quantity + 1);
-  });
+  if (invoicedata.length>0) {
+    Object.keys(invoicedata?.products)?.forEach((product, j) => {
+      let eachpro = invoicedata?.products[product];
+      totalrent += eachpro.prices[eachpro.time] * (eachpro.Quantity + 1);
+      totalrefundable += eachpro.refundableprice * (eachpro.Quantity + 1);
+    });
+  }
 
   // second table
   const [secondtabledata, setsecondtabledata] = useState({
@@ -28,7 +30,8 @@ function Publicpage() {
     Number(secondtabledata.refundabledeposit) +
     Number(secondtabledata.saving);
 
-  return (
+  if(invoicedata.length>0){
+    return (
     <div className="flex flex-col min-h-screen items-end p-[40px]">
       <div className="absolute top-[10px] left-[40px]" contentEditable="true">
         {new Date().getDate() +
@@ -257,6 +260,7 @@ function Publicpage() {
       </table>
     </div>
   );
+  }
 }
 
 export default Publicpage;
