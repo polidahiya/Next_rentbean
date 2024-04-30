@@ -199,7 +199,7 @@ function Navlist({ data, title, listitems, location, settogglemobilenav }) {
         {title} <span className="block lg:hidden">:</span>
       </Link>
 
-      <div className="flex lg:block gap-[10px] w-full px-[10px] lg:px-0 overflow-x-scroll lg:group-hover:border-b  lg:group-hover:border-t lg:group-hover:border-theme">
+      <div className="blackshadow1 flex lg:block gap-[10px] w-full px-[10px] lg:px-0 overflow-x-scroll lg:group-hover:border-b  lg:group-hover:border-t lg:group-hover:border-theme">
         {listitems.map((list, i) => {
           return (
             <Link

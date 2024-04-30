@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import {AppContextfn} from "../Context/Index";
+import { AppContextfn } from "../Context/Index";
 import Facebooksvg from "../components/(svgs)/Facebook";
 import Instagramsvg from "../components/(svgs)/Instagram";
 import Twittersvg from "../components/(svgs)/Twitter";
@@ -87,6 +87,11 @@ function Footer() {
       </div>
       <hr className="w-full h-[1px] bg-slate-400 my-[40px]" />
       <div className="relative flex">
+        <p className=" text-[12px]">
+          &copy; {new Date().getFullYear()}{" "}
+          <strong className="font-bold">RentBean.in</strong>. All rights
+          reserved.
+        </p>
         <div className="flex gap-[10px] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]  ">
           <Link
             target="_blank"

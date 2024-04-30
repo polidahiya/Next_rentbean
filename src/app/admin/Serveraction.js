@@ -1,6 +1,5 @@
 "use server";
 import { orders, ObjectId } from "@/components/mongodb";
-import { revalidatePath } from "next/cache";
 
 // set verified
 export const setverifiedorder = async (documentId) => {

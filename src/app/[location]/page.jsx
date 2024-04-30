@@ -4,6 +4,15 @@ import { notFound } from "next/navigation";
 import Pickups from "../components/pickups/Pickups";
 import { Data, typeofprices } from "../Data";
 import Posteradds from "../components/Posterads";
+import Description from "../components/Description";
+
+export const generateMetadata = ({ params }) => {
+  let location = params.location.replace(/_/g, " ");
+
+  return {
+    title: "Rentbean.in | products on rent in " + location,
+  };
+};
 
 let data = Data();
 let randomproducts = Object.keys(data.data)
@@ -57,7 +66,7 @@ export default async function Home({ params }) {
   if (!listoflocation.includes(location)) {
     notFound();
   }
-  
+
   return (
     <>
       {/* poster ads */}
@@ -126,6 +135,8 @@ export default async function Home({ params }) {
           })}
         </div>
       </div>
+      {/* descriptions  */}
+      <Description location={location}/>
     </>
   );
 }

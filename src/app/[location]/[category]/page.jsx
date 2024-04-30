@@ -4,6 +4,15 @@ import { notFound } from "next/navigation";
 import { Data } from "../../Data";
 import Loadingimage from "./Loadingimage";
 
+export const generateMetadata = ({ params }) => {
+  let location = params.location.replace(/_/g, " ");
+  let category = params.category.replace(/_/g, " ");
+
+  return {
+    title: category + " on rent in " + location + " | Rentbean.in",
+  };
+};
+
 function page({ params }) {
   let location = params.location.replace(/_/g, " ");
   let category = params.category.replace(/_/g, " ");
