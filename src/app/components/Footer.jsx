@@ -87,7 +87,7 @@ function Footer() {
       </div>
       <hr className="w-full h-[1px] bg-slate-400 my-[40px]" />
       <div className="relative flex">
-        <p className=" text-[12px]">
+        <p className=" text-[12px] max-w-[100px] md:max-w-[300px]">
           &copy; {new Date().getFullYear()}{" "}
           <strong className="font-bold">RentBean.in</strong>. All rights
           reserved.
