@@ -37,7 +37,7 @@ function Description({ location }) {
             of the cost?
           </p>
           <p className=" text-[12px] my-[5px]">
-            We understand that every individual's needs are different, which is
+            We understand that every individual&#39;s needs are different, which is
             why we offer flexible monthly rental subscriptions tailored to your
             budget and requirements. Choose from short-term to long-term
             subscriptions and enjoy maximum savings on our extensive range of
@@ -46,7 +46,7 @@ function Description({ location }) {
           </p>
           <p className=" text-[12px] my-[5px]">
             Renting with <strong className="font-bold">RentBean.in</strong>{" "}
-            couldn't be easier. Simply browse our website, select your desired
+            couldn&#39;t be easier. Simply browse our website, select your desired
             items, specify the rental term, add them to your cart, and proceed
             to checkout. Once your order is confirmed, our dedicated team will
             promptly deliver the items to your doorstep anywhere in {location},
