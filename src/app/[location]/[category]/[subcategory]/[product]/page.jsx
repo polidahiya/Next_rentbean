@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-
 import { Data, typeofprices } from "../../../../Data";
 import Topimages from "./Topimages";
 import Settings from "./Settings";
@@ -9,19 +8,6 @@ import Relatedproducts from "./Relatedproducts";
 import Details from "../../../../components/(svgs)/Details";
 import Homesvg from "../../../../components/(svgs)/Home";
 
-export const generateMetadata = ({ params }) => {
-  let location = params.location.replace(/_/g, " ");
-  let category = params.category.replace(/_/g, " ");
-  let subcat = params.subcategory.replace(/_/g, " ");
-  let productid = params.product.replace(/_/g, " ");
-  let products = Data()?.data[category]?.subcat[subcat]?.products;
-  let product = products?.filter((item) => item.pid == productid)[0];
-  console.log(product);
-  return {
-    title: product?.name + " on rent in " + location + " | Rentbean.in",
-    image:"https://next-rentbean.vercel.app/"+product.image[0]
-  };
-};
 
 function page({ params }) {
   let location = params.location.replace(/_/g, " ");
@@ -38,6 +24,18 @@ function page({ params }) {
 
   return (
     <div>
+      <head>
+        <title>
+          {product?.name + " on rent in " + location + " | Rentbean.in"}
+        </title>
+        <meta name="description" content="This is an example page" />
+        <meta property="og:title" content="Example Page" />
+        <meta property="og:description" content="This is an example page" />
+        <meta
+          property="og:image"
+          content={"https://next-rentbean.vercel.app/" + product.image[0]}
+        />
+      </head>
       <div className="flex items-center gap-[5px] h-[30px] px-[10px] lg:px-[40px] bg-bg1 text-[12px] text-theme select-none ">
         <Link
           className="group hover:text-cyan-500 flex items-center"
