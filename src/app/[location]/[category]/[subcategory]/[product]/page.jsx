@@ -42,7 +42,7 @@ function page({ params }) {
 
   return (
     <div>
-      <div className="flex items-center gap-[5px] h-[30px] px-[10px] lg:px-[40px] bg-bg1 text-[12px] text-theme select-none ">
+      <div className="flex items-center gap-[5px] h-[30px] px-[10px] lg:px-[40px] bg-bg1 text-[12px] text-theme select-none whitespace-nowrap">
         <Link
           className="group hover:text-cyan-500 flex items-center"
           href={"/" + location}
@@ -67,7 +67,7 @@ function page({ params }) {
           {subcat}
         </Link>
         &gt;
-        <div className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[100%]">
+        <div className=" overflow-hidden text-ellipsis max-w-[100%]">
           {product.name}
         </div>
       </div>
@@ -112,8 +112,8 @@ function page({ params }) {
         params={params}
       />
       {/* meta description */}
-      <div className="my-[20px] px-[10px] md:px-[40px]">
-          <strong className="text-[12px] font-normal ">
+      <div className="my-[20px] px-[10px] md:px-[40px] text-justify">
+          <strong className="text-[12px] font-normal">
             {product.metadesc}
           </strong>
         </div>

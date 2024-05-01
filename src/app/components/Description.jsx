@@ -96,7 +96,7 @@ function Description({ location }) {
               Event & party items
             </Link>
             : Rent the life of the party! From hookahs to beer towers, DJ
-            lights, and beyond, we've got your event essentials covered. Let the
+            lights, and beyond, we&apos;ve got your event essentials covered. Let the
             good times roll with our extensive selection of rental items.
           </p>
         </section>
