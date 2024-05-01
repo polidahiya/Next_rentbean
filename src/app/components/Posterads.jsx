@@ -106,12 +106,14 @@ function Posteradds({ location }) {
         </div>
       </div>
       <div className="hidden relative lg:flex items-center justify-center w-[400px] bg-pink-300 text-[40px] gap-[10px] rounded-[10px] overflow-hidden">
-        <img
-          className="h-full w-full object-cover brightness-[0.8]"
-          src="https://i.pinimg.com/736x/4d/8c/ae/4d8cae8e5a724213b65cb322c039de54.jpg"
-          alt=""
-        />
-        <div className="absolute bottom-[30px] left-[50%] translate-x-[-50%] text-white text-[30px] z-10 text-center">Event Planner</div>
+        <video
+          className="h-full w-full object-cover "
+          src="\ADS\Picsart_24-05-01_19-27-09-065.mp4"
+          poster="\ADS\Screenshot 2024-05-01 195538.png"
+          autoPlay
+          muted
+          loop
+        ></video>
       </div>
     </div>
   );
