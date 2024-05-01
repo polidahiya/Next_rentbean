@@ -16,10 +16,11 @@ export const generateMetadata = ({ params }) => {
   let productid = params.product.replace(/_/g, " ");
   let products = Data()?.data[category]?.subcat[subcat]?.products;
   let product = products?.filter((item) => item.pid == productid)[0];
-  console.log(product);
+  
   return {
     title: product?.name + " on rent in " + location + " | Rentbean.in",
     description: product.metadesc,
+    keywords: product.keywords,
     openGraph: {
       images: "https://" + sitename + "/" + product.image[0],
     },

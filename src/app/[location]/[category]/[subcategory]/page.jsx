@@ -3,13 +3,20 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Data, typeofprices } from "../../../Data";
 import Loadingimage from "../Loadingimage";
+import { sitename } from "../../../../components/Commondata";
 
 export const generateMetadata = ({ params }) => {
   let location = params?.location?.replace(/_/g, " ");
+  let category = params?.category?.replace(/_/g, " ");
   let subcat = params?.subcategory?.replace(/_/g, " ");
-
+  let products = Data()?.data[category]?.subcat[subcat].image;
+  
   return {
     title: subcat + " on rent in " + location + " | Rentbean.in",
+    description: "Rent " + subcat + " in " + location,
+    openGraph: {
+      images: "https://" + sitename + "/" + products,
+    },
   };
 };
 
