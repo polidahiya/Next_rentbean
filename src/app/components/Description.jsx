@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Link from "next/link";
 
 function Description({ location }) {
   const [moredesc, setmoredesc] = useState(false);
@@ -37,20 +38,20 @@ function Description({ location }) {
             of the cost?
           </p>
           <p className=" text-[12px] my-[5px]">
-            We understand that every individual&#39;s needs are different, which is
-            why we offer flexible monthly rental subscriptions tailored to your
-            budget and requirements. Choose from short-term to long-term
+            We understand that every individual&#39;s needs are different, which
+            is why we offer flexible monthly rental subscriptions tailored to
+            your budget and requirements. Choose from short-term to long-term
             subscriptions and enjoy maximum savings on our extensive range of
             products. Plus, renting with us comes with added perks such as free
             relocation, damage waiver, and complimentary maintenance.
           </p>
           <p className=" text-[12px] my-[5px]">
             Renting with <strong className="font-bold">RentBean.in</strong>{" "}
-            couldn&#39;t be easier. Simply browse our website, select your desired
-            items, specify the rental term, add them to your cart, and proceed
-            to checkout. Once your order is confirmed, our dedicated team will
-            promptly deliver the items to your doorstep anywhere in {location},
-            including popular areas like {popularplaces[location]}.
+            couldn&#39;t be easier. Simply browse our website, select your
+            desired items, specify the rental term, add them to your cart, and
+            proceed to checkout. Once your order is confirmed, our dedicated
+            team will promptly deliver the items to your doorstep anywhere in{" "}
+            {location}, including popular areas like {popularplaces[location]}.
           </p>
         </section>
         <section className={`overflow-hidden ${moredesc ? "" : "h-0"} `}>
@@ -64,23 +65,39 @@ function Description({ location }) {
             home.
           </p>
           <p className=" text-[12px] my-[5px]">
-            - Furniture Rentals: Explore our wide selection of home furniture
-            from renowned brands, catering to every room in your apartment.
+            -{" "}
+            <Link href={"/" + location + "/Fitness_and_Gym"}>
+              Fitness and Gym item Rentals
+            </Link>
+            : Explore our wide selection of top-quality treadmills and other gym
+            equipment for your fitness journey today.
           </p>
           <p className=" text-[12px] my-[5px]">
-            - Appliance Rentals: Rent appliances from trusted names like
-            Panasonic, Samsung, and Haier, including refrigerators, microwaves,
-            washing machines, air conditioners, cooktops, and more.
+            -{" "}
+            <Link href={"/" + location + "/Electronics"}>
+              Appliance Rentals
+            </Link>
+            : Rent appliances from trusted names like Panasonic, Samsung, and
+            Haier, including refrigerators, microwaves, washing machines, air
+            conditioners, cooktops, and more.
           </p>
           <p className=" text-[12px] my-[5px]">
-            - Electronics Rentals: Stay ahead with the latest smart gadgets by
-            renting laptops, tablets, smartphones, and smart home devices from{" "}
+            -{" "}
+            <Link href={"/" + location + "/Electronics"}>
+              Electronics Rentals
+            </Link>
+            : Stay ahead with the latest smart gadgets by renting laptops,
+            tablets, smartphones, and smart home devices from{" "}
             <strong className="font-bold">RentBean.in</strong>.
           </p>
           <p className=" text-[12px] my-[5px]">
-            - Furniture & Appliance Packages: Take advantage of our curated
-            furniture and appliance package combos, available at discounted
-            rates.
+            -{" "}
+            <Link href={"/" + location + "/Event_and_Parties"}>
+              Event & party items
+            </Link>
+            : Rent the life of the party! From hookahs to beer towers, DJ
+            lights, and beyond, we've got your event essentials covered. Let the
+            good times roll with our extensive selection of rental items.
           </p>
         </section>
         <section className={`overflow-hidden ${moredesc ? "" : "h-0"} `}>
@@ -163,7 +180,9 @@ function Description({ location }) {
         >
           {moredesc ? "Read Less" : "Read More"}
           <svg
-            className={`h-[20px] fill-textcolor ${moredesc ? "rotate-180" : ""}`}
+            className={`h-[20px] fill-textcolor ${
+              moredesc ? "rotate-180" : ""
+            }`}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
           >

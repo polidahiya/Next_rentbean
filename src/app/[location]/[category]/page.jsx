@@ -3,19 +3,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Data } from "../../Data";
 import Loadingimage from "./Loadingimage";
-import { sitename } from "@/components/Commondata";
 
 export const generateMetadata = ({ params }) => {
   let location = params.location.replace(/_/g, " ");
   let category = params.category.replace(/_/g, " ");
-  console.log(Data().data[category].image);
 
   return {
     title: category + " on rent in " + location + " | Rentbean.in",
     description: "Rent " + category + " and more in " + location,
-    openGraph: {
-      images: "https://" + sitename + "/" + Data().data[category].image,
-    },
   };
 };
 

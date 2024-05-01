@@ -16,7 +16,7 @@ export const generateMetadata = ({ params }) => {
   let productid = params.product.replace(/_/g, " ");
   let products = Data()?.data[category]?.subcat[subcat]?.products;
   let product = products?.filter((item) => item.pid == productid)[0];
-  
+
   return {
     title: product?.name + " on rent in " + location + " | Rentbean.in",
     description: product.metadesc,
@@ -111,6 +111,12 @@ function page({ params }) {
         typeofprices={typeofprices}
         params={params}
       />
+      {/* meta description */}
+      <div className="my-[20px] px-[10px] md:px-[40px]">
+          <strong className="text-[12px] font-normal ">
+            {product.metadesc}
+          </strong>
+        </div>
     </div>
   );
 }

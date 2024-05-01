@@ -76,7 +76,7 @@ export default async function Home({ params }) {
         {Object.keys(data.data).map((categories, i) => {
           return (
             <Link
-              className="categoriestile blackshadow1hover h-[60px] w-[60px] md:h-[70px] md:w-[120px]  rounded-lg flex flex-col items-center justify-center border border-gray-200 transition-shadow duration-200"
+              className="categoriestile shadow2hover h-[60px] w-[60px] md:h-[70px] md:w-[120px]  rounded-lg flex flex-col items-center justify-center border border-gray-200 lg:hover:border-none lg:hover:scale-110   duration-200"
               href={
                 "/" +
                 location.replace(/ /g, "_") +

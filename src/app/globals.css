@@ -41,19 +41,23 @@ body {
 }
 .blackshadow1 {
   -webkit-box-shadow: rgba(0, 0, 0, 0.12) 5px 5px 10px 0px;
-          box-shadow: rgba(0, 0, 0, 0.12) 5px 5px 10px 0px;
+  box-shadow: rgba(0, 0, 0, 0.12) 5px 5px 10px 0px;
 }
 .blackshadow1hover:hover {
   -webkit-box-shadow: rgba(0, 0, 0, 0.12) 5px 5px 10px 0px;
-          box-shadow: rgba(0, 0, 0, 0.12) 5px 5px 10px 0px;
+  box-shadow: rgba(0, 0, 0, 0.12) 5px 5px 10px 0px;
+}
+.shadow2hover:hover {
+  -webkit-box-shadow: 0 8px 14px 0 #bfcfdc;
+  box-shadow: 0 8px 14px 0 #bfcfdc;
 }
 /* notification */
 .notification {
-  -webkit-transition: opacity 0.3s 0.4s, width 0.3s,max-width 0.3s;
-  -o-transition: opacity 0.3s 0.4s, width 0.3s,max-width 0.3s;
-  transition: opacity 0.3s 0.4s, width 0.3s,max-width 0.3s;
+  -webkit-transition: opacity 0.3s 0.4s, width 0.3s, max-width 0.3s;
+  -o-transition: opacity 0.3s 0.4s, width 0.3s, max-width 0.3s;
+  transition: opacity 0.3s 0.4s, width 0.3s, max-width 0.3s;
   -webkit-box-shadow: 2px 2px 5px rgba(128, 128, 128, 0.5);
-          box-shadow: 2px 2px 5px rgba(128, 128, 128, 0.5);
+  box-shadow: 2px 2px 5px rgba(128, 128, 128, 0.5);
 }
 .notification div {
   -webkit-transition: opacity 0.1s;
@@ -62,9 +66,9 @@ body {
 }
 /*  */
 .activenotification {
-  -webkit-transition: opacity 0.3s, width 0.3s 0.3s ,max-width 0.3s 0.3s !important;
-  -o-transition: opacity 0.3s, width 0.3s 0.3s ,max-width 0.3s 0.3s !important;
-  transition: opacity 0.3s, width 0.3s 0.3s ,max-width 0.3s 0.3s !important;
+  -webkit-transition: opacity 0.3s, width 0.3s 0.3s, max-width 0.3s 0.3s !important;
+  -o-transition: opacity 0.3s, width 0.3s 0.3s, max-width 0.3s 0.3s !important;
+  transition: opacity 0.3s, width 0.3s 0.3s, max-width 0.3s 0.3s !important;
   width: 90% !important;
   max-width: 350px !important;
   pointer-events: all !important;
@@ -85,7 +89,7 @@ body {
 }
 nav .cartcounter {
   -webkit-animation: pop 0.3s ease-in-out forwards;
-          animation: pop 0.3s ease-in-out forwards;
+  animation: pop 0.3s ease-in-out forwards;
 }
 @-webkit-keyframes pop {
   0% {
@@ -125,7 +129,7 @@ nav .cartcounter {
 @media screen and (width<640px) {
   .categoriestile {
     -webkit-box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.123);
-            box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.123);
+    box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.123);
     background: -o-linear-gradient(
       235deg,
       rgba(240, 240, 240, 0),
@@ -143,7 +147,7 @@ nav .cartcounter {
   }
 }
 /* home page ads */
-.adscontrolbuttons:hover{
+.adscontrolbuttons:hover {
   opacity: 1 !important;
   background: white !important;
 }
@@ -157,8 +161,8 @@ nav .cartcounter {
   bottom: 0;
   left: 50%;
   -webkit-transform: translateX(-50%);
-      -ms-transform: translateX(-50%);
-          transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
 }
 
 @media screen and (width>450px) {
@@ -182,8 +186,8 @@ nav .cartcounter {
     -o-transition: 0.3s;
     transition: 0.3s;
     -webkit-transform: rotate(-180deg);
-        -ms-transform: rotate(-180deg);
-            transform: rotate(-180deg);
+    -ms-transform: rotate(-180deg);
+    transform: rotate(-180deg);
   }
   .desksidebar .columns .list:hover {
     color: var(--theme);
@@ -201,14 +205,14 @@ nav .cartcounter {
 .prices {
   -webkit-box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.123) inset,
     -5px -5px 7px rgba(255, 255, 255) inset;
-          box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.123) inset,
+  box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.123) inset,
     -5px -5px 7px rgba(255, 255, 255) inset;
 }
 /* range input */
 input[type="range"] {
   -webkit-appearance: none;
   -moz-appearance: none;
-       appearance: none;
+  appearance: none;
   height: 20px;
   border-radius: 5px;
   background-color: transparent;
@@ -224,7 +228,7 @@ input[type="range"]::-webkit-slider-thumb {
   border-radius: 50%;
   cursor: pointer;
   -webkit-transform: translateY(calc(-50% + 1px));
-          transform: translateY(calc(-50% + 1px));
+  transform: translateY(calc(-50% + 1px));
   -webkit-transition: 0.2s linear, background-color 0s;
   transition: 0.2s linear, background-color 0s;
 }
@@ -233,7 +237,7 @@ input[type="range"]::-webkit-slider-thumb {
     outline-offset: 2px;
     background: var(--theme);
     -webkit-transform: translateY(calc(-50% + 1px)) scale(1.2);
-            transform: translateY(calc(-50% + 1px)) scale(1.2);
+    transform: translateY(calc(-50% + 1px)) scale(1.2);
   }
 }
 @media screen and (width<450px) {
@@ -250,7 +254,7 @@ input[type="range"]::-webkit-slider-thumb {
     outline-offset: 2px;
     background: var(--theme);
     -webkit-transform: translateY(calc(-50% + 1px)) scale(1.2);
-            transform: translateY(calc(-50% + 1px)) scale(1.2);
+    transform: translateY(calc(-50% + 1px)) scale(1.2);
   }
 }
 
@@ -264,8 +268,8 @@ input[type="range"]::-webkit-slider-runnable-track {
 .forminput:focus + label,
 .forminput:valid + label {
   -webkit-transform: translateY(-80%);
-      -ms-transform: translateY(-80%);
-          transform: translateY(-80%);
+  -ms-transform: translateY(-80%);
+  transform: translateY(-80%);
   font-size: 12px;
 }
 
@@ -297,33 +301,33 @@ input[type="range"]::-webkit-slider-runnable-track {
   margin: 0;
   padding: 10px 0 0 0;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   -webkit-filter: hue-rotate(0deg);
-          filter: hue-rotate(0deg);
+  filter: hue-rotate(0deg);
   -webkit-animation: rotatehue 200s infinite linear;
-          animation: rotatehue 200s infinite linear;
+  animation: rotatehue 200s infinite linear;
 }
 @-webkit-keyframes rotatehue {
   0% {
     -webkit-filter: hue-rotate(0deg) saturate(2);
-            filter: hue-rotate(0deg) saturate(2);
+    filter: hue-rotate(0deg) saturate(2);
     background-position: -200% 50%;
   }
   100% {
     -webkit-filter: hue-rotate(360deg) saturate(2);
-            filter: hue-rotate(360deg) saturate(2);
+    filter: hue-rotate(360deg) saturate(2);
     background-position: 200% 50%;
   }
 }
 @keyframes rotatehue {
   0% {
     -webkit-filter: hue-rotate(0deg) saturate(2);
-            filter: hue-rotate(0deg) saturate(2);
+    filter: hue-rotate(0deg) saturate(2);
     background-position: -200% 50%;
   }
   100% {
     -webkit-filter: hue-rotate(360deg) saturate(2);
-            filter: hue-rotate(360deg) saturate(2);
+    filter: hue-rotate(360deg) saturate(2);
     background-position: 200% 50%;
   }
 }
