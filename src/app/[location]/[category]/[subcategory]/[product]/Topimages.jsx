@@ -105,7 +105,7 @@ function Topimages({ images, name }) {
         title="Copy Link"
         onClick={sharepage}
       >
-        <Linksvg styles="h-[30px] aspect-square fill-none" />
+        <Linksvg styles="h-[30px] aspect-square fill-none stroke-cyan-500" />
       </button>
       {/* dotts */}
       <div className="absolute bottom-0 left-0 z-10 w-full ">
