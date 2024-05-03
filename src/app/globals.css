@@ -1,21 +1,19 @@
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v8.4.14,
-* Autoprefixer: v10.4.7
-* Browsers: last 4 version
-*/
-
 @import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: Recline;
+  src: url(/Recline.ttf);
+}
 * {
   -webkit-tap-highlight-color: transparent;
   font-family: "Mulish", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
 }
+
 html {
   width: 100vw;
   overflow-x: hidden;
@@ -297,7 +295,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   -webkit-background-clip: text;
   color: transparent;
   text-align: center;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  /* font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif; */
   margin: 0;
   padding: 10px 0 0 0;
   -webkit-box-sizing: border-box;

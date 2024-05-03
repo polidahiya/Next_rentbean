@@ -50,7 +50,7 @@ function Topimages({ images, name }) {
   }
 
   return (
-    <div className="relative lg:sticky top-0 lg:top-[80px] aspect-[2/1]  w-[100%] lg:w-[70%]">
+    <div className="relative lg:sticky top-0 lg:top-[80px] aspect-[2/1]  w-[100%] lg:w-[70%] max-h-[400px] lg:max-h-full">
       <div
         className="h-full w-full flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory scroll-smooth"
         onScroll={(e) => {
@@ -71,6 +71,7 @@ function Topimages({ images, name }) {
               alt={name}
               height={2000}
               width={2000}
+              quality={100}
               key={i}
             ></Image>
           );

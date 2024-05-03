@@ -3,7 +3,7 @@ import React from "react";
 function page() {
   return (
     <div>
-      <h1 className="text-center text-[25px] text-theme font-bold pt-[40px] pb-[10px]">
+      <h1 className="text-center text-[25px] text-theme font-bold pt-[40px] pb-[10px] font-recline">
         Documents Required
       </h1>
       <div className="flex items-stretch justify-center gap-[10px] flex-wrap p-[20px]">
@@ -18,7 +18,7 @@ function page() {
             >
               <path d="M5 21h14a2.006 2.006 0 002-2V9a2.006 2.006 0 00-2-2h-2V5a2 2 0 00-2-2H9a2 2 0 00-2 2v2H5a2.006 2.006 0 00-2 2v10a2.006 2.006 0 002 2zM9 5.5a.5.5 0 01.5-.5h5a.5.5 0 01.5.5V7H9zM6 11h12v2H6zm0 4h12v2H6z"></path>
             </svg>
-            <span className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] whitespace-nowrap">
+            <span className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] whitespace-nowrap text-[18px] font-recline">
               {" "}
               Working Professional
             </span>
@@ -54,7 +54,7 @@ function page() {
                 <path d="M129.774 124.617c-.053 7.43-1.516 17.95-8.265 25.567 0 14.883 12.107 27.681 26.991 27.681s26.991-12.798 26.991-27.681c-6.748-7.617-8.212-18.136-8.263-25.567-5.86 2.617-12.139 4.078-18.727 4.078-6.587 0-12.867-1.461-18.727-4.078z"></path>
               </g>
             </svg>
-            <span className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] whitespace-nowrap">
+            <span className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] whitespace-nowrap text-[18px] font-recline">
               {" "}
               Self Employed
             </span>
@@ -81,7 +81,7 @@ function page() {
             >
               <path d="M14.096 3.076l1.634 2.292L24 3.076M5.503 20.924l4.474-4.374-2.692-2.89m6.133-10.584L11.027 5.23l4.022.15M4.124 3.077l.857 1.76 4.734.294m-3.058 7.072l3.497-6.522L0 5.13m7.064 7.485l3.303 3.548 3.643-3.57 1.13-6.652-4.439-.228z"></path>
             </svg>
-            <span className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] whitespace-nowrap">
+            <span className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] whitespace-nowrap text-[18px] font-recline">
               Freelance
             </span>
           </h2>
@@ -120,7 +120,7 @@ function page() {
                 ></path>
               </g>
             </svg>
-            <span className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] whitespace-nowrap">
+            <span className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] whitespace-nowrap text-[18px] font-recline">
               {" "}
               Students
             </span>

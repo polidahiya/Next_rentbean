@@ -19,10 +19,10 @@ export const generateMetadata = ({ params }) => {
 
   return {
     title: product?.name + " on rent in " + location + " | Rentbean.in",
-    description: product.metadesc,
-    keywords: product.keywords,
+    description: product?.metadesc,
+    keywords: product?.keywords,
     openGraph: {
-      images: "https://" + sitename + "/" + product.image[0],
+      images: "https://" + sitename + "/" + product?.image[0],
     },
   };
 };
@@ -42,7 +42,7 @@ function page({ params }) {
 
   return (
     <div>
-      <div className="flex items-center gap-[5px] h-[30px] px-[10px] lg:px-[40px] bg-bg1 text-[12px] text-theme select-none whitespace-nowrap">
+      <div className="flex items-center gap-[5px] h-[30px] px-[10px] lg:px-[40px]  text-[12px] text-theme select-none whitespace-nowrap">
         <Link
           className="group hover:text-cyan-500 flex items-center"
           href={"/" + location}
@@ -92,9 +92,9 @@ function page({ params }) {
       </div>
       {/* procuct details */}
       <div className="mt-[30px] p-[20px] md:p-[40px] py-[30px] bg-bg1">
-        <h2 className="flex items-center gap-[10px] text-[22px] font-semibold mb-[10px]">
+        <h2 className="flex items-center gap-[10px] text-[22px] font-semibold mb-[10px] ">
           <Details />
-          <span>Product Details</span>
+          <span className="font-recline">Product Details</span>
         </h2>
         <ul>
           {product.desc.map((desc, i) => {
@@ -112,7 +112,7 @@ function page({ params }) {
         params={params}
       />
       {/* meta description */}
-      <div className="my-[20px] px-[10px] md:px-[40px] text-justify">
+      <div className="my-[20px] px-[10px] md:px-[40px] text-center">
           <strong className="text-[12px] font-normal">
             {product.metadesc}
           </strong>

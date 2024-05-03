@@ -11,7 +11,7 @@ function page() {
       />
       <div className="h-[100svh] relative">
         <div className="blackshadow1  p-[40px] text-center  absolute  w-[90%] max-w-[400px] aspect-[4/3] bg-bg1 flex flex-col items-center justify-center rounded-[20px] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] ">
-          <p className="font-semibold text-[20px]"> We are here to help!</p>
+          <p className="font-semibold text-[20px] font-recline"> We are here to help!</p>
           <Link
             href="mailto:letsolvein@gmail.com"
             className=" flex items-center justify-center gap-[5px] w-full md:w-fit  text-[14px] pt-[10px] lg:hover:underline  "

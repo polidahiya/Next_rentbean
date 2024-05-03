@@ -108,7 +108,7 @@ export default async function Home({ params }) {
       />
       {/* commnets */}
       <div className="py-[50px] commentscontainer ">
-        <p className="text-center text-[30px]">What our clients say!</p>
+        <p className="text-center text-[30px] font-recline">What our clients say!</p>
         <div className="flex md:justify-center gap-[10px] md:flex-wrap mt-[50px] min-w-[100vw] px-[30px] pb-[30px] md:px-0 md:pb-[30px] overflow-x-scroll">
           {commnets.map((item, i) => {
             return (
@@ -126,7 +126,7 @@ export default async function Home({ params }) {
                   alt={item.name}
                   className="rounded-full duration-300"
                 ></Image>
-                <p className="mt-[10px] relative commentname">{item.name}</p>
+                <p className="mt-[10px] relative commentname ">{item.name}</p>
                 <p className={"text-[12px] text-justify mt-[30px]"}>
                   {item.comment}
                 </p>

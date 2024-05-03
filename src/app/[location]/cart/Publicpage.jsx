@@ -8,7 +8,6 @@ import Userdetails from "./components/Userdetails";
 
 function Publicpage({ placeorder }) {
   const { cartproducts,location } = AppContextfn();
-  // cosnt[(totalprice, settotalprice)] = useState(0);
   let total = 0;
 
   let productsToShow = Object.keys(Data().data).flatMap((i) =>

@@ -32,7 +32,7 @@ function page({ params }) {
 
   return (
     <>
-      <div className="text-[20px] relative h-[60px] flex items-center justify-center bg-bg1">
+      <div className="text-[22px] font-medium font-recline relative h-[60px] flex items-center justify-center bg-bg1">
         <Link
           href={"/" + location.replace(/ /g, "_") + "/" + params.category}
           className="group absolute left-[40px] h-[40px] w-[40px] top-[50%] bg-theme translate-y-[-50%] rounded-full overflow-hidden flex items-center justify-center lg:hover:w-[140px] duration-300"
@@ -76,7 +76,7 @@ function page({ params }) {
                 alt={item.name}
                 objectfit="object-cover"
               />
-              <div className="text-ellipsis text-center overflow-hidden whitespace-nowrap px-0[10px]">
+              <div className="text-ellipsis text-center overflow-hidden whitespace-nowrap px-0[10px] ">
                 {item.name}
               </div>
               <div className=" h-[30px] min-w-[70%] w-[70%] mx-auto px-[10px] text-[14px] box-content bg-theme text-white whitespace-nowrap rounded-[10px] flex items-center justify-center">
@@ -90,7 +90,9 @@ function page({ params }) {
                 /{typeofprices[item.pricetype - 1].suffix}
               </div>
               <div className="absolute h-[2px] bg-theme w-[50%] rounded-full left-[50%] bottom-[4px] translate-x-[-50%]"></div>
+
               {/* if not available */}
+
               {item.available == 0 && (
                 <div
                   className="absolute top-0 left-0 h-full w-full flex items-center justify-center text-white"

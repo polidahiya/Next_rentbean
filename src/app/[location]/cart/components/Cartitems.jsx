@@ -44,7 +44,7 @@ function Cartitems({ item, typeofprices }) {
 
       <div className="flex flex-col justify-between w-full h-full p-0 lg:p-[10px]">
         <center>
-          <h2 className="w-full max-w-[200px] lg:max-w-[250px] text-center font-semibold text-[16px] lg:text-[18px] text-ellipsis whitespace-nowrap overflow-hidden">
+          <h2 className="w-full max-w-[200px] lg:max-w-[250px] text-center font-semibold text-[16px] lg:text-[18px] text-ellipsis whitespace-nowrap overflow-hidden font-recline">
             {item.name}
           </h2>
         </center>

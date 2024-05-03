@@ -15,14 +15,14 @@ function Description({ location }) {
   return (
     <div className="pb-[20px] px-[10px] md:px-[40px] text-justify">
       <header>
-        <h1 className="text-[30px] mb-[40px] font-normal text-center">
-          <strong className="font-bold">RentBean.in</strong> - Elevate Your
+        <h1 className="text-[30px] mb-[40px] font-normal text-center font-recline">
+          <strong className="font-bold font-recline">RentBean.in</strong> - Elevate Your
           Lifestyle
         </h1>
       </header>
       <main>
         <section>
-          <h2 className=" text-[18px] font-semibold mt-[10px] ">
+          <h2 className=" text-[18px] font-semibold mt-[10px] font-recline ">
             Enhance Your Lifestyle with{" "}
             <strong className="font-bold">RentBean.in</strong> in {location}
           </h2>
@@ -55,7 +55,7 @@ function Description({ location }) {
           </p>
         </section>
         <section className={`overflow-hidden ${moredesc ? "" : "h-0"} `}>
-          <h2 className=" text-[18px] font-semibold mt-[10px]">
+          <h2 className=" text-[18px] font-semibold mt-[10px] font-recline">
             Discover Premium Furniture, Appliances, and Electronics
           </h2>
           <p className=" text-[12px] my-[5px]">
@@ -101,7 +101,7 @@ function Description({ location }) {
           </p>
         </section>
         <section className={`overflow-hidden ${moredesc ? "" : "h-0"} `}>
-          <h2 className=" text-[18px] font-semibold mt-[10px]">
+          <h2 className=" text-[18px] font-semibold mt-[10px] font-recline">
             Enjoy Exclusive Benefits with Your Subscription
           </h2>
           <p className=" text-[12px] my-[5px]">
@@ -143,7 +143,7 @@ function Description({ location }) {
           </ul>
         </section>
         <section className={`overflow-hidden ${moredesc ? "" : "h-0"} `}>
-          <h2 className=" text-[18px] font-semibold mt-[10px]">
+          <h2 className=" text-[18px] font-semibold mt-[10px] font-recline">
             Unlock Exceptional Value with{" "}
             <strong className="font-bold">RentBean.in</strong>
           </h2>

@@ -17,7 +17,7 @@ function Relatedproducts({ products, typeofprices, params }) {
   return (
     <div className="px-[10px] md:px-[40px] py-[40px] bg-white">
       <div className="flex items-end px-[10px] lg:px-0">
-        <h2 className="flex items-center gap-[10px] text-[22px] font-semibold whitespace-nowrap">
+        <h2 className="flex items-center gap-[10px] text-[22px] font-semibold whitespace-nowrap font-recline">
           <Relatedprosvg />
           Related products
         </h2>
@@ -82,6 +82,7 @@ function Relatedproducts({ products, typeofprices, params }) {
 
 function Imagecard({ product, i, params, typeofprices }) {
   const [imgloading, setimgloading] = useState(true);
+
   return (
     <Link
       href={
@@ -128,4 +129,5 @@ function Imagecard({ product, i, params, typeofprices }) {
     </Link>
   );
 }
+
 export default Relatedproducts;

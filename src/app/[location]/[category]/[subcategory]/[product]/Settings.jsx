@@ -33,7 +33,7 @@ function Settings({ product, typeofprices, link }) {
 
   return (
     <div className="blackshadow1 p-[20px] bg-bg1 w-[100%] lg:w-[30%] rounded-[20px]">
-      <h3 className="text-center font-semibold">{product.name}</h3>
+      <h3 className="text-center text-[22px] font-medium font-recline">{product.name}</h3>
       {/* otions */}
       {product.options.map((item, i) => {
         return (

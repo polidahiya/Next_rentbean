@@ -15,10 +15,10 @@ function Pickups({ randomproducts, typeofprices, location }) {
   return (
     <div className="px-[10px] py-[40px]  md:p-[40px] bg-bg1">
       <div className="flex justify-between items-end p-[10px] md:p-0">
-        <div className=" text-[20px]">
+        <div className=" text-[20px] font-recline">
           You&apos;ll love to
           <br />
-          <div className="opacity-90">
+          <div className="opacity-90 font-recline">
             {" "}
             take these home
             <div
@@ -119,7 +119,7 @@ function Imagecard({ product, i, typeofprices, location }) {
             }}
           ></Image>
         </div>
-        <p className="text-center text-[14px] md:text-[16px]  mt-[10px] overflow-hidden whitespace-nowrap text-ellipsis">
+        <p className="text-center text-[14px] md:text-[16px]  mt-[10px] overflow-hidden whitespace-nowrap text-ellipsis ">
           {product.product.name}
         </p>
       </Link>

@@ -30,7 +30,7 @@ function page({ params }) {
 
   return (
     <div>
-      <div className="text-[20px] relative h-[60px] flex items-center justify-center bg-bg1">
+      <div className="text-[22px] font-medium relative h-[60px] flex items-center justify-center bg-bg1 font-recline">
         <Link
           href={"/" + location.replace(/ /g, "_")}
           className="group absolute left-[40px] h-[40px] w-[40px] top-[50%] bg-theme translate-y-[-50%] rounded-full overflow-hidden flex items-center justify-center lg:hover:w-[140px] duration-300"
@@ -72,7 +72,7 @@ function page({ params }) {
                 alt={item.name}
                 objectfit="object-contain"
               />
-              <div className=" h-[30px] min-w-[70%] mx-auto px-[10px]  box-content bg-theme text-[16px] whitespace-nowrap text-white rounded-[10px] flex items-center justify-center">
+              <div className=" h-[30px] min-w-[70%] mx-auto px-[10px]  box-content bg-theme text-[16px] whitespace-nowrap text-white rounded-[10px] flex items-center justify-center ">
                 {item.name}
               </div>
               <div className="absolute h-[2px] bg-theme w-[50%] rounded-full left-[50%] bottom-[4px] translate-x-[-50%]"></div>

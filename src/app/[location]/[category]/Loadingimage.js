@@ -13,8 +13,8 @@ function Loadingimage({ src,alt,objectfit }) {
         alt={alt}
         height={200}
         width={200}
-        // layout="responsive" 
         className={`absolute h-full w-full rounded-[10px] ${objectfit}`}
+        loading="eager"
         onLoad={() => {
           setimgloading(false);
         }}

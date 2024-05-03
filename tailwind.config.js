@@ -12,8 +12,11 @@ module.exports = {
         theme50: "var(--theme50)",
         theme20: "var(--theme20)",
         bg1: "var(--bg1)",
-        textcolor: "var(--textcolor)"
+        textcolor: "var(--textcolor)",
       },
+    },
+    fontFamily: {
+      recline: "Recline",
     },
   },
   plugins: [],

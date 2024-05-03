@@ -79,7 +79,7 @@ function Userdetails({ placeorder, total }) {
           }}
         >
           <Usersvg styles="h-[55px]" />
-          <span>User Details</span>
+          <span className="text-[25px] font-recline">User Details</span>
         </div>
         <div className="p-[30px]">
           <div className=" relative h-[35px] w-full my-[30px] bg-transparent">
@@ -160,7 +160,7 @@ function Userdetails({ placeorder, total }) {
           }}
         >
           <Checkoutsvg styles="h-[40px]" />
-          <span>Checkout</span>
+          <span className="text-[25px] font-recline">Checkout</span>
         </div>
         <div>
           <p className="flex justify-between items-center my-[20px] px-[30px]">
@@ -182,7 +182,7 @@ function Userdetails({ placeorder, total }) {
           }}
         >
           <Paymentmodesvg styles="h-[40px]" />
-          <span>Payment Mode</span>
+          <span className="text-[25px] font-recline">Payment Mode</span>
         </div>
         <div className="flex items-center justify-around p-[30px] select-none">
           <div className="flex flex-col items-center justify-center h-[80px] w-[150px] p-[10px] border border-gray-400 rounded-[10px] cursor-not-allowed opacity-[0.6]">
