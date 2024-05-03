@@ -50,7 +50,7 @@ function Topimages({ images, name }) {
   }
 
   return (
-    <div className="relative lg:sticky top-0 lg:top-[80px] aspect-[2/1]  w-[100%] lg:w-[70%] max-h-[400px] lg:max-h-full">
+    <div className="relative lg:sticky top-0 lg:top-[90px] aspect-[2/1]  w-[100%] lg:w-[70%] max-h-[400px] lg:max-h-full ">
       <div
         className="h-full w-full flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory scroll-smooth"
         onScroll={(e) => {
@@ -102,11 +102,11 @@ function Topimages({ images, name }) {
       </div>
       {/* share button */}
       <button
-        className="absolute right-[20px] top-[20px]"
+        className="absolute right-[20px] top-[20px] "
         title="Copy Link"
         onClick={sharepage}
       >
-        <Linksvg styles="h-[30px] aspect-square fill-none stroke-cyan-500" />
+        <Linksvg styles="h-[30px] aspect-square fill-none stroke-textcolor" />
       </button>
       {/* dotts */}
       <div className="absolute bottom-0 left-0 z-10 w-full ">

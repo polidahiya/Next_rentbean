@@ -32,7 +32,7 @@ function page({ params }) {
 
   return (
     <>
-      <div className="text-[22px] font-medium font-recline relative h-[60px] flex items-center justify-center bg-bg1">
+      <div className="text-[22px] font-medium font-recline relative h-[60px] flex items-center justify-center bg-bg1 ">
         <Link
           href={"/" + location.replace(/ /g, "_") + "/" + params.category}
           className="group absolute left-[40px] h-[40px] w-[40px] top-[50%] bg-theme translate-y-[-50%] rounded-full overflow-hidden flex items-center justify-center lg:hover:w-[140px] duration-300"

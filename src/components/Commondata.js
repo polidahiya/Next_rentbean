@@ -1,1 +1,1 @@
-export const sitename="next-rentbean.vercel.app"
+export const sitename = "next-rentbean.vercel.app";
