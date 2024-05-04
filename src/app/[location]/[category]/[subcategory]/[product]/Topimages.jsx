@@ -69,9 +69,8 @@ function Topimages({ images, name }) {
               className="min-w-[100%] h-full snap-start snap-always object-contain"
               src={"/" + image}
               alt={name}
-              height={2000}
-              width={2000}
-              quality={100}
+              height={400}
+              width={754}
               key={i}
             ></Image>
           );

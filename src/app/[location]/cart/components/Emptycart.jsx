@@ -12,8 +12,8 @@ function Emptycart({ location }) {
       <Image
         src={"/logo&ui/no-cart.png"}
         alt="empty cart png image"
-        height={300}
-        width={300}
+        height={172}
+        width={200}
         className="w-[200px] object-contain"
       ></Image>
       <h2 className="font-extrabold text-[22px] mt-[50px]">No items in cart</h2>

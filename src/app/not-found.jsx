@@ -11,6 +11,8 @@ function page() {
         <img
           src="/logo&ui/notfound.gif"
           alt="not found gif image"
+          height={300}
+          width={400}
           className="max-w-[400px] m-auto w-full object-contain object-center"
         />
         <h3 className=" font-bold text-center">Look like you&lsquo;re lost</h3>
