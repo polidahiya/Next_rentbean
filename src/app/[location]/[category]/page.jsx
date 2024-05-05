@@ -1,8 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Data } from "../../Data";
+import { Data } from "../../../components/Commondata";
 import Loadingimage from "./Loadingimage";
+import { listoflocation } from "../../../components/Commondata";
 
 export const generateMetadata = ({ params }) => {
   let location = params.location.replace(/_/g, " ");
@@ -14,17 +15,21 @@ export const generateMetadata = ({ params }) => {
   };
 };
 
-function page({ params }) {
+async function page({ params }) {
+  const data = await Data();
   let location = params.location.replace(/_/g, " ");
   let category = params.category.replace(/_/g, " ");
-  let categorydata = Object.keys(Data().data[category]?.subcat || {}).map(
+  let categorydata = Object.keys(data.data[category]?.subcat || {}).map(
     (subcategory) => ({
       name: subcategory,
-      img: Data().data[category].subcat[subcategory].image,
+      img: data.data[category].subcat[subcategory].image,
     })
   );
 
-  if (!Object.keys(Data().data).includes(category)) {
+  if (
+    !listoflocation.includes(location) ||
+    !Object.keys(data.data).includes(category)
+  ) {
     notFound();
   }
 

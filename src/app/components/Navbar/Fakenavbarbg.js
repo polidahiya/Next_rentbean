@@ -16,14 +16,10 @@ function Fakenavbarbg() {
     };
   }, []);
 
-  const navbarStyle = activenav
-    ? { boxShadow: "0 2px 10px var(--theme20)" }
-    : { boxShadow: "unset" };
-
   return (
     <div
       className="absolute top-0 left-0 h-[60px] w-full bg-white -z-10 "
-      style={navbarStyle}
+      style={{ boxShadow: activenav ? "0 2px 10px var(--theme20)" : "unset" }}
     ></div>
   );
 }

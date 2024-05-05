@@ -3,12 +3,10 @@ import Notification from "../components/Notification";
 import Location from "../components/Location";
 import Footer from "../components/Footer";
 import Orderplacedmenu from "../components/Orderplacedmenu";
-import { Data } from "../Data";
+import {Data} from "../../components/Commondata"
 
-let data = Data();
+let data = await Data();
 
-// import { sitedata } from "../components/mongodb";
-// let data = await sitedata.findOne({});
 
 export const metadata = {
   title: "Rentbean.in",

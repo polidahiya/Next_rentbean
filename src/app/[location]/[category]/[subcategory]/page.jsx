@@ -1,16 +1,21 @@
 import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Data, typeofprices } from "../../../Data";
 import Loadingimage from "../Loadingimage";
-import { sitename } from "../../../../components/Commondata";
+import {
+  sitename,
+  Data,
+  typeofprices,listoflocation 
+} from "../../../../components/Commondata";
 
-export const generateMetadata = ({ params }) => {
+// meta data
+export const generateMetadata =async ({ params }) => {
+  const data= await Data()
   let location = params?.location?.replace(/_/g, " ");
   let category = params?.category?.replace(/_/g, " ");
   let subcat = params?.subcategory?.replace(/_/g, " ");
-  let products = Data()?.data[category]?.subcat[subcat].image;
-  
+  let products =data?.data[category]?.subcat[subcat]?.image;
+
   return {
     title: subcat + " on rent in " + location + " | Rentbean.in",
     description: "Rent " + subcat + " in " + location,
@@ -20,13 +25,18 @@ export const generateMetadata = ({ params }) => {
   };
 };
 
-function page({ params }) {
+async function page({ params }) {
+  const data = await Data();
   let location = params?.location?.replace(/_/g, " ");
   let category = params?.category?.replace(/_/g, " ");
   let subcat = params?.subcategory?.replace(/_/g, " ");
-  let products = Data()?.data[category]?.subcat[subcat]?.products;
+  let products = data?.data[category]?.subcat[subcat]?.products;
 
-  if (!Object.keys(Data().data[category].subcat).includes(subcat)) {
+  if (
+    !listoflocation.includes(location) ||
+    !Object.keys(data.data).includes(category) ||
+    !Object.keys(data?.data[category]?.subcat)?.includes(subcat)
+  ) {
     notFound();
   }
 

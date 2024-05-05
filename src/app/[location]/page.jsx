@@ -2,9 +2,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Pickups from "../components/pickups/Pickups";
-import { Data, typeofprices } from "../Data";
+import { Data, typeofprices } from "../../components/Commondata";
 import Posteradds from "../components/Posterads";
 import Description from "../components/Description";
+import {listoflocation} from "../../components/Commondata"
 
 export const generateMetadata = ({ params }) => {
   let location = params.location.replace(/_/g, " ");
@@ -14,7 +15,7 @@ export const generateMetadata = ({ params }) => {
   };
 };
 
-let data = Data();
+let data =await Data();
 let randomproducts = Object.keys(data.data)
   .flatMap((i) =>
     Object.keys(data.data[i].subcat).flatMap((j) =>
@@ -59,7 +60,6 @@ const commnets = [
   },
 ];
 
-const listoflocation = ["Delhi", "Noida", "Gurgaon"];
 
 export default async function Home({ params }) {
   let location = params.location.replace(/_/g, " ");

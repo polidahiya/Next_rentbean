@@ -2,19 +2,24 @@ import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { sitename } from "../../../../../components/Commondata";
-import { Data, typeofprices } from "../../../../Data";
 import Topimages from "./Topimages";
 import Settings from "./Settings";
 import Relatedproducts from "./Relatedproducts";
 import Details from "../../../../components/(svgs)/Details";
 import Homesvg from "../../../../components/(svgs)/Home";
+import {
+  listoflocation,
+  Data,
+  typeofprices,
+} from "../../../../../components/Commondata";
 
-export const generateMetadata = ({ params }) => {
+export const generateMetadata = async ({ params }) => {
+  const data = await Data();
   let location = params?.location.replace(/_/g, " ");
   let category = params?.category.replace(/_/g, " ");
   let subcat = params?.subcategory.replace(/_/g, " ");
   let productid = params?.product.replace(/_/g, " ");
-  let products = Data()?.data[category]?.subcat[subcat]?.products;
+  let products = data?.data[category]?.subcat[subcat]?.products;
   let product = products?.filter((item) => item.pid == productid)[0];
 
   return {
@@ -27,16 +32,21 @@ export const generateMetadata = ({ params }) => {
   };
 };
 
-function page({ params }) {
+async function page({ params }) {
+  const data = await Data();
   let location = params?.location.replace(/_/g, " ");
   let category = params?.category.replace(/_/g, " ");
   let subcat = params?.subcategory.replace(/_/g, " ");
   let productid = params?.product.replace(/_/g, " ");
-  let products = Data()?.data[category]?.subcat[subcat]?.products;
+  let products = data?.data[category]?.subcat[subcat]?.products;
   let product = products?.filter((item) => item.pid == productid)[0];
 
-  const isAvailable = products?.some((product) => product?.pid === productid);
-  if (!isAvailable) {
+  if (
+    !listoflocation.includes(location) ||
+    !Object.keys(data.data).includes(category) ||
+    !Object.keys(data?.data[category]?.subcat)?.includes(subcat) ||
+    !products?.some((product) => product?.pid === productid)
+  ) {
     notFound();
   }
 
@@ -113,10 +123,8 @@ function page({ params }) {
       />
       {/* meta description */}
       <div className="my-[20px] px-[10px] md:px-[40px] text-center">
-          <strong className="text-[12px] font-normal">
-            {product.metadesc}
-          </strong>
-        </div>
+        <strong className="text-[12px] font-normal">{product.metadesc}</strong>
+      </div>
     </div>
   );
 }

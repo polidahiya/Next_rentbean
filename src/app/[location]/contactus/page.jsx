@@ -1,17 +1,23 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 function page() {
   return (
     <div>
-      <img
+      <Image
         className="fixed h-full w-full left-0 top-0 object-cover z-[-1]"
+        width={1024}
+        height={551}
         src="/logo&ui/bg1.jpeg"
         alt="background"
-      />
+      ></Image>
       <div className="h-[100svh] relative">
         <div className="blackshadow1  p-[40px] text-center  absolute  w-[90%] max-w-[400px] aspect-[4/3] bg-bg1 flex flex-col items-center justify-center rounded-[20px] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] ">
-          <p className="font-semibold text-[20px] font-recline"> We are here to help!</p>
+          <p className="font-semibold text-[20px] font-recline">
+            {" "}
+            We are here to help!
+          </p>
           <Link
             href="mailto:letsolvein@gmail.com"
             className=" flex items-center justify-center gap-[5px] w-full md:w-fit  text-[14px] pt-[10px] lg:hover:underline  "
