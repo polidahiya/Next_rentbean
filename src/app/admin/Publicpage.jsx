@@ -5,7 +5,7 @@ import Ordersmenu from "./Components/Ordersmenu";
 import Loginpage from "./Components/Loginpage";
 import { AppContextfn } from "../Context/Index";
 
-function Publicpage() {
+function Publicpage({typeofprices}) {
   const { showlogin, setshowlogin, notifictionarr, setnotifictionarr } =
     AppContextfn();
   useEffect(() => {
@@ -34,7 +34,7 @@ function Publicpage() {
       ) : (
         <div className="bg-bg1">
           <Navbar />
-          <Ordersmenu />
+          <Ordersmenu typeofprices={typeofprices}/>
         </div>
       )}
     </>

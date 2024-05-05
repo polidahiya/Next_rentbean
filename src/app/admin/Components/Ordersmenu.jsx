@@ -4,7 +4,7 @@ import Orderscomp from "../Components/Orders";
 import { AppContextfn } from "../../Context/Index";
 import Imageloading from "@/app/components/Imageloading/Imageloading";
 
-function Ordersmenu() {
+function Ordersmenu({typeofprices}) {
   const { ordercomps, setordercomps, ordercompsref, refresh } = AppContextfn();
   const [allorders, setallorders] = useState(null);
   const [runningorders, setrunningorders] = useState(null);
@@ -55,7 +55,7 @@ function Ordersmenu() {
           allorders.length == 0 ? (
             <Noitems />
           ) : (
-            allorders.map((item, i) => <Orderscomp key={i} item={item} />)
+            allorders.map((item, i) => <Orderscomp key={i} item={item} typeofprices={typeofprices}/>)
           )
         ) : (
           <Loading />
@@ -70,7 +70,7 @@ function Ordersmenu() {
           runningorders.length == 0 ? (
             <Noitems />
           ) : (
-            runningorders.map((item, i) => <Orderscomp key={i} item={item} />)
+            runningorders.map((item, i) => <Orderscomp key={i} item={item} typeofprices={typeofprices}/>)
           )
         ) : (
           <Loading />
@@ -84,7 +84,7 @@ function Ordersmenu() {
           completedorders.length == 0 ? (
             <Noitems />
           ) : (
-            completedorders.map((item, i) => <Orderscomp key={i} item={item} />)
+            completedorders.map((item, i) => <Orderscomp key={i} item={item} typeofprices={typeofprices}/>)
           )
         ) : (
           <Loading />

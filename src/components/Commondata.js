@@ -45,21 +45,14 @@ let cachedData = null;
 let lastFetchedTime = null;
 
 export async function Data() {
+  "use server";
   const currentTime = new Date().getTime();
   const oneHour = 60 * 60 * 1000;
-  console.log("get fn called");
   if (
     !cachedData ||
     !lastFetchedTime ||
     currentTime - lastFetchedTime >= oneHour
   ) {
-    console.log(
-      !cachedData,
-      !lastFetchedTime,
-      currentTime - lastFetchedTime >= oneHour,
-      currentTime,
-      lastFetchedTime
-    );
     cachedData = await sitedata.findOne({});
     lastFetchedTime = currentTime;
   }

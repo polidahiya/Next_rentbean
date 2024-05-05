@@ -1,6 +1,7 @@
 import React from "react";
 import Publicpage from "./Publicpage";
 import { orders } from "@/components/mongodb";
+import { Data, typeofprices } from "../../../components/Commondata";
 
 async function placeorder(data) {
   "use server";
@@ -21,8 +22,15 @@ async function placeorder(data) {
   }
 }
 
-function page() {
-  return <Publicpage placeorder={placeorder} />;
+async function page() {
+  const data = await Data();
+  return (
+    <Publicpage
+      placeorder={placeorder}
+      data={data.data}
+      typeofprices={typeofprices}
+    />
+  );
 }
 
 export default page;

@@ -9,9 +9,8 @@ import {
   deleteorder,
   updatenote,
 } from "../Serveraction";
-import { typeofprices } from "@/app/Data";
 
-function Orders({ item }) {
+function Orders({ item, typeofprices }) {
   const { notifictionarr, setnotifictionarr, setinvoicedata, refreshfn } =
     AppContextfn();
   const [note, setnote] = useState(item.note);

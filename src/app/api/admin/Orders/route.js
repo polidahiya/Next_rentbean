@@ -1,8 +1,9 @@
 import verifyToken from "@/app/components/Verifytoken";
 import { orders } from "@/components/mongodb";
-import { Data } from "@/app/Data";
+import { Data } from "../../../../components/Commondata";
 
 export async function GET(req) {
+  const data = await Data();
   if (!req.cookies.get("token")) {
     return new Response(JSON.stringify({ message: "No token found" }));
   }
@@ -18,13 +19,13 @@ export async function GET(req) {
     Object.keys(allorders).forEach((l) => {
       allorders[l]._id = allorders[l]._id.toString();
       Object.keys(allorders[l].products).forEach((m) => {
-        Object.keys(Data().data).forEach((i) => {
-          Object.keys(Data().data[i].subcat).forEach((j) => {
-            Object.keys(Data().data[i].subcat[j].products).forEach((k) => {
-              if (m == Data().data[i].subcat[j].products[k].pid) {
+        Object.keys(data.data).forEach((i) => {
+          Object.keys(data.data[i].subcat).forEach((j) => {
+            Object.keys(data.data[i].subcat[j].products).forEach((k) => {
+              if (m == data.data[i].subcat[j].products[k].pid) {
                 allorders[l].products[m] = {
                   ...allorders[l].products[m],
-                  ...Data().data[i].subcat[j].products[k],
+                  ...data.data[i].subcat[j].products[k],
                 };
               }
             });
