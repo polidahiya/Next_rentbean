@@ -5,7 +5,7 @@ import Ordersmenu from "./Components/Ordersmenu";
 import Loginpage from "./Components/Loginpage";
 import { AppContextfn } from "../Context/Index";
 
-function Publicpage({typeofprices}) {
+function Publicpage() {
   const { showlogin, setshowlogin, notifictionarr, setnotifictionarr } =
     AppContextfn();
   useEffect(() => {
@@ -23,6 +23,14 @@ function Publicpage({typeofprices}) {
               content: res.message,
             },
           ]);
+        } else {
+          setnotifictionarr([
+            ...notifictionarr,
+            {
+              id: new Date() + new Date().getMilliseconds(),
+              content: res?.message || "Unknown error",
+            },
+          ]);
         }
       });
   }, []);
@@ -34,7 +42,7 @@ function Publicpage({typeofprices}) {
       ) : (
         <div className="bg-bg1">
           <Navbar />
-          <Ordersmenu typeofprices={typeofprices}/>
+          <Ordersmenu />
         </div>
       )}
     </>

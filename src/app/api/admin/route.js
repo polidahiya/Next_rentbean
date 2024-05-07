@@ -11,6 +11,6 @@ export async function POST(req) {
   if (result.message == "Token verified") {
     return new Response(JSON.stringify({ message: "Login successfull" }));
   } else {
-    return new Response(JSON.stringify({ message: "No token found" }));
+    return new Response(JSON.stringify({ message: "Invalid user" }));
   }
 }

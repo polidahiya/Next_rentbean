@@ -9,8 +9,9 @@ import {
   deleteorder,
   updatenote,
 } from "../Serveraction";
+import { typeofprices } from "../../../components/Commondata";
 
-function Orders({ item, typeofprices }) {
+function Orders({ item }) {
   const { notifictionarr, setnotifictionarr, setinvoicedata, refreshfn } =
     AppContextfn();
   const [note, setnote] = useState(item.note);

@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { sitename } from "../../../../../components/Commondata";
+import { Data } from "../../../../../components/Getdata";
 import Topimages from "./Topimages";
 import Settings from "./Settings";
 import Relatedproducts from "./Relatedproducts";
@@ -9,8 +9,8 @@ import Details from "../../../../components/(svgs)/Details";
 import Homesvg from "../../../../components/(svgs)/Home";
 import {
   listoflocation,
-  Data,
   typeofprices,
+  sitename,
 } from "../../../../../components/Commondata";
 
 export const generateMetadata = async ({ params }) => {

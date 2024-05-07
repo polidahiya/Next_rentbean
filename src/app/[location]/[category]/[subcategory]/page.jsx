@@ -4,17 +4,18 @@ import { notFound } from "next/navigation";
 import Loadingimage from "../Loadingimage";
 import {
   sitename,
-  Data,
-  typeofprices,listoflocation 
+  typeofprices,
+  listoflocation,
 } from "../../../../components/Commondata";
+import { Data } from "../../../../components/Getdata";
 
 // meta data
-export const generateMetadata =async ({ params }) => {
-  const data= await Data()
+export const generateMetadata = async ({ params }) => {
+  const data = await Data();
   let location = params?.location?.replace(/_/g, " ");
   let category = params?.category?.replace(/_/g, " ");
   let subcat = params?.subcategory?.replace(/_/g, " ");
-  let products =data?.data[category]?.subcat[subcat]?.image;
+  let products = data?.data[category]?.subcat[subcat]?.image;
 
   return {
     title: subcat + " on rent in " + location + " | Rentbean.in",

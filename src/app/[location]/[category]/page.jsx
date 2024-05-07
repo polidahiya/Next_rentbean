@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Data } from "../../../components/Commondata";
+import { Data } from "../../../components/Getdata";
 import Loadingimage from "./Loadingimage";
 import { listoflocation } from "../../../components/Commondata";
 

@@ -4,7 +4,7 @@ import Orderscomp from "../Components/Orders";
 import { AppContextfn } from "../../Context/Index";
 import Imageloading from "@/app/components/Imageloading/Imageloading";
 
-function Ordersmenu({typeofprices}) {
+function Ordersmenu() {
   const { ordercomps, setordercomps, ordercompsref, refresh } = AppContextfn();
   const [allorders, setallorders] = useState(null);
   const [runningorders, setrunningorders] = useState(null);
@@ -15,21 +15,27 @@ function Ordersmenu({typeofprices}) {
       fetch("/api/admin/Orders")
         .then((res) => res.json())
         .then((res) => {
-          setallorders(res);
+          if (!res.message) {
+            setallorders(res);
+          }
         });
     }
     if (ordercomps == 1) {
       fetch("/api/admin/Runningorders")
         .then((res) => res.json())
         .then((res) => {
-          setrunningorders(res);
+          if (!res.message) {
+            setrunningorders(res);
+          }
         });
     }
     if (ordercomps == 2) {
       fetch("/api/admin/Completedorders")
         .then((res) => res.json())
         .then((res) => {
-          setcompletedorders(res);
+          if (!res.message) {
+            setcompletedorders(res);
+          }
         });
     }
   }, [ordercomps, refresh]);
@@ -52,10 +58,12 @@ function Ordersmenu({typeofprices}) {
         style={{ height: "calc(100dvh - 60px)" }}
       >
         {allorders ? (
-          allorders.length == 0 ? (
+          allorders?.length == 0 ? (
             <Noitems />
           ) : (
-            allorders.map((item, i) => <Orderscomp key={i} item={item} typeofprices={typeofprices}/>)
+            allorders?.map((item, i) => (
+              <Orderscomp key={i} item={item} />
+            ))
           )
         ) : (
           <Loading />
@@ -67,10 +75,12 @@ function Ordersmenu({typeofprices}) {
         style={{ height: "calc(100dvh - 60px)" }}
       >
         {runningorders ? (
-          runningorders.length == 0 ? (
+          runningorders?.length == 0 ? (
             <Noitems />
           ) : (
-            runningorders.map((item, i) => <Orderscomp key={i} item={item} typeofprices={typeofprices}/>)
+            runningorders?.map((item, i) => (
+              <Orderscomp key={i} item={item} />
+            ))
           )
         ) : (
           <Loading />
@@ -81,10 +91,12 @@ function Ordersmenu({typeofprices}) {
         style={{ height: "calc(100dvh - 60px)" }}
       >
         {completedorders ? (
-          completedorders.length == 0 ? (
+          completedorders?.length == 0 ? (
             <Noitems />
           ) : (
-            completedorders.map((item, i) => <Orderscomp key={i} item={item} typeofprices={typeofprices}/>)
+            completedorders?.map((item, i) => (
+              <Orderscomp key={i} item={item} />
+            ))
           )
         ) : (
           <Loading />
@@ -108,11 +120,10 @@ function Noitems() {
   return (
     <div className="flex flex-col items-center justify-center h-full   bg-white ">
       <Emptyboxsvg />
-     <div className="text-[25px]"> No items to show</div>
+      <div className="text-[25px]"> No items to show</div>
     </div>
   );
 }
-
 
 function Emptyboxsvg() {
   return (

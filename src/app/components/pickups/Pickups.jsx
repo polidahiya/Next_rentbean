@@ -15,15 +15,14 @@ function Pickups({ randomproducts, typeofprices, location }) {
   return (
     <div className="px-[10px] py-[40px]  md:p-[40px] bg-bg1">
       <div className="flex justify-between items-end p-[10px] md:p-0">
-        <div className=" text-[20px] font-recline">
+        <div className=" text-[25px] font-recline">
           You&apos;ll love to
           <br />
           <div className="opacity-90 font-recline">
             {" "}
             take these home
             <div
-              className="h-[2px] w-[100px]"
-              style={{ backgroundColor: "var(--theme)" }}
+              className="h-[2px] w-[100px] bg-theme"
             ></div>
           </div>
         </div>

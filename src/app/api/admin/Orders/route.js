@@ -1,6 +1,6 @@
 import verifyToken from "@/app/components/Verifytoken";
 import { orders } from "@/components/mongodb";
-import { Data } from "../../../../components/Commondata";
+import { Data } from "../../../../components/Getdata";
 
 export async function GET(req) {
   const data = await Data();

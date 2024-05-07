@@ -3,7 +3,7 @@ import Notification from "../components/Notification";
 import Location from "../components/Location";
 import Footer from "../components/Footer";
 import Orderplacedmenu from "../components/Orderplacedmenu";
-import {Data} from "../../components/Commondata"
+import {Data} from "../../components/Getdata"
 
 let data = await Data();
 

@@ -2,7 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Pickups from "../components/pickups/Pickups";
-import { Data, typeofprices } from "../../components/Commondata";
+import { Data } from "../../components/Getdata";
+import { typeofprices } from "../../components/Commondata";
 import Posteradds from "../components/Posterads";
 import Description from "../components/Description";
 import {listoflocation} from "../../components/Commondata"

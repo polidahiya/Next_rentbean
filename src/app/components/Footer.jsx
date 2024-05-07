@@ -12,7 +12,9 @@ function Footer() {
     <div className="bg-bg1 px-[10px] md:px-[40px] pt-[0] md:pt-[40px] pb-[90px] lg:pb-[40px]">
       <div className="w-full flex flex-col md:flex-row text-center md:text-left">
         <div className="flex flex-col w-full ">
-          <h2 className="font-semibold mt-[40px] md:mt-0 text-[18px] font-recline">Rentbean.in</h2>
+          <h2 className="font-semibold mt-[40px] md:mt-0 text-[18px] font-recline">
+            Rentbean.in
+          </h2>
           <Link
             href={"/" + location.replace(/ /g, "_") + "/aboutus"}
             className=" w-full md:w-fit  text-[12px] pt-[10px] lg:hover:underline "
@@ -33,7 +35,9 @@ function Footer() {
           </Link>
         </div>
         <div className="flex flex-col w-full ">
-          <h2 className="font-semibold mt-[40px] md:mt-0 text-[18px] font-recline">POLICIES</h2>
+          <h2 className="font-semibold mt-[40px] md:mt-0 text-[18px] font-recline">
+            POLICIES
+          </h2>
           <Link
             href={"/" + location.replace(/ /g, "_") + "/shipping_policy"}
             className=" w-full md:w-fit  text-[12px] pt-[10px] lg:hover:underline "
@@ -64,7 +68,9 @@ function Footer() {
           </Link> */}
         </div>
         <div className="flex flex-col w-full ">
-          <h2 className="font-semibold mt-[40px] md:mt-0 text-[18px] font-recline">NEED HELP?</h2>
+          <h2 className="font-semibold mt-[40px] md:mt-0 text-[18px] font-recline">
+            NEED HELP?
+          </h2>
           <Link
             href="mailto:letsolvein@gmail.com"
             className=" flex items-center justify-center gap-[5px] w-full md:w-fit  text-[12px] pt-[10px] lg:hover:underline "
@@ -87,7 +93,7 @@ function Footer() {
       </div>
       <hr className="w-full h-[1px] bg-slate-400 my-[40px]" />
       <div className="relative flex">
-        <p className=" text-[12px] max-w-[100px] md:max-w-[300px]">
+        <p className=" text-[12px] max-w-[100px] md:max-w-[300px] hidden md:block">
           &copy; {new Date().getFullYear()}{" "}
           <strong className="font-bold">RentBean.in</strong>. All rights
           reserved.
@@ -115,8 +121,9 @@ function Footer() {
             <Twittersvg styles="fill-theme h-[20px] aspect-square lg:group-hover:fill-white duration-200" />
           </Link>
         </div>
+        {/* to the top button */}
         <button
-          className="ml-auto flex items-center gap-[5px] "
+          className="ml-auto items-center gap-[5px] hidden  md:flex"
           onClick={() => {
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
@@ -144,6 +151,10 @@ function Footer() {
           Go Top
         </button>
       </div>
+      <p className=" text-[10px] text-center mt-[30px]">
+        &copy; {new Date().getFullYear()}{" "}
+        <strong className="font-bold">RentBean.in</strong>. All rights reserved.
+      </p>
     </div>
   );
 }
