@@ -216,7 +216,7 @@ function Navlist({ data, title, listitems, location, settogglemobilenav }) {
               <div className="flex flex-col items-center justify-between">
                 <Image
                   src={"/" + data[title].subcat[list].image}
-                  alt={data[title].subcat[list]}
+                  alt={Object.keys(data[title].subcat)}
                   width={30}
                   height={30}
                   className="block lg:hidden h-[50px] w-[50px] object-contain mix-blend-multiply"
