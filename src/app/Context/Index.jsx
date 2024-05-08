@@ -6,10 +6,21 @@ const AppContext = createContext({});
 
 export function Appwrapper({ children }) {
   const [location, setlocation] = useState("Gurgaon");
-  const [cartproducts, setcartproducts] = useState({});
+  const [cartproducts, setcartproducts] = useState({
+    bed1: {
+      time: 0,
+      link: "/Gurgaon/Furniture/Bed/bed1",
+      Quantity: 0,
+    },
+  });
+
   const [togglelocation, settogglelocation] = useState(false);
   const [toggleorderplacedmenu, settoggleorderplacedmenu] = useState(false);
   const [notifictionarr, setnotifictionarr] = useState([]);
+  const [cartprodremove, setcartprodremove] = useState({
+    show: false,
+    productid: null,
+  });
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -39,6 +50,8 @@ export function Appwrapper({ children }) {
         settoggleorderplacedmenu,
         notifictionarr,
         setnotifictionarr,
+        cartprodremove,
+        setcartprodremove,
         ordercomps,
         setordercomps,
         ordercompsref,

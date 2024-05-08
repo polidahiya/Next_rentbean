@@ -4,26 +4,20 @@ import Image from "next/image";
 import { AppContextfn } from "../../../Context/Index";
 
 function Cartitems({ item, typeofprices }) {
-  const { cartproducts, setcartproducts, notifictionarr, setnotifictionarr } =
-    AppContextfn();
+  const {
+    cartproducts,
+    setcartproducts,
+    notifictionarr,
+    setnotifictionarr,
+    setcartprodremove,
+  } = AppContextfn();
   const [toggletime, settoggletime] = useState(false);
   return (
     <div className="blackshadow1 relative flex h-[150px] lg:h-[200px] w-full p-[10px] rounded-[10px] mb-[20px] overflow-hidden">
       <button
         onClick={() => {
-          setcartproducts((prevCartProducts) => {
-            const updatedCartProducts = { ...prevCartProducts };
-            delete updatedCartProducts[item.pid];
-            return updatedCartProducts;
-          });
-          // notification
-          setnotifictionarr([
-            ...notifictionarr,
-            {
-              id: new Date() + new Date().getMilliseconds(),
-              content: "Removed Successfully",
-            },
-          ]);
+          setcartprodremove({ show: true, productid: item?.pid });
+          history.pushState(null, "", "");
         }}
         className=" absolute top-[10px] right-[10px] h-[30px] aspect-square bg-slate-100 flex items-center justify-center lg:hover:bg-red-500 lg:hover:text-white"
       >

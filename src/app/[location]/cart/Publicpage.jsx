@@ -4,8 +4,10 @@ import Emptycart from "./components/Emptycart";
 import Cartitems from "./components/Cartitems";
 import { AppContextfn } from "../../Context/Index";
 import Userdetails from "./components/Userdetails";
+import { typeofprices } from "../../../components/Commondata";
+import Removeprodialoge from "./components/Removeprodialoge";
 
-function Publicpage({ placeorder, data, typeofprices }) {
+function Publicpage({ placeorder, data }) {
   const { cartproducts, location } = AppContextfn();
   let total = 0;
 
@@ -27,6 +29,8 @@ function Publicpage({ placeorder, data, typeofprices }) {
   } else {
     return (
       <div className="gap-[20px] px-[10px] md:px-[40px] mt-[80px] flex flex-col lg:flex-row">
+        {/* remove cart product dialoge */}
+        <Removeprodialoge />
         {/* products */}
         <div className="w-full">
           {productsToShow.map((item, i) => {

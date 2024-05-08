@@ -1,7 +1,7 @@
 import React from "react";
 import Publicpage from "./Publicpage";
 import { orders } from "@/components/mongodb";
-import { Data, typeofprices } from "../../../components/Commondata";
+import { Data} from "../../../components/Getdata";
 
 async function placeorder(data) {
   "use server";
@@ -14,7 +14,7 @@ async function placeorder(data) {
     Object.keys(productdata).forEach((item) => {
       delete productdata[item].link;
     });
-
+    
     await orders.insertOne({ ...data });
     return { message: "order placed" };
   } catch (error) {
@@ -28,7 +28,6 @@ async function page() {
     <Publicpage
       placeorder={placeorder}
       data={data.data}
-      typeofprices={typeofprices}
     />
   );
 }

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { AppContextfn } from "../../../Context/Index";
 import Usersvg from "../../../components/(svgs)/User";
 import Checkoutsvg from "../../../components/(svgs)/Checkout";
@@ -6,9 +6,16 @@ import Paymentmodesvg from "../../../components/(svgs)/Paymentmode";
 import Upisvg from "../../../components/(svgs)/Upi";
 import Cashsvg from "../../../components/(svgs)/Cash";
 import Placeordersvg from "../../../components/(svgs)/Placeorder";
+import Link from "next/link";
 
 function Userdetails({ placeorder, total }) {
-  const { cartproducts, settoggleorderplacedmenu } = AppContextfn();
+  const {
+    cartproducts,
+    settoggleorderplacedmenu,
+    notifictionarr,
+    setnotifictionarr,
+  } = AppContextfn();
+  const [currentlocation, setcurrentlocation] = useState(null);
 
   const nameref = useRef("");
   const emailref = useRef("");
@@ -20,17 +27,34 @@ function Userdetails({ placeorder, total }) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          addressref.current.value = latitude + "," + longitude;
+          setcurrentlocation(
+            `https://www.google.com/maps?q=${latitude},${longitude}`
+          );
         },
         (error) => {
           console.error("Error getting user location:", error);
+          setnotifictionarr([
+            ...notifictionarr,
+            {
+              id: new Date() + new Date().getMilliseconds(),
+              content: "Error getting location",
+            },
+          ]);
         }
       );
     } else {
       console.error("Geolocation is not supported by this browser.");
+      setnotifictionarr([
+        ...notifictionarr,
+        {
+          id: new Date() + new Date().getMilliseconds(),
+          content: "Geolocation is not supported",
+        },
+      ]);
     }
   };
-  //
+  // empty 
+  //make order
   const makeorder = async () => {
     if (nameref.current.value == "") {
       nameref.current.focus();
@@ -58,12 +82,20 @@ function Userdetails({ placeorder, total }) {
         email: emailref.current.value,
         phonenumber: phonenumref.current.value,
         address: addressref.current.value,
+        currentlocation: currentlocation,
       },
     });
 
     if (res.message == "order placed") {
       settoggleorderplacedmenu(true);
-      console.log(res);
+    } else {
+      setnotifictionarr([
+        ...notifictionarr,
+        {
+          id: new Date() + new Date().getMilliseconds(),
+          content: "Unable to place order",
+        },
+      ]);
     }
   };
 
@@ -142,12 +174,35 @@ function Userdetails({ placeorder, total }) {
               Address
             </label>
           </div>
-          <button
-            className="w-full text-center px-[20px] z-20"
-            onClick={getlivelocation}
-          >
-            Share your current location
-          </button>
+
+          {currentlocation ? (
+            <div
+              className={` w-full flex items-center justify-center gap-[10px] text-center h-[30px] md:px-[20px] z-20 `}
+            >
+              <Link
+                href={currentlocation}
+                target="_blank"
+                className="min-h-full w-full flex items-center justify-center text-green-500  rounded-full border border-slate-300"
+              >
+                Check shared location
+              </Link>
+              <button
+                className=" text-red-500  h-full px-[15px] rounded-full border border-slate-300"
+                onClick={() => {
+                  setcurrentlocation(null);
+                }}
+              >
+                Remove
+              </button>
+            </div>
+          ) : (
+            <button
+              className={`w-full text-center h-[30px] px-[20px] z-20 border border-slate-300 rounded-full overflow-hidden`}
+              onClick={getlivelocation}
+            >
+              Share your current location
+            </button>
+          )}
         </div>
       </div>
       {/* chekcout */}
