@@ -7,7 +7,7 @@ function Commonloading() {
       className=" w-full flex items-center justify-center"
       style={{ height: "calc(100dvh - 60px)" }}
     >
-      <div class="loading translate-y-[-30px]">
+      <div className="loading translate-y-[-30px]">
         <span></span>
         <span></span>
         <span></span>
