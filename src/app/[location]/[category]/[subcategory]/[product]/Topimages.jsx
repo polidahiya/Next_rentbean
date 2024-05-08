@@ -64,26 +64,9 @@ function Topimages({ images, name }) {
         }}
         ref={imagesscrollref}
       >
-        {images.map((image, i) => {
-          const [loading, setloading] = useState(true);
-          return (
-            <div key={i} className="min-w-[100%] h-full">
-              {loading && <Imageloading />}
-              <Image
-                className="min-w-[100%] h-full snap-start snap-always object-contain"
-                src={"/" + image}
-                alt={name}
-                height={400}
-                width={754}
-                loading="eager"
-                quality={100}
-                onLoad={() => {
-                  setloading(false);
-                }}
-              ></Image>
-            </div>
-          );
-        })}
+        {images.map((image, i) => (
+          <Mainimage key={i} image={image} name={name} />
+        ))}
       </div>
       {/* mini images */}
       <div className="hidden md:flex absolute top-0 left-[10px] w-[70px] h-full  flex-col justify-center gap-[10px] ">
@@ -137,4 +120,24 @@ function Topimages({ images, name }) {
   );
 }
 
+function Mainimage({ image, name }) {
+  const [loading, setloading] = useState(true);
+  return (
+    <div className="min-w-[100%] h-full">
+      {loading && <Imageloading />}
+      <Image
+        className="min-w-[100%] h-full snap-start snap-always object-contain"
+        src={"/" + image}
+        alt={name}
+        height={400}
+        width={754}
+        loading="eager"
+        quality={100}
+        onLoad={() => {
+          setloading(false);
+        }}
+      ></Image>
+    </div>
+  );
+}
 export default Topimages;

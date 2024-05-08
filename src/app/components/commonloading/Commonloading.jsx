@@ -3,8 +3,11 @@ import "./Styles.css";
 
 function Commonloading() {
   return (
-    <div className="h-[100dvh] w-full flex items-center justify-center">
-      <div class="loading">
+    <div
+      className=" w-full flex items-center justify-center"
+      style={{ height: "calc(100dvh - 60px)" }}
+    >
+      <div class="loading translate-y-[-30px]">
         <span></span>
         <span></span>
         <span></span>
