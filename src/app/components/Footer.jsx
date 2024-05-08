@@ -151,7 +151,7 @@ function Footer() {
           Go Top
         </button>
       </div>
-      <p className=" text-[10px] text-center mt-[30px]">
+      <p className=" text-[10px] text-center mt-[30px] md:hidden">
         &copy; {new Date().getFullYear()}{" "}
         <strong className="font-bold">RentBean.in</strong>. All rights reserved.
       </p>

@@ -15,7 +15,7 @@ function Orders({ item }) {
   const { notifictionarr, setnotifictionarr, setinvoicedata, refreshfn } =
     AppContextfn();
   const [note, setnote] = useState(item.note);
-
+  // date formater
   const dateformater = (value) => {
     const date = new Date(value);
 
@@ -32,6 +32,42 @@ function Orders({ item }) {
     hours = hours ? hours : 12; // Handle midnight (0 hours)
     return { year, month, day, hours, minutes, ampm };
   };
+  // link copier
+  function sharepage(link) {
+    if (navigator.clipboard) {
+      navigator.clipboard
+        .writeText(link)
+        .then(function () {
+          setnotifictionarr([
+            ...notifictionarr,
+            {
+              id: new Date() + new Date().getMilliseconds(),
+              content: "Live location copied",
+            },
+          ]);
+        })
+        .catch(function (err) {
+          fallbackCopyTextToClipboard(link);
+        });
+    } else {
+      fallbackCopyTextToClipboard(link);
+    }
+  }
+  function fallbackCopyTextToClipboard(text) {
+    var textArea = document.createElement("textarea");
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textArea);
+    setnotifictionarr([
+      ...notifictionarr,
+      {
+        id: new Date() + new Date().getMilliseconds(),
+        content: "Live location copied",
+      },
+    ]);
+  }
 
   return (
     <div className="blackshadow1 p-[20px] mb-[10px] bg-white">
@@ -150,6 +186,30 @@ function Orders({ item }) {
       <div>
         <span className="min-w-[130px] inline-block">Address </span> :{" "}
         {item.userdetails.address}
+      </div>
+      <div>
+        <span className="min-w-[130px] inline-block">Live Loaction</span> :{" "}
+        {item?.userdetails?.currentlocation ? (
+          <>
+            <Link
+              href={item?.userdetails?.currentlocation || "#"}
+              target="_blank"
+              className="text-cyan-500"
+            >
+              {item?.userdetails?.currentlocation}
+            </Link>
+            <button
+              className="px-[30px] rounded-full border border-slate-300 ml-[20px]"
+              onClick={() => {
+                sharepage(item?.userdetails?.currentlocation);
+              }}
+            >
+              Copy
+            </button>
+          </>
+        ) : (
+          "No live location shared"
+        )}
       </div>
       {/* order date */}
       <div>

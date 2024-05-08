@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { AppContextfn } from "../../../../Context/Index";
 import Linksvg from "../../../../components/(svgs)/Linksvg";
+import Imageloading from "@/app/components/Imageloading/Imageloading";
 
 function Topimages({ images, name }) {
   const { notifictionarr, setnotifictionarr } = AppContextfn();
@@ -64,15 +65,23 @@ function Topimages({ images, name }) {
         ref={imagesscrollref}
       >
         {images.map((image, i) => {
+          const [loading, setloading] = useState(true);
           return (
-            <Image
-              className="min-w-[100%] h-full snap-start snap-always object-contain"
-              src={"/" + image}
-              alt={name}
-              height={400}
-              width={754}
-              key={i}
-            ></Image>
+            <div key={i} className="min-w-[100%] h-full">
+              {loading && <Imageloading />}
+              <Image
+                className="min-w-[100%] h-full snap-start snap-always object-contain"
+                src={"/" + image}
+                alt={name}
+                height={400}
+                width={754}
+                loading="eager"
+                quality={100}
+                onLoad={() => {
+                  setloading(false);
+                }}
+              ></Image>
+            </div>
           );
         })}
       </div>
@@ -82,15 +91,14 @@ function Topimages({ images, name }) {
           return (
             <Image
               className={`w-full aspect-square  object-contain bg-bg1  cursor-pointer   border ${
-                dotnum == i
-                  ? "  outline outline-cyan-500"
-                  : " border-slate-300"
+                dotnum == i ? "  outline outline-cyan-500" : " border-slate-300"
               }`}
               src={"/" + image}
               alt={name}
               height={100}
               width={100}
               key={i}
+              quality={1}
               onClick={() => {
                 imagesscrollref.current.scrollLeft =
                   imagesscrollref.current.clientWidth * i;
