@@ -39,11 +39,14 @@ function Posteradds({ location }) {
   };
 
   return (
-    <div className="flex px-[10px] md:px-[40px] pt-[20px] gap-[20px] overflow-hidden">
-      <div className="w-[400px] min-h-full  hidden lg:block rounded-[10px] overflow-hidden">
-        <img src="https://lh4.googleusercontent.com/wRB9fV3OQS-ecx8YL7HyHLol6-Dfd9hDivMEwKtrrBkP8F7spQ2D84KtTOcOTHsC8bvadH2w7Wbddi-q2frPJJxeBNm6BgMrLEstUlwYYQ0HUUnEIJ-0vnxM4GB_EgIripUzHnGW-UHMeFfBLQ" />
+    <div className="flex items-center px-[10px] md:px-[40px] pt-[20px] gap-[20px] overflow-hidden">
+      <div className="aspect-[9/16] h-full w-[30%]  hidden lg:block rounded-[10px] overflow-hidden">
+        <img
+          className="h-full w-full object-cover object-center"
+          src="https://lh4.googleusercontent.com/wRB9fV3OQS-ecx8YL7HyHLol6-Dfd9hDivMEwKtrrBkP8F7spQ2D84KtTOcOTHsC8bvadH2w7Wbddi-q2frPJJxeBNm6BgMrLEstUlwYYQ0HUUnEIJ-0vnxM4GB_EgIripUzHnGW-UHMeFfBLQ"
+        />
       </div>
-      <div className="group relative w-full aspect-[16/9] rounded-[10px] overflow-hidden">
+      <div className="group relative w-full h-full aspect-[16/9] rounded-[10px] overflow-hidden">
         {imageArray.map((item, i) => (
           <Link
             key={i}
@@ -105,7 +108,7 @@ function Posteradds({ location }) {
           })}
         </div>
       </div>
-      <div className="hidden relative lg:flex items-center justify-center w-[400px] text-[40px] gap-[10px] rounded-[10px] overflow-hidden">
+      <div className="aspect-[9/16] h-full w-[30%]  hidden lg:block  rounded-[10px] overflow-hidden">
         <video
           className="h-full w-full object-cover "
           src="\ADS\Picsart_24-05-01_19-27-09-065.mp4"
