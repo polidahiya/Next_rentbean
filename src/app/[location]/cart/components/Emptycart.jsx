@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Homesvg from "../../../components/(svgs)/Home";
 
-function Emptycart({ location }) {
+function Emptycart() {
   return (
     <div
       className="flex flex-col items-center justify-center"
@@ -22,7 +22,7 @@ function Emptycart({ location }) {
         process!
       </p>
       <Link
-        href={"/" + location}
+        href={"/"}
         className="flex items-center gap-[5px] bg-green-600 px-[80px] py-[10px] text-white rounded-full mt-[20px]"
       >
         <Homesvg styles="h-[20px] fill-white" />

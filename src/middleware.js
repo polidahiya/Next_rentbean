@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 export default function middleware(req, res) {
-  // console.log(req.cookies);
-  if (req.url.includes("/Noida")) {
-  
-  }
+  // let location = req.cookies.get("Rentbeanloction");
+
+  // if (location) {
+  //   if (!req.url.includes("/" + location.value)) {
+  //     return NextResponse.redirect("/"+location.value);
+  //   }
+  // }
 }

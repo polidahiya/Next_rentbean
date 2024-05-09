@@ -8,9 +8,8 @@ import Homesvg from "../(svgs)/Home";
 import Menusvg from "../(svgs)/Menu";
 import Cartsvg from "../(svgs)/Cartstroke";
 
-function Navbar({ data }) {
-  const { cartproducts, togglelocation, settogglelocation, location } =
-    AppContextfn();
+function Navbar({ data, location }) {
+  const { cartproducts, togglelocation, settogglelocation } = AppContextfn();
   const [togglemobilenav, settogglemobilenav] = useState(false);
 
   useEffect(() => {
@@ -30,7 +29,7 @@ function Navbar({ data }) {
         {/* mobile nav bar */}
         <div className="flex lg:hidden items-center justify-evenly fixed bottom-0 left-0 h-[50px] w-full  bg-white z-[60]">
           <Link
-            href={"/" + location.replace(/ /g, "_")}
+            href={"/" + location}
             onClick={() => {
               if (togglemobilenav) {
                 settogglemobilenav(false);
@@ -71,7 +70,7 @@ function Navbar({ data }) {
           </Link>
         </div>
         <Fakenavbg />
-        <Link href={"/" + location.replace(/ /g, "_")} title="Home">
+        <Link href={"/" } title="Home">
           <Image
             src="/logo&ui/3dlogo.png"
             alt="rentbean.in logo image"
@@ -181,7 +180,7 @@ function Navlist({ data, title, listitems, location, settogglemobilenav }) {
     >
       <Link
         href={
-          "/" + location.replace(/ /g, "_") + "/" + title.replace(/ /g, "_")
+          "/" + location + "/" + title.replace(/ /g, "_")
         }
         className=" titles flex items-center content-center h-[60px] text-[18px] lg:text-sm px-[10px] font-bold lg:font-normal"
       >
@@ -204,7 +203,7 @@ function Navlist({ data, title, listitems, location, settogglemobilenav }) {
             <Link
               href={
                 "/" +
-                location.replace(/ /g, "_") +
+                location +
                 "/" +
                 title.replace(/ /g, "_") +
                 "/" +

@@ -6,7 +6,7 @@ import { Data } from "../../components/Getdata";
 import { typeofprices } from "../../components/Commondata";
 import Posteradds from "../components/Posterads";
 import Description from "../components/Description";
-import {listoflocation} from "../../components/Commondata"
+import { listoflocation } from "../../components/Commondata";
 
 export const generateMetadata = ({ params }) => {
   let location = params.location.replace(/_/g, " ");
@@ -16,7 +16,7 @@ export const generateMetadata = ({ params }) => {
   };
 };
 
-let data =await Data();
+let data = await Data();
 let randomproducts = Object.keys(data.data)
   .flatMap((i) =>
     Object.keys(data.data[i].subcat).flatMap((j) =>
@@ -61,7 +61,6 @@ const commnets = [
   },
 ];
 
-
 export default async function Home({ params }) {
   let location = params.location.replace(/_/g, " ");
   if (!listoflocation.includes(location)) {
@@ -71,7 +70,7 @@ export default async function Home({ params }) {
   return (
     <>
       {/* poster ads */}
-      <Posteradds location={location} />
+      <Posteradds location={location.replace(/ /g, "_")} />
       {/* tiles */}
       <div className="flex items-center justify-center gap-[10px] md:gap-[20px] px-[10px] py-[40px] md:px-[40px] flex-wrap">
         {Object.keys(data.data).map((categories, i) => {
@@ -109,7 +108,9 @@ export default async function Home({ params }) {
       />
       {/* commnets */}
       <div className="py-[50px] commentscontainer ">
-        <p className="text-center text-[30px] font-recline">What our clients say!</p>
+        <p className="text-center text-[30px] font-recline">
+          What our clients say!
+        </p>
         <div className="flex md:justify-center gap-[10px] md:flex-wrap mt-[50px] min-w-[100vw] px-[30px] pb-[30px] md:px-0 md:pb-[30px] overflow-x-scroll">
           {commnets.map((item, i) => {
             return (
@@ -137,7 +138,7 @@ export default async function Home({ params }) {
         </div>
       </div>
       {/* descriptions  */}
-      <Description location={location}/>
+      <Description location={location} />
     </>
   );
 }

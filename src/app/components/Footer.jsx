@@ -1,13 +1,11 @@
-"use client";
+"use client"
 import React from "react";
 import Link from "next/link";
-import { AppContextfn } from "../Context/Index";
 import Facebooksvg from "../components/(svgs)/Facebook";
 import Instagramsvg from "../components/(svgs)/Instagram";
 import Twittersvg from "../components/(svgs)/Twitter";
 
-function Footer() {
-  const { location } = AppContextfn();
+function Footer({location}) {
   return (
     <div className="bg-bg1 px-[10px] md:px-[40px] pt-[0] md:pt-[40px] pb-[90px] lg:pb-[40px]">
       <div className="w-full flex flex-col md:flex-row text-center md:text-left">
@@ -16,19 +14,19 @@ function Footer() {
             Rentbean.in
           </h2>
           <Link
-            href={"/" + location.replace(/ /g, "_") + "/aboutus"}
+            href={"/" + location + "/aboutus"}
             className=" w-full md:w-fit  text-[12px] pt-[10px] lg:hover:underline "
           >
             About us
           </Link>
           <Link
-            href={"/" + location.replace(/ /g, "_") + "/contactus"}
+            href={"/" + location + "/contactus"}
             className=" w-full md:w-fit  text-[12px] pt-[10px] lg:hover:underline "
           >
             Contact us
           </Link>
           <Link
-            href={"/" + location.replace(/ /g, "_") + "/documents_required"}
+            href={"/" + location + "/documents_required"}
             className=" w-full md:w-fit  text-[12px] pt-[10px] lg:hover:underline "
           >
             Documents Required
@@ -39,7 +37,7 @@ function Footer() {
             POLICIES
           </h2>
           <Link
-            href={"/" + location.replace(/ /g, "_") + "/shipping_policy"}
+            href={"/" + location + "/shipping_policy"}
             className=" w-full md:w-fit  text-[12px] pt-[10px] lg:hover:underline "
           >
             Shipping Policy
@@ -47,7 +45,7 @@ function Footer() {
           <Link
             href={
               "/" +
-              location.replace(/ /g, "_") +
+              location +
               "/cancleation_and_return_policy"
             }
             className=" w-full md:w-fit  text-[12px] pt-[10px] lg:hover:underline "
@@ -55,7 +53,7 @@ function Footer() {
             Cancellation & Return
           </Link>
           <Link
-            href={"/" + location.replace(/ /g, "_") + "/privacy_policy"}
+            href={"/" + location + "/privacy_policy"}
             className=" w-full md:w-fit  text-[12px] pt-[10px] lg:hover:underline "
           >
             Privacy Policy

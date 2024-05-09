@@ -1,11 +1,10 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, useRef } from "react";
+import { createContext, useContext, useState, useRef } from "react";
 
 const AppContext = createContext({});
 
 export function Appwrapper({ children }) {
-  const [location, setlocation] = useState("Gurgaon");
   const [cartproducts, setcartproducts] = useState({});
   const [togglelocation, settogglelocation] = useState(false);
   const [toggleorderplacedmenu, settoggleorderplacedmenu] = useState(false);
@@ -14,14 +13,6 @@ export function Appwrapper({ children }) {
     show: false,
     productid: null,
   });
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setlocation(localStorage?.getItem("rblocation") || "Gurgaon");
-      // setcartproducts(JSON.parse(localStorage.getItem("rbproducts")));
-      // localStorage.setItem("rbproducts", JSON.stringify(cartproducts));
-    }
-  }, []);
 
   // admin contexts
   const [ordercomps, setordercomps] = useState(0);
@@ -33,8 +24,6 @@ export function Appwrapper({ children }) {
   return (
     <AppContext.Provider
       value={{
-        location,
-        setlocation,
         cartproducts,
         setcartproducts,
         togglelocation,

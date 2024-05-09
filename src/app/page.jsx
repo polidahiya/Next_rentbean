@@ -1,28 +1,16 @@
-"use client";
-
 import Image from "next/image";
 import Location from "./components/Location";
 import Homesvg from "./components/(svgs)/Home";
 import Menusvg from "./components/(svgs)/Menu";
 import Cartsvg from "./components/(svgs)/Cartstroke";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { AppContextfn } from "./Context/Index";
 import Description from "./components/Description";
 import { listoflocation } from "../components/Commondata";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  const { location, settogglelocation } = AppContextfn();
-  const router = useRouter();
-
-  useEffect(() => {
-    let locallocation = localStorage.getItem("rblocation") || null;
-    if (locallocation) {
-      router.push(`/${location}`);
-    } else {
-      settogglelocation(true);
-    }
-  }, []);
+  let locationcookie = cookies().get("Rentbeanloction");
+  if (locationcookie) redirect("/" + locationcookie.value);
 
   const navlist = [
     "Fitness and Gym",

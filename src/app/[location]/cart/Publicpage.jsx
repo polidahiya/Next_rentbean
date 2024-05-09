@@ -8,7 +8,7 @@ import { typeofprices } from "../../../components/Commondata";
 import Removeprodialoge from "./components/Removeprodialoge";
 
 function Publicpage({ placeorder, data }) {
-  const { cartproducts, location } = AppContextfn();
+  const { cartproducts } = AppContextfn();
   let total = 0;
 
   let productsToShow = Object.keys(data)?.flatMap((i) =>
@@ -25,7 +25,7 @@ function Publicpage({ placeorder, data }) {
   });
 
   if (Object.keys(cartproducts).length == 0) {
-    return <Emptycart location={location} />;
+    return <Emptycart />;
   } else {
     return (
       <div className="gap-[20px] px-[10px] md:px-[40px] mt-[80px] flex flex-col lg:flex-row">

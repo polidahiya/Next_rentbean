@@ -1,18 +1,27 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { AppContextfn } from "../Context/Index";
 
 function Location({ removable }) {
-  const { togglelocation, settogglelocation, setlocation } = AppContextfn();
+  const { togglelocation, settogglelocation } = AppContextfn();
+
+  useEffect(() => {
+    if (!removable) {
+      settogglelocation(true);
+    }
+  }, []);
+
   const setlocationfn = (value) => {
-    localStorage.setItem("rblocation",value)
-    setlocation(value);
+    document.cookie = `Rentbeanloction=${value}; expires=${new Date(
+      "9999-12-31"
+    ).toUTCString()}; path=/`;
+
     settogglelocation(false);
   };
   return (
     <div
-      className={`fixed top-0 left-0 h-full w-[100vw] bg-black bg-opacity-[40%] z-20 duration-300 ${
+      className={`fixed top-0 left-0 h-full w-full bg-black bg-opacity-[40%] z-20 duration-300 overflow-hidden ${
         togglelocation
           ? "opacity-1 pointer-events-auto"
           : "opacity-0 pointer-events-none"

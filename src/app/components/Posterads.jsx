@@ -47,7 +47,7 @@ function Posteradds({ location }) {
         {imageArray.map((item, i) => (
           <Link
             key={i}
-            href={"/" + location.replace(/ /g, "_") + item.link}
+            href={"/" + location + item.link}
             className={`absolute min-w-full min-h-full duration-[1s] ${
               i === activeImage
                 ? "opacity-100"
