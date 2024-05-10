@@ -1,11 +1,12 @@
 "use client";
 import React, { useEffect } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { AppContextfn } from "../Context/Index";
 import { listoflocation } from "../../components/Commondata";
 
 function Location({ removable, location }) {
   const { togglelocation, settogglelocation } = AppContextfn();
+  const router = useRouter();
 
   useEffect(() => {
     if (!removable) {
@@ -49,18 +50,20 @@ function Location({ removable, location }) {
         </h2>
         {listoflocation?.map((item, i) => {
           return (
-            <Link
+            <button
               key={i}
-              href={"/" + item + "/"}
               onClick={() => {
                 setlocationfn(`${item}`);
+                setTimeout(() => {
+                  router.push("/" + item + "/");
+                }, 500);
               }}
               className={`relative flex items-center justify-center h-[60px] aspect-[2/1] border border-slate-300 rounded-[10px] lg:hover:scale-[1.1] duration-200  ${
                 location == item ? "bg-theme text-white" : "bg-white text-theme"
               }`}
             >
               {item}
-            </Link>
+            </button>
           );
         })}
         <p className="absolute left-[50%] bottom-[30px] translate-x-[-50%] w-[90%] text-center text-[12px]">
