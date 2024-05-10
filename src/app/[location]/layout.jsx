@@ -21,7 +21,10 @@ export default async function RootLayout({ children }) {
         data={data.data}
         location={cookies()?.get("Rentbeanloction")?.value || "Gurgaon"}
       />
-      <Location removable={true} />
+      <Location
+        removable={true}
+        location={cookies()?.get("Rentbeanloction")?.value || "Gurgaon"}
+      />
       <Orderplacedmenu />
       <Notification />
       <div className="mt-[60px]">{children}</div>

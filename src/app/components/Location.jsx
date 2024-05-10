@@ -2,8 +2,9 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
 import { AppContextfn } from "../Context/Index";
+import { listoflocation } from "../../components/Commondata";
 
-function Location({ removable }) {
+function Location({ removable, location }) {
   const { togglelocation, settogglelocation } = AppContextfn();
 
   useEffect(() => {
@@ -46,33 +47,22 @@ function Location({ removable }) {
         <h2 className="absolute left-[50%] top-[30px] translate-x-[-50%] text-[20px] font-semibold whitespace-nowrap">
           🌍 Select your location
         </h2>
-        <Link
-          href={"/Gurgaon/"}
-          onClick={() => {
-            setlocationfn("Gurgaon");
-          }}
-          className="relative flex items-center justify-center h-[60px] aspect-[2/1] border border-slate-300 bg-theme text-white rounded-[10px]"
-        >
-          Gurgaon
-        </Link>
-        <Link
-          href={"/Delhi/"}
-          onClick={() => {
-            setlocationfn("Delhi");
-          }}
-          className="relative flex items-center justify-center h-[60px] aspect-[2/1] border border-slate-300 bg-theme text-white rounded-[10px]"
-        >
-          Delhi
-        </Link>
-        <Link
-          href={"/Noida/"}
-          onClick={() => {
-            setlocationfn("Noida");
-          }}
-          className="relative flex items-center justify-center h-[60px] aspect-[2/1] border border-slate-300 bg-theme text-white rounded-[10px]"
-        >
-          Noida
-        </Link>
+        {listoflocation?.map((item, i) => {
+          return (
+            <Link
+              key={i}
+              href={"/" + item + "/"}
+              onClick={() => {
+                setlocationfn(`${item}`);
+              }}
+              className={`relative flex items-center justify-center h-[60px] aspect-[2/1] border border-slate-300 rounded-[10px] lg:hover:scale-[1.1] duration-200  ${
+                location == item ? "bg-theme text-white" : "bg-white text-theme"
+              }`}
+            >
+              {item}
+            </Link>
+          );
+        })}
         <p className="absolute left-[50%] bottom-[30px] translate-x-[-50%] w-[90%] text-center text-[12px]">
           We apologize if you couldn&#39;t find your location right now. Our
           site is always evolving to serve you better. In the meantime, feel

@@ -1,0 +1,11 @@
+body {
+  --themepink: #e72e77;
+}
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--themepink);
+  border-radius: 10px;
+}
