@@ -52,6 +52,8 @@ function Removeprodialoge() {
           <button
             className="px-[30px] py-[5px] border border-slate-300 rounded-full text-red-500"
             onClick={() => {
+              window.history.back();
+              setcartprodremove({ ...cartprodremove, show: false });
               setcartproducts((prevCartProducts) => {
                 const updatedCartProducts = { ...prevCartProducts };
                 delete updatedCartProducts[cartprodremove.productid];
@@ -65,8 +67,6 @@ function Removeprodialoge() {
                   content: "Removed Successfully",
                 },
               ]);
-
-              window.history.back();
             }}
           >
             Remove

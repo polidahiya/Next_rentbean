@@ -43,7 +43,7 @@ function Posteradds({ location }) {
       <div className="aspect-[9/16] h-full w-[30%]  hidden lg:block rounded-[10px] overflow-hidden">
         <img
           className="h-full w-full object-cover object-center"
-          src="https://lh4.googleusercontent.com/wRB9fV3OQS-ecx8YL7HyHLol6-Dfd9hDivMEwKtrrBkP8F7spQ2D84KtTOcOTHsC8bvadH2w7Wbddi-q2frPJJxeBNm6BgMrLEstUlwYYQ0HUUnEIJ-0vnxM4GB_EgIripUzHnGW-UHMeFfBLQ"
+          src="https://polidahiya.github.io/rentbeanimages/portraitad1.png"
         />
       </div>
       <div className="group relative w-full h-full aspect-[16/9] rounded-[10px] overflow-hidden">
