@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Fakenavbg from "./Fakenavbarbg";
+import Searchbox from "./Searchbox";
 import { AppContextfn } from "@/app/Context/Index";
 import Homesvg from "../(svgs)/Home";
 import Menusvg from "../(svgs)/Menu";
@@ -70,7 +71,7 @@ function Navbar({ data, location }) {
           </Link>
         </div>
         <Fakenavbg />
-        <Link href={"/" } title="Home">
+        <Link href={"/"} title="Home">
           <Image
             src="/logo&ui/3dlogo.png"
             alt="rentbean.in logo image"
@@ -78,7 +79,8 @@ function Navbar({ data, location }) {
             height={60}
           ></Image>
         </Link>
-
+        {/* search */}
+        <Searchbox location={location}/>
         {/* choose location */}
         <div
           className="location relative top-[15px] h-[30px] flex items-center justify-center gap-[5px] text-sm px-[20px] ml-auto border-[0] lg:border border-textcolor rounded-md cursor-pointer"
@@ -179,9 +181,7 @@ function Navlist({ data, title, listitems, location, settogglemobilenav }) {
       }}
     >
       <Link
-        href={
-          "/" + location + "/" + title.replace(/ /g, "_")
-        }
+        href={"/" + location + "/" + title.replace(/ /g, "_")}
         className=" titles flex items-center content-center h-[60px] text-[18px] lg:text-sm px-[10px] font-bold lg:font-normal"
       >
         <svg

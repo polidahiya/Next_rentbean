@@ -1,11 +1,10 @@
-import "./evglobals.css";
+import "./epglobals.css";
 import Navbar from "./components/Navbar";
 
 export const metadata = {
-  title: "Rentbean.in",
-  description: "Rentbean.in | Elevate Your Lifestyle",
-  manifest: "/manifest.json",
-  favicon: "/eventmanager/images/favicon.png",
+  title: "Rentbean Event Planners | Craft your beautiful moments",
+  description: "Craft your beautiful moments with Rentbean Event Planners",
+  manifest: "/eventmanager/manifest.json",
 };
 
 export default async function RootLayout({ children }) {
