@@ -11,11 +11,11 @@ import Cartsvg from "../(svgs)/Cartstroke";
 
 function Navbar({ data, location }) {
   const { cartproducts, togglelocation, settogglelocation } = AppContextfn();
-  const [togglemobilenav, settogglemobilenav] = useState(false);
+  const [togglecategories, settogglecategories] = useState(false);
 
   useEffect(() => {
     const handleBackButton = () => {
-      settogglemobilenav(false);
+      settogglecategories(false);
       settogglelocation(false);
     };
     window.addEventListener("popstate", handleBackButton);
@@ -23,6 +23,17 @@ function Navbar({ data, location }) {
       window.removeEventListener("popstate", handleBackButton);
     };
   }, []);
+
+  let sidebartimer;
+  const categoriesenterfn = () => {
+    settogglecategories(true);
+    clearTimeout(sidebartimer);
+  };
+  const categoriesexitfn = () => {
+    sidebartimer = setTimeout(() => {
+      settogglecategories(false);
+    }, 500);
+  };
 
   return (
     <>
@@ -32,8 +43,8 @@ function Navbar({ data, location }) {
           <Link
             href={"/" + location}
             onClick={() => {
-              if (togglemobilenav) {
-                settogglemobilenav(false);
+              if (togglecategories) {
+                settogglecategories(false);
               }
             }}
           >
@@ -41,17 +52,17 @@ function Navbar({ data, location }) {
           </Link>
           <button
             onClick={() => {
-              if (togglemobilenav) {
+              if (togglecategories) {
                 window.history.back();
               } else {
                 history.pushState(null, "", "");
-                settogglemobilenav(true);
+                settogglecategories(true);
               }
             }}
           >
             <Menusvg
               styles={`h-[30px] ${
-                togglemobilenav ? "stroke-cyan-500" : "stroke-textcolor"
+                togglecategories ? "stroke-cyan-500" : "stroke-textcolor"
               }`}
             />
           </button>
@@ -59,8 +70,8 @@ function Navbar({ data, location }) {
             href={"/" + location + "/cart"}
             className="relative"
             onClick={() => {
-              if (togglemobilenav) {
-                settogglemobilenav(false);
+              if (togglecategories) {
+                settogglecategories(false);
               }
             }}
           >
@@ -79,11 +90,9 @@ function Navbar({ data, location }) {
             height={60}
           ></Image>
         </Link>
-        {/* search */}
-        <Searchbox location={location}/>
         {/* choose location */}
         <div
-          className="location relative top-[15px] h-[30px] flex items-center justify-center gap-[5px] text-sm px-[20px] ml-auto border-[0] lg:border border-textcolor rounded-md cursor-pointer"
+          className="location relative top-[15px] h-[30px] flex items-center justify-center gap-[5px] text-sm px-[20px] ml-auto border-[0] lg:border lg:border-slate-300 rounded-md cursor-pointer"
           onClick={() => {
             settogglelocation(!togglelocation);
             history.pushState(null, "", "");
@@ -102,28 +111,55 @@ function Navbar({ data, location }) {
           </svg>
           <span className="hidden lg:block">{location}</span>
         </div>
-        {/* sidebar */}
+        {/* search */}
+        <Searchbox location={location} />
+        {/* toggle sidebar */}
         <div
-          className={`sidebar fixed bottom-[50px] left-0 w-full lg:w-fit  bg-white flex flex-col lg:static  lg:h-[60px] lg:flex-row  lg:items-start  py-[10px] lg:py-0  z-20 duration-[0.3s] lg:duration-0 lg:opacity-100 lg:pointer-events-auto ${
-            togglemobilenav
-              ? "opacity-100 pointer-events-auto"
-              : "opacity-0 pointer-events-none"
-          }`}
+          className="h-[60px] w-fit hidden lg:block"
+          onMouseEnter={categoriesenterfn}
+          onMouseLeave={categoriesexitfn}
         >
-          {/* categories */}
-          {Object.keys(data).map((title, i) => {
-            return (
-              <Navlist
-                key={i}
-                data={data}
-                title={title}
-                listitems={Object.keys(data[title].subcat)}
-                location={location}
-                settogglemobilenav={settogglemobilenav}
-              />
-            );
-          })}
+          <button className="relative top-[15px] h-[30px] flex items-center justify-center gap-[5px] text-sm pl-[20px] pr-[10px]  lg:border border-slate-300 rounded-md">
+            <span>Categories</span>
+            <svg
+              className={`h-[20px]  duration-300 ${togglecategories?"rotate-[-180deg]":"rotate-[0deg]"}`}
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="var(--textcolor)"
+                d="M5.707 9.71a1 1 0 000 1.415l4.892 4.887a2 2 0 002.828 0l4.89-4.89a1 1 0 10-1.414-1.415l-4.185 4.186a1 1 0 01-1.415 0L7.121 9.71a1 1 0 00-1.414 0z"
+              ></path>
+            </svg>
+          </button>
         </div>
+
+        {/* sidebar */}
+        {togglecategories && (
+          <div
+            className={`sidebar fixed bottom-[50px] py-[10px] left-0 w-full bg-white flex flex-col z-20 duration-[0.3s] lg:absolute lg:top-[60px] lg:left-[50%] lg:translate-x-[-50%] lg:w-full lg:h-fit  lg:items-start lg:justify-center lg:gap-[5px] lg:border lg:border-slate-300 lg:py-[5px] lg:px-[40px] `}
+            onMouseEnter={categoriesenterfn}
+            onMouseLeave={() => {
+              settogglecategories(false);
+            }}
+          >
+            {/* categories */}
+            {Object.keys(data).map((title, i) => {
+              return (
+                <Navlist
+                  key={i}
+                  data={data}
+                  title={title}
+                  listitems={Object.keys(data[title].subcat)}
+                  location={location}
+                  settogglecategories={settogglecategories}
+                />
+              );
+            })}
+          </div>
+        )}
+
         {/* cart */}
         <Link
           href={"/" + location + "/cart"}
@@ -148,8 +184,64 @@ function Navbar({ data, location }) {
             ""
           )}
         </Link>
-        {/* mobile menu button */}
-        {/* <svg
+      </nav>
+    </>
+  );
+}
+
+function Navlist({ data, title, listitems, location, settogglecategories }) {
+  return (
+    <div
+      className="navlistcontainer lg:flex lg:items-center"
+      onClick={() => {
+        settogglecategories(false);
+      }}
+    >
+      <Link
+        href={"/" + location + "/" + title.replace(/ /g, "_")}
+        className=" titles flex items-center justify-center h-[60px] text-[18px] lg:min-w-[150px] lg:h-[40px] lg:text-sm px-[10px] lg:justify-start font-bold"
+      >
+        {title} :
+      </Link>
+      <div className="flex gap-[10px] w-full px-[10px]  overflow-x-scroll lg:items-center lg:gap-[5px] lg:px-0 ">
+        {listitems.map((list, i) => {
+          return (
+            <Link
+              href={
+                "/" +
+                location +
+                "/" +
+                title.replace(/ /g, "_") +
+                "/" +
+                list.replace(/ /g, "_")
+              }
+              className=" min-w-fit  overflow-hidden text-sm flex px-[10px]  py-[5px] items-center justify-center whitespace-nowrap no-underline cursor-pointer lg:hover:text-theme lg:p-0"
+              key={i}
+            >
+              <div className="flex flex-col items-center justify-between lg:w-full  lg:flex-row lg:justify-start lg:gap-[10px] lg:border lg:border-slate-300 lg:rounded-[10px] lg:p-[5px] lg:pr-[20px]">
+                <Image
+                  src={"/" + data[title].subcat[list].image}
+                  alt={Object.keys(data[title].subcat)}
+                  width={30}
+                  height={30}
+                  className="block h-[50px] w-[50px] object-contain mix-blend-multiply lg:h-[40px] lg:w-[40px]"
+                ></Image>
+                <span>{list}</span>
+              </div>
+            </Link>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+export default Navbar;
+
+{
+  /* mobile menu button */
+}
+{
+  /* <svg
           className="block h-[60px] p-[7px]  lg:hidden"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -166,67 +258,5 @@ function Navbar({ data, location }) {
               ></path>
             </g>
           </g>
-        </svg> */}
-      </nav>
-    </>
-  );
+        </svg> */
 }
-
-function Navlist({ data, title, listitems, location, settogglemobilenav }) {
-  return (
-    <div
-      className="navlistcontainer group"
-      onClick={() => {
-        settogglemobilenav(false);
-      }}
-    >
-      <Link
-        href={"/" + location + "/" + title.replace(/ /g, "_")}
-        className=" titles flex items-center content-center h-[60px] text-[18px] lg:text-sm px-[10px] font-bold lg:font-normal"
-      >
-        <svg
-          className="h-[20px] lg:group-hover:rotate-[-180deg] duration-300 hidden lg:block"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <path
-            fill="var(--textcolor)"
-            d="M5.707 9.71a1 1 0 000 1.415l4.892 4.887a2 2 0 002.828 0l4.89-4.89a1 1 0 10-1.414-1.415l-4.185 4.186a1 1 0 01-1.415 0L7.121 9.71a1 1 0 00-1.414 0z"
-          ></path>
-        </svg>
-        {title} <span className="block lg:hidden">:</span>
-      </Link>
-      <div className="flex lg:block gap-[10px] w-full px-[10px] lg:px-0 overflow-x-scroll lg:group-hover:border-b  lg:group-hover:border-t lg:group-hover:border-theme lg:shadow-lg">
-        {listitems.map((list, i) => {
-          return (
-            <Link
-              href={
-                "/" +
-                location +
-                "/" +
-                title.replace(/ /g, "_") +
-                "/" +
-                list.replace(/ /g, "_")
-              }
-              className=" lg:h-0  lg:group-hover:h-[40px] min-w-fit rounded-[10px] lg:rounded-none overflow-hidden text-sm flex px-[10px] lg:px-[5px] py-[5px] lg:py-0 items-center justify-center bg-bg1 whitespace-nowrap no-underline cursor-pointer lg:hover:text-theme"
-              key={i}
-            >
-              <div className="flex flex-col items-center justify-between">
-                <Image
-                  src={"/" + data[title].subcat[list].image}
-                  alt={Object.keys(data[title].subcat)}
-                  width={30}
-                  height={30}
-                  className="block lg:hidden h-[50px] w-[50px] object-contain mix-blend-multiply"
-                ></Image>
-                {list}
-              </div>
-            </Link>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-export default Navbar;

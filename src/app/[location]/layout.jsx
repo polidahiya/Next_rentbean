@@ -15,22 +15,15 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
+  const location = cookies()?.get("Rentbeanloction")?.value || "Gurgaon";
   return (
     <>
-      <Navbar
-        data={data.data}
-        location={cookies()?.get("Rentbeanloction")?.value || "Gurgaon"}
-      />
-      <Location
-        removable={true}
-        location={cookies()?.get("Rentbeanloction")?.value || "Gurgaon"}
-      />
+      <Navbar data={data.data} location={location} />
+      <Location removable={true} location={location} />
       <Orderplacedmenu />
       <Notification />
       <div className="mt-[60px]">{children}</div>
-      <Footer
-        location={cookies()?.get("Rentbeanloction")?.value || "Gurgaon"}
-      />
+      <Footer location={location} />
     </>
   );
 }

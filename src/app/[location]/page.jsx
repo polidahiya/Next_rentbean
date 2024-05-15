@@ -111,11 +111,11 @@ export default async function Home({ params }) {
         <p className="text-center text-[30px] font-recline">
           What our clients say!
         </p>
-        <div className="flex md:justify-center gap-[10px] md:flex-wrap mt-[50px] min-w-[100vw] px-[30px] pb-[30px] md:px-0 md:pb-[30px] overflow-x-scroll">
+        <div className="flex flex-col md:flex-row md:justify-center gap-[10px] md:flex-wrap mt-[50px] min-w-[100vw] px-[30px] pb-[30px] md:px-0 md:pb-[30px] ">
           {commnets.map((item, i) => {
             return (
               <div
-                className={`card blackshadow1 relative min-w-[220px] w-[220px] flex flex-col items-center justify-center rounded-xl  p-[20px] py-[30px] ${
+                className={`card blackshadow1 relative min-w-[220px] w-full md:w-[220px] flex  md:flex-col items-center justify-center gap-[20px] md:gap-0 rounded-xl  p-[40px] md:p-[20px] py-[50px] md:py-[30px] ${
                   i == 0 || i == 4 ? "md:scale-[0.9]" : "md:scale-[0.95]"
                 } ${i == 2 ? "md:scale-[1.00]" : ""}`}
                 key={i}
@@ -128,8 +128,10 @@ export default async function Home({ params }) {
                   alt={item.name}
                   className="rounded-full duration-300"
                 ></Image>
-                <p className="mt-[10px] relative commentname ">{item.name}</p>
-                <p className={"text-[12px] text-justify mt-[30px]"}>
+                <p className="absolute top-[0px]  mt-[10px] md:relative commentname ">
+                  {item.name}
+                </p>
+                <p className={"text-[12px] text-justify md:mt-[30px]"}>
                   {item.comment}
                 </p>
               </div>

@@ -37,9 +37,15 @@ async function page(params) {
   allproducts.sort((a, b) => {
     const nameA = a?.product?.name?.toLowerCase();
     const nameB = b?.product?.name?.toLowerCase();
-    if (nameA.includes(words.toLowerCase()) && !nameB.includes(words.toLowerCase())) {
+    if (
+      nameA.includes(words.toLowerCase()) &&
+      !nameB.includes(words.toLowerCase())
+    ) {
       return -1;
-    } else if (!nameA.includes(words.toLowerCase()) && nameB.includes(words.toLowerCase())) {
+    } else if (
+      !nameA.includes(words.toLowerCase()) &&
+      nameB.includes(words.toLowerCase())
+    ) {
       return 1;
     } else {
       return 0;
@@ -52,10 +58,10 @@ async function page(params) {
       style={{ minHeight: "calc(100dvh - 60px)" }}
     >
       <div className="px-[100px] py-[2px] text-theme font-recline text-[30px] mt-[10px]">
-        {words}
+        {words} - <span className="text-cyan-500 text-[16px] font-recline"> &#40;{allproducts.length} results found &#41;</span>
       </div>
       {/*  */}
-      {allproducts.length < 1 ? (
+      {allproducts.length == 0 ? (
         <Nosearchfound />
       ) : (
         <div className="w-full h-full flex items-center justify-center gap-[20px] flex-wrap px-[5px] md:px-[40px] py-[30px]">
@@ -70,7 +76,7 @@ async function page(params) {
                   "/" +
                   item.subcat.replace(/ /g, "_") +
                   "/" +
-                  item.pid
+                  item.product.pid
                 }
                 className="productcards blackshadow1 relative  lg:w-[250px] rounded-[20px] cursor-pointer p-[10px] flex flex-col gap-[10px] box-content lg:hover:translate-y-[-5px] duration-300 overflow-hidden"
                 key={i}
