@@ -122,7 +122,9 @@ function Navbar({ data, location }) {
           <button className="relative top-[15px] h-[30px] flex items-center justify-center gap-[5px] text-sm pl-[20px] pr-[10px]  lg:border border-slate-300 rounded-md">
             <span>Categories</span>
             <svg
-              className={`h-[20px]  duration-300 ${togglecategories?"rotate-[-180deg]":"rotate-[0deg]"}`}
+              className={`h-[20px]  duration-300 ${
+                togglecategories ? "rotate-[-180deg]" : "rotate-[0deg]"
+              }`}
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -136,29 +138,28 @@ function Navbar({ data, location }) {
         </div>
 
         {/* sidebar */}
-        {togglecategories && (
-          <div
-            className={`sidebar fixed bottom-[50px] py-[10px] left-0 w-full bg-white flex flex-col z-20 duration-[0.3s] lg:absolute lg:top-[60px] lg:left-[50%] lg:translate-x-[-50%] lg:w-full lg:h-fit  lg:items-start lg:justify-center lg:gap-[5px] lg:border lg:border-slate-300 lg:py-[5px] lg:px-[40px] `}
-            onMouseEnter={categoriesenterfn}
-            onMouseLeave={() => {
-              settogglecategories(false);
-            }}
-          >
-            {/* categories */}
-            {Object.keys(data).map((title, i) => {
-              return (
-                <Navlist
-                  key={i}
-                  data={data}
-                  title={title}
-                  listitems={Object.keys(data[title].subcat)}
-                  location={location}
-                  settogglecategories={settogglecategories}
-                />
-              );
-            })}
-          </div>
-        )}
+        <div
+          className={`sidebar fixed bottom-[50px] py-[10px] left-0 w-full bg-white flex-col z-20 duration-[0.3s] lg:absolute lg:top-[60px] lg:left-[50%] lg:translate-x-[-50%] lg:w-full lg:h-fit  lg:items-start lg:justify-center lg:gap-[5px] lg:border lg:border-slate-300 lg:py-[5px] lg:px-[40px]
+            ${togglecategories ? "flex" : "hidden"} `}
+          onMouseEnter={categoriesenterfn}
+          onMouseLeave={() => {
+            settogglecategories(false);
+          }}
+        >
+          {/* categories */}
+          {Object.keys(data).map((title, i) => {
+            return (
+              <Navlist
+                key={i}
+                data={data}
+                title={title}
+                listitems={Object.keys(data[title].subcat)}
+                location={location}
+                settogglecategories={settogglecategories}
+              />
+            );
+          })}
+        </div>
 
         {/* cart */}
         <Link

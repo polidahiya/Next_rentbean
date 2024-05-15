@@ -23,11 +23,11 @@ export const generateMetadata = async ({ params }) => {
   let product = products?.filter((item) => item.pid == productid)[0];
 
   return {
-    title: product?.name + " on rent in " + location + " | Rentbean.in",
+    title: `${product?.name} on rent in ${location} | Rentbean`,
     description: product?.metadesc,
     keywords: product?.keywords,
     openGraph: {
-      images: "https://" + sitename + "/" + product?.image[0],
+      images: `https://${sitename}/${product?.image[0]}`,
     },
   };
 };

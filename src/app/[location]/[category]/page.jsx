@@ -10,8 +10,8 @@ export const generateMetadata = ({ params }) => {
   let category = params.category.replace(/_/g, " ");
 
   return {
-    title: category + " on rent in " + location + " | Rentbean.in",
-    description: "Rent " + category + " and more in " + location,
+    title: `${category} products on rent in ${location} | Rentbean`,
+    description: `Rent ${category} and more in ${location}`,
   };
 };
 

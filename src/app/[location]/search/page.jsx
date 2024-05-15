@@ -1,13 +1,17 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { Data } from "../../../components/Getdata";
 import Loadingimage from "../[category]/Loadingimage";
-import { typeofprices } from "@/components/Commondata";
+import { listoflocation, typeofprices } from "@/components/Commondata";
 
-async function page(params) {
-  const words = params.searchParams.q;
-  const location = params.params.location;
+async function page({ params, searchParams }) {
+  const words = searchParams?.q;
+  let location = params.location.replace(/_/g, " ");
+  if (!listoflocation.includes(location)) {
+    notFound();
+  }
   const data = await Data();
 
   let allproducts = Object.keys(data.data).flatMap((i) =>
@@ -58,7 +62,11 @@ async function page(params) {
       style={{ minHeight: "calc(100dvh - 60px)" }}
     >
       <div className="px-[100px] py-[2px] text-theme font-recline text-[30px] mt-[10px]">
-        {words} - <span className="text-cyan-500 text-[16px] font-recline"> &#40;{allproducts.length} results found &#41;</span>
+        {words} -{" "}
+        <span className="text-cyan-500 text-[16px] font-recline">
+          {" "}
+          &#40;{allproducts.length} results found &#41;
+        </span>
       </div>
       {/*  */}
       {allproducts.length == 0 ? (

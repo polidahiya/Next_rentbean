@@ -2,7 +2,13 @@
 export const sitename = "rentbean.in";
 
 // locations
-export const listoflocation = ["Delhi", "Noida", "Gurgaon"];
+export const listoflocation = [
+  "Delhi",
+  "Noida",
+  "Gurgaon",
+  "Ghaziabad",
+  "Faridabad",
+];
 
 // types of prices
 export const typeofprices = {
@@ -37,4 +43,3 @@ export const typeofprices = {
     name: "Daily Rent",
   }, //upto week
 };
-

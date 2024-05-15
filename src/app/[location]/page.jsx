@@ -12,7 +12,7 @@ export const generateMetadata = ({ params }) => {
   let location = params.location.replace(/_/g, " ");
 
   return {
-    title: "Rentbean.in | products on rent in " + location,
+    title: `Rent affordable products in ${location} | Rentbean`,
   };
 };
 

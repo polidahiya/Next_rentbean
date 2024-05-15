@@ -18,10 +18,10 @@ export const generateMetadata = async ({ params }) => {
   let products = data?.data[category]?.subcat[subcat]?.image;
 
   return {
-    title: subcat + " on rent in " + location + " | Rentbean.in",
-    description: "Rent " + subcat + " in " + location,
+    title: `${subcat} on rent in ${location} | Rentbean`,
+    description: `Rent ${subcat} in  ${location}`,
     openGraph: {
-      images: "https://" + sitename + "/" + products,
+      images: `https://${sitename}/${products}`,
     },
   };
 };

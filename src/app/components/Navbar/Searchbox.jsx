@@ -8,7 +8,9 @@ function Searchbox({ location }) {
   const [search, setSearch] = useState("");
 
   return (
-    <div className="relative top-[15px] h-[30px] mx-[10px] flex items-center justify-center border border-slate-300 rounded-full overflow-hidden">
+    <div
+      className={`relative top-[15px] h-[30px] mx-[10px] flex items-center justify-center border border-slate-300   rounded-full overflow-hidden `}
+    >
       <input
         type="text"
         className="h-full w-full indent-[20px] outline-none"
