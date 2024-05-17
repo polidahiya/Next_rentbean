@@ -23,7 +23,7 @@ function Location({ removable, location }) {
   };
   return (
     <div
-      className={`fixed top-0 left-0 h-full w-full bg-black bg-opacity-[40%] z-20 duration-300 overflow-hidden ${
+      className={`fixed top-0 left-0 h-full w-full bg-black bg-opacity-[40%] z-20 duration-300  ${
         togglelocation
           ? "opacity-1 pointer-events-auto"
           : "opacity-0 pointer-events-none"

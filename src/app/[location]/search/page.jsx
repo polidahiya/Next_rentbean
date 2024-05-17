@@ -62,11 +62,16 @@ async function page({ params, searchParams }) {
       style={{ minHeight: "calc(100dvh - 60px)" }}
     >
       <div className="px-[100px] py-[2px] text-theme font-recline text-[30px] mt-[10px]">
-        {words} -{" "}
-        <span className="text-cyan-500 text-[16px] font-recline">
-          {" "}
-          &#40;{allproducts.length} results found &#41;
-        </span>
+        {words}{" "}
+        {allproducts.length != 0 && (
+          <>
+            -{" "}
+            <span className="text-cyan-500 text-[16px] font-recline">
+              {" "}
+              &#40;{allproducts.length} results found &#41;
+            </span>
+          </>
+        )}
       </div>
       {/*  */}
       {allproducts.length == 0 ? (

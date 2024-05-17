@@ -7,18 +7,12 @@ import Description from "./components/Description";
 import { listoflocation } from "../components/Commondata";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import Searchicon from "./components/(svgs)/Searchicon";
+
 
 export default function Home() {
   let locationcookie = cookies().get("Rentbeanloction");
   if (locationcookie) redirect("/" + locationcookie.value);
-
-  const navlist = [
-    "Fitness and Gym",
-    "Electronics",
-    "Furniture",
-    "Events and Parties",
-    "Others",
-  ];
 
   return (
     <>
@@ -30,7 +24,7 @@ export default function Home() {
           height={60}
         ></Image>
         {/* location */}
-        <div className="location h-[30px] flex items-center justify-center gap-[5px] text-sm px-[20px] ml-auto border-[0] lg:border border-textcolor rounded-md cursor-pointer">
+        <div className="location h-[30px] flex items-center justify-center gap-[5px] text-sm px-[20px] ml-auto border-[0] lg:border border-slate-300 rounded-md cursor-pointer">
           <svg
             className="h-[15px] scale-[1.6] lg:scale-[1]"
             xmlns="http://www.w3.org/2000/svg"
@@ -43,28 +37,37 @@ export default function Home() {
           </svg>
           <span className="hidden lg:block">Choose location</span>
         </div>
-        <div className="hidden lg:flex items-center gap-[10px]">
-          {navlist.map((item, i) => {
-            return (
-              <div
-                key={i}
-                className="flex items-center justify-center gap-[5px] px-[5px] text-[14px]"
-              >
-                <svg
-                  className="h-[20px] lg:group-hover:rotate-[-180deg] duration-300 hidden lg:block"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="var(--textcolor)"
-                    d="M5.707 9.71a1 1 0 000 1.415l4.892 4.887a2 2 0 002.828 0l4.89-4.89a1 1 0 10-1.414-1.415l-4.185 4.186a1 1 0 01-1.415 0L7.121 9.71a1 1 0 00-1.414 0z"
-                  ></path>
-                </svg>
-                {item}
-              </div>
-            );
-          })}
+        {/* search bar */}
+        <div
+          className={` h-[30px] mx-[10px] flex items-center justify-center border border-slate-300   rounded-full overflow-hidden `}
+        >
+          <input
+            type="text"
+            className="h-full w-full indent-[20px] outline-none"
+            placeholder="Search"
+          />
+          <button
+            className="h-full px-[15px] border-l border-l-slate-300"
+          >
+            <Searchicon styles="h-[20px]" />
+          </button>
+        </div>
+        {/* categories */}
+        <div className="h-[60px] w-fit hidden lg:block">
+          <button className="relative top-[15px] h-[30px] flex items-center justify-center gap-[5px] text-sm pl-[20px] pr-[10px]  lg:border border-slate-300 rounded-md">
+            <span>Categories</span>
+            <svg
+              className={`h-[20px]  duration-300`}
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="var(--textcolor)"
+                d="M5.707 9.71a1 1 0 000 1.415l4.892 4.887a2 2 0 002.828 0l4.89-4.89a1 1 0 10-1.414-1.415l-4.185 4.186a1 1 0 01-1.415 0L7.121 9.71a1 1 0 00-1.414 0z"
+              ></path>
+            </svg>
+          </button>
         </div>
         {/* cart */}
         <div className="h-[30px] ml-[30px] hidden lg:flex  items-center px-[20px] rounded-md cursor-pointer border border-theme no-underline text-theme text-sm ">

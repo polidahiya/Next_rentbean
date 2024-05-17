@@ -18,14 +18,16 @@ function Searchbox({ location }) {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         onKeyDown={(e) => {
-          if (e.key === "Enter") {
+          if (e.key === "Enter" && search.trim() != "") {
             router.push(`/${location}/search?q=${search}`);
           }
         }}
       />
       <button
         onClick={() => {
-          router.push(`/${location}/search?q=${search}`);
+          if (search.trim() != "") {
+            router.push(`/${location}/search?q=${search}`);
+          }
         }}
         className="h-full px-[15px] border-l border-l-slate-300"
       >

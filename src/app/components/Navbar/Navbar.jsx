@@ -82,7 +82,7 @@ function Navbar({ data, location }) {
           </Link>
         </div>
         <Fakenavbg />
-        <Link href={"/"} title="Home">
+        <Link href={"/"+location} title="Home">
           <Image
             src="/logo&ui/3dlogo.png"
             alt="rentbean.in logo image"
