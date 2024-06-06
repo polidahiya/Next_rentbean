@@ -1,8 +1,9 @@
+"use server";
 import jwt from "jsonwebtoken";
 
-export default function verifyToken(token) {
+export default async function verifyToken(token) {
   if (!token) {
-    return Promise.resolve({ message: "Token not available" });
+    return Promise.resolve({ message: "Please login" });
   }
 
   return new Promise((resolve, reject) => {
@@ -10,7 +11,7 @@ export default function verifyToken(token) {
       if (err) {
         resolve({ message: "Invalid token" });
       } else {
-        resolve({ message: "Token verified", usermail: decoded.userId });
+        resolve({ message: "Token verified", email: decoded.email });
       }
     });
   });

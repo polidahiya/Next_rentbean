@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Orderscomp from "../Components/Orders";
 import { AppContextfn } from "../../Context/Index";
 import Imageloading from "@/app/components/Imageloading/Imageloading";
+import { getallorders } from "../loginandordersaction";
 
 function Ordersmenu() {
   const { ordercomps, setordercomps, ordercompsref, refresh } = AppContextfn();
@@ -12,31 +13,21 @@ function Ordersmenu() {
 
   useEffect(() => {
     if (ordercomps == 0) {
-      fetch("/api/admin/Orders")
-        .then((res) => res.json())
-        .then((res) => {
-          if (!res.message) {
-            setallorders(res);
-          }
-        });
+      (async () => {
+        setallorders(await getallorders({ status: "order" }))
+      })();
     }
+    
     if (ordercomps == 1) {
-      fetch("/api/admin/Runningorders")
-        .then((res) => res.json())
-        .then((res) => {
-          if (!res.message) {
-            setrunningorders(res);
-          }
-        });
+      (async () => {
+        setrunningorders(await getallorders({ status: "running" }))
+      })();
     }
+    
     if (ordercomps == 2) {
-      fetch("/api/admin/Completedorders")
-        .then((res) => res.json())
-        .then((res) => {
-          if (!res.message) {
-            setcompletedorders(res);
-          }
-        });
+      (async () => {
+        setcompletedorders(await getallorders({ status: "completed" }))
+      })();
     }
   }, [ordercomps, refresh]);
 
@@ -61,14 +52,11 @@ function Ordersmenu() {
           allorders?.length == 0 ? (
             <Noitems />
           ) : (
-            allorders?.map((item, i) => (
-              <Orderscomp key={i} item={item} />
-            ))
+            allorders?.map((item, i) => <Orderscomp key={i} item={item} />)
           )
         ) : (
           <Loading />
         )}
-        {}
       </div>
       <div
         className=" min-w-full  snap-start px-[10px] md:px-[40px] py-[20px] overflow-y-scroll "
@@ -78,9 +66,7 @@ function Ordersmenu() {
           runningorders?.length == 0 ? (
             <Noitems />
           ) : (
-            runningorders?.map((item, i) => (
-              <Orderscomp key={i} item={item} />
-            ))
+            runningorders?.map((item, i) => <Orderscomp key={i} item={item} />)
           )
         ) : (
           <Loading />
@@ -90,13 +76,11 @@ function Ordersmenu() {
         className=" min-w-full  snap-start px-[10px] md:px-[40px] py-[20px] overflow-y-scroll "
         style={{ height: "calc(100dvh - 60px)" }}
       >
-        {completedorders ? (
+       {completedorders ? (
           completedorders?.length == 0 ? (
             <Noitems />
           ) : (
-            completedorders?.map((item, i) => (
-              <Orderscomp key={i} item={item} />
-            ))
+            completedorders?.map((item, i) => <Orderscomp key={i} item={item} />)
           )
         ) : (
           <Loading />

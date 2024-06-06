@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { AppContextfn } from "../../Context/Index";
+import { passwordlogin } from "../loginandordersaction";
 
 function Loginpage() {
   const { setshowlogin, notifictionarr, setnotifictionarr } = AppContextfn();
@@ -9,35 +10,42 @@ function Loginpage() {
   const passwordinput = useRef();
 
   const loginfn = () => {
-    fetch("/api/admin/Login", {
-      method: "POST",
-      body: JSON.stringify({
-        password: password,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.message == "Login successfull") {
-          setshowlogin(false);
-          setnotifictionarr([
-            ...notifictionarr,
-            {
-              id: new Date() + new Date().getMilliseconds(),
-              content: res.message,
-            },
-          ]);
-        }
-        if (res.message == "Wrong password") {
-          setshowlogin(true);
-          setnotifictionarr([
-            ...notifictionarr,
-            {
-              id: new Date() + new Date().getMilliseconds(),
-              content: res.message,
-            },
-          ]);
-        }
-      });
+    //
+    (async () => {
+      if (password == "") {
+        setnotifictionarr([
+          ...notifictionarr,
+          {
+            id: new Date() + new Date().getMilliseconds(),
+            content: "Please enter password",
+          },
+        ]);
+        return;
+      }
+      let res = await passwordlogin({ password: password });
+
+      if (res.message == "Login successfull") {
+        setshowlogin(false);
+        setnotifictionarr([
+          ...notifictionarr,
+          {
+            id: new Date() + new Date().getMilliseconds(),
+            content: res.message,
+          },
+        ]);
+      }
+
+      if (res.message == "Wrong password") {
+        setshowlogin(true);
+        setnotifictionarr([
+          ...notifictionarr,
+          {
+            id: new Date() + new Date().getMilliseconds(),
+            content: res.message,
+          },
+        ]);
+      }
+    })();
   };
 
   useEffect(() => {

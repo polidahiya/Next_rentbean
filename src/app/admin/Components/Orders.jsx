@@ -32,42 +32,6 @@ function Orders({ item }) {
     hours = hours ? hours : 12; // Handle midnight (0 hours)
     return { year, month, day, hours, minutes, ampm };
   };
-  // link copier
-  function sharepage(link) {
-    if (navigator.clipboard) {
-      navigator.clipboard
-        .writeText(link)
-        .then(function () {
-          setnotifictionarr([
-            ...notifictionarr,
-            {
-              id: new Date() + new Date().getMilliseconds(),
-              content: "Live location copied",
-            },
-          ]);
-        })
-        .catch(function (err) {
-          fallbackCopyTextToClipboard(link);
-        });
-    } else {
-      fallbackCopyTextToClipboard(link);
-    }
-  }
-  function fallbackCopyTextToClipboard(text) {
-    var textArea = document.createElement("textarea");
-    textArea.value = text;
-    document.body.appendChild(textArea);
-    textArea.select();
-    document.execCommand("copy");
-    document.body.removeChild(textArea);
-    setnotifictionarr([
-      ...notifictionarr,
-      {
-        id: new Date() + new Date().getMilliseconds(),
-        content: "Live location copied",
-      },
-    ]);
-  }
 
   return (
     <div className="blackshadow1 p-[20px] mb-[10px] bg-white">
@@ -173,43 +137,19 @@ function Orders({ item }) {
       </div>
       <div>
         <span className="min-w-[130px] inline-block">Name </span> :{" "}
-        {item.userdetails.name}
+        {item?.username}
       </div>
       <div>
         <span className="min-w-[130px] inline-block">Email </span> :{" "}
-        {item.userdetails.email}
+        {item?.email}
       </div>
       <div>
         <span className="min-w-[130px] inline-block">Phone no </span> :{" "}
-        {item.userdetails.phonenumber}
+        {item?.phonenum}
       </div>
       <div>
         <span className="min-w-[130px] inline-block">Address </span> :{" "}
-        {item.userdetails.address}
-      </div>
-      <div>
-        <span className="min-w-[130px] inline-block">Live Loaction</span> :{" "}
-        {item?.userdetails?.currentlocation ? (
-          <>
-            <Link
-              href={item?.userdetails?.currentlocation || "#"}
-              target="_blank"
-              className="text-cyan-500"
-            >
-              {item?.userdetails?.currentlocation}
-            </Link>
-            <button
-              className="px-[30px] rounded-full border border-slate-300 ml-[20px]"
-              onClick={() => {
-                sharepage(item?.userdetails?.currentlocation);
-              }}
-            >
-              Copy
-            </button>
-          </>
-        ) : (
-          "No live location shared"
-        )}
+        {item?.address}
       </div>
       {/* order date */}
       <div>
@@ -270,49 +210,46 @@ function Orders({ item }) {
         </button>
       </div>
       <div className="flex flex-wrap gap-[5px]">
-        {Object.keys(item.products).map((product, j) => {
-          let eachpro = item.products[product];
-          return (
-            <div key={j} className="border border-slate-300 my-[10px] p-[5px]">
+       {/*  */}
+            <div className="border border-slate-300 my-[10px] p-[5px]">
               <Image
-                src={"/" + eachpro.image[0]}
+                src={"/" + item.image[0]}
                 className="h-[200px] w-[200px] object-contain"
                 alt="product image"
                 height={200}
                 width={200}
               ></Image>
               <div>
-                <div>Product Name : {eachpro.name}</div>
-                <div>Product Id : {eachpro.pid}</div>
+                <div>Product Name : {item.name}</div>
+                <div>Product Id : {item.pid}</div>
                 <div>
                   Duration :{" "}
-                  {typeofprices[eachpro.pricetype - 1].time[eachpro.time]}{" "}
-                  {typeofprices[eachpro.pricetype - 1].suffix}
+                  {typeofprices[item.pricetype - 1].time[item.time]}{" "}
+                  {typeofprices[item.pricetype - 1].suffix}
                 </div>
-                <div>Quantity : {eachpro.Quantity + 1}</div>
+                <div>Quantity : {item.Quantity + 1}</div>
                 <div>
                   Rent : ₹{" "}
-                  {eachpro.prices[eachpro.time] * (eachpro.Quantity + 1)}
+                  {item.prices[item.time] * (item.Quantity + 1)}
                   /-
                 </div>
                 <div>
                   Security Deposit : ₹{" "}
-                  {eachpro.refundableprice * (eachpro.Quantity + 1)}
+                  {item.refundableprice * (item.Quantity + 1)}
                   /-
                 </div>
                 <div>
                   Total : ₹{" "}
-                  {eachpro.prices[eachpro.time] * (eachpro.Quantity + 1) +
-                    eachpro.refundableprice * (eachpro.Quantity + 1)}
+                  {item.prices[item.time] * (item.Quantity + 1) +
+                    item.refundableprice * (item.Quantity + 1)}
                   /-
                 </div>
               </div>
             </div>
-          );
-        })}
+         {/*  */}
       </div>
       {/* invoice link */}
-      <Link
+      {/* <Link
         href="admin/Invoice"
         onClick={() => {
           setinvoicedata({
@@ -333,7 +270,7 @@ function Orders({ item }) {
         }}
       >
         Generate Invoice
-      </Link>
+      </Link> */}
     </div>
   );
 }

@@ -1,5 +1,6 @@
 // sitename
 export const sitename = "rentbean.in";
+export const admin = "admin@vishal.com";
 
 // locations
 export const listoflocation = [

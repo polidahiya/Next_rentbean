@@ -10,4 +10,5 @@ const db = client.db("rentbeen");
 const data = db.collection("data");
 const orders = db.collection("orders");
 const sitedata = db.collection("sitedata");
-export { data, orders, sitedata, ObjectId };
+const users = db.collection("users");
+export { data, orders, sitedata, users, ObjectId };

@@ -1,34 +1,47 @@
 import React from "react";
 import Publicpage from "./Publicpage";
 import { orders } from "@/components/mongodb";
-import { Data} from "../../../components/Getdata";
+import { Data } from "../../../components/Getdata";
+import { cookies } from "next/headers";
+import verifyToken from "@/app/components/Verifytoken";
 
 async function placeorder(data) {
   "use server";
   try {
-    data.orderdate = new Date();
-    data.status = "order"; //order,verified,finished
-    data.note = "";
-    data.verified = false;
-    let productdata = { ...data.products };
-    Object.keys(productdata).forEach((item) => {
-      delete productdata[item].link;
+    let token = cookies().get("token");
+    if (!token) {
+      return { message: "Please login first!" };
+    }
+
+    let tokendata = await verifyToken(token?.value);
+    if (!tokendata.email) {
+      return { message: "server error" };
+    }
+    Object.keys(data.products).forEach(async(item) => {
+      delete data.products[item].link;
+      data.products[item].product=item
+      data.products[item].orderdate = new Date();
+      data.products[item].status = "order"; //order,verified,finished
+      data.products[item].note = "";
+      data.products[item].verified = false;
+      data.products[item].email = tokendata.email;
+
+      await orders.insertOne(data.products[item]);
     });
-    
-    await orders.insertOne({ ...data });
+
     return { message: "order placed" };
+
   } catch (error) {
+    console.log(error);
     return { message: "error" };
   }
 }
 
-async function page() {
+async function page({ params }) {
+  let location = params?.location.replace(/_/g, " ");
   const data = await Data();
   return (
-    <Publicpage
-      placeorder={placeorder}
-      data={data.data}
-    />
+    <Publicpage placeorder={placeorder} location={location} data={data.data} />
   );
 }
 

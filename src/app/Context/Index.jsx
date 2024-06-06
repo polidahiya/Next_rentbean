@@ -5,6 +5,7 @@ import { createContext, useContext, useState, useRef } from "react";
 const AppContext = createContext({});
 
 export function Appwrapper({ children }) {
+  const [redirectloginlink, setredirectloginlink] = useState("");
   const [cartproducts, setcartproducts] = useState({});
   const [togglelocation, settogglelocation] = useState(false);
   const [toggleorderplacedmenu, settoggleorderplacedmenu] = useState(false);
@@ -24,6 +25,8 @@ export function Appwrapper({ children }) {
   return (
     <AppContext.Provider
       value={{
+        redirectloginlink,
+        setredirectloginlink,
         cartproducts,
         setcartproducts,
         togglelocation,

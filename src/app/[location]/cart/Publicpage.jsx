@@ -7,7 +7,7 @@ import Userdetails from "./components/Userdetails";
 import { typeofprices } from "../../../components/Commondata";
 import Removeprodialoge from "./components/Removeprodialoge";
 
-function Publicpage({ placeorder, data }) {
+function Publicpage({ placeorder, data, location }) {
   const { cartproducts } = AppContextfn();
   let total = 0;
 
@@ -25,7 +25,7 @@ function Publicpage({ placeorder, data }) {
   });
 
   if (Object.keys(cartproducts).length == 0) {
-    return <Emptycart />;
+    return <Emptycart location={location} />;
   } else {
     return (
       <div className="gap-[20px] px-[10px] md:px-[40px] mt-[80px] flex flex-col lg:flex-row">
@@ -40,7 +40,7 @@ function Publicpage({ placeorder, data }) {
           })}
         </div>
         {/* customer details and payments */}
-        <Userdetails placeorder={placeorder} total={total} />
+        <Userdetails placeorder={placeorder} total={total} location={location}/>
       </div>
     );
   }
