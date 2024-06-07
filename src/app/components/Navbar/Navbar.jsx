@@ -5,6 +5,7 @@ import Image from "next/image";
 import Fakenavbg from "./Fakenavbarbg";
 import Searchbox from "./Searchbox";
 import { AppContextfn } from "@/app/Context/Index";
+import { logout } from "../logoutaction";
 import Homesvg from "../(svgs)/Home";
 import Menusvg from "../(svgs)/Menu";
 import Cartsvg from "../(svgs)/Cartstroke";
@@ -22,6 +23,7 @@ function Navbar({ data, location, token }) {
     settogglelocation,
     setredirectloginlink,
   } = AppContextfn();
+
   const [togglecategories, settogglecategories] = useState(false);
   const [toggleusermenu, settoggleusermenu] = useState(false);
 
@@ -58,6 +60,7 @@ function Navbar({ data, location, token }) {
           location={location}
           toggleusermenu={toggleusermenu}
           settoggleusermenu={settoggleusermenu}
+          token={token}
         />
         <Fakenavbg />
         <Link href={"/" + location} title="Home">
@@ -170,6 +173,7 @@ function Navbar({ data, location, token }) {
           <Usermenu
             toggleusermenu={toggleusermenu}
             settoggleusermenu={settoggleusermenu}
+            location={location}
           />
         ) : (
           <Link
@@ -180,7 +184,7 @@ function Navbar({ data, location, token }) {
               setredirectloginlink(link.pathname);
             }}
           >
-            Signup / Login
+            Login
           </Link>
         )}
       </nav>
@@ -235,7 +239,9 @@ function Navlist({ data, title, listitems, location, settogglecategories }) {
   );
 }
 
-function Usermenu({ toggleusermenu, settoggleusermenu }) {
+function Usermenu({ toggleusermenu, settoggleusermenu, location }) {
+  const { notifictionarr, setnotifictionarr } = AppContextfn();
+
   return (
     <>
       {/* usermenu svg */}
@@ -259,22 +265,43 @@ function Usermenu({ toggleusermenu, settoggleusermenu }) {
       {/* menu */}
       {toggleusermenu && (
         <div className="fadeup fixed lg:absolute bottom-[55px] right-[10px] lg:bottom-auto lg:top-[50px] lg:right-[40px] flex flex-col gap-[2px] w-[250px]  bg-white border border-slate-300 rounded-[10px] p-[10px] shadow-lg duration-300 ">
-          <div className="p-[5px] flex items-center gap-[10px] lg:hover:bg-slate-100 cursor-pointer">
+          <Link
+            href={`/${location}/orderdetails`}
+            className="p-[5px] flex items-center gap-[10px] lg:hover:bg-slate-100 cursor-pointer"
+          >
             <Navorders styles="h-[25px]" />
             Orders Detail
-          </div>
+          </Link>
           <div className="w-full h-[1px] bg-slate-300"></div>
-          <div className="p-[5px] flex items-center gap-[10px] lg:hover:bg-slate-100 cursor-pointer">
-            <Heart styles="h-[25px]" />
+          <Link
+            href={`/${location}/likedproducts`}
+            className="p-[5px] flex items-center gap-[10px] lg:hover:bg-slate-100 cursor-pointer"
+          >
+            <Heart styles="h-[25px] fill-red-500" />
             Liked Products
-          </div>
+          </Link>
           <div className="w-full h-[1px] bg-slate-300"></div>
-          <div className="p-[5px] flex items-center gap-[10px] lg:hover:bg-slate-100 cursor-pointer">
+          <Link
+            href={`/${location}/updateuserdetails`}
+            className="p-[5px] flex items-center gap-[10px] lg:hover:bg-slate-100 cursor-pointer"
+          >
             <Updateusersvg styles="h-[25px]" />
             Update User Details
-          </div>
+          </Link>
           <div className="w-full h-[1px] bg-slate-300"></div>
-          <div className="p-[5px] flex items-center gap-[10px] lg:hover:bg-slate-100 cursor-pointer">
+          <div
+            className="p-[5px] flex items-center gap-[10px] lg:hover:bg-slate-100 cursor-pointer"
+            onClick={async () => {
+              let res = await logout();
+              setnotifictionarr([
+                ...notifictionarr,
+                {
+                  id: new Date() + new Date().getMilliseconds(),
+                  content: res?.message,
+                },
+              ]);
+            }}
+          >
             <Logout styles="h-[25px]" />
             Logout
           </div>
@@ -291,6 +318,7 @@ function Mobilenav({
   location,
   toggleusermenu,
   settoggleusermenu,
+  token,
 }) {
   return (
     <div className="flex lg:hidden  items-center justify-evenly fixed bottom-0 left-0 h-[50px] w-full border-t border-slate-300 bg-white z-[60]">
@@ -336,14 +364,26 @@ function Mobilenav({
         </div>
       </Link>
       {/* usermenu svg */}
-      <button
-        className="h-[30px]"
-        onClick={() => {
-          settoggleusermenu(!toggleusermenu);
-        }}
-      >
-        <Usersvg styles="h-[30px]  border-[2px] border-slate-300 rounded-full cursor-pointer" />
-      </button>
+      {token ? (
+        <button
+          className="h-[30px]"
+          onClick={() => {
+            settoggleusermenu(!toggleusermenu);
+          }}
+        >
+          <Usersvg styles="h-[30px]  border-[2px] border-slate-300 rounded-full cursor-pointer" />
+        </button>
+      ) : (
+        <Link
+          href={`/${location}/loginlogout`}
+          onClick={() => {
+            const link = new URL(window.location.href);
+            setredirectloginlink(link.pathname);
+          }}
+        >
+          <Usersvg styles="h-[30px]  border-[2px] border-slate-300 rounded-full cursor-pointer" />
+        </Link>
+      )}
     </div>
   );
 }

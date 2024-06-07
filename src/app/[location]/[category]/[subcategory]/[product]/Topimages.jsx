@@ -1,14 +1,27 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { AppContextfn } from "../../../../Context/Index";
+import { likeproduct, isliked } from "./serveractions";
 import Linksvg from "../../../../components/(svgs)/Linksvg";
 import Imageloading from "@/app/components/Imageloading/Imageloading";
+import Heart from "@/app/components/(svgs)/Heart";
 
-function Topimages({ images, name }) {
+function Topimages({ images, name, productid }) {
   const { notifictionarr, setnotifictionarr } = AppContextfn();
   const [dotnum, setdotnum] = useState(0);
+  const [liked, setliked] = useState(false);
   const imagesscrollref = useRef();
+
+  // check liked
+  useEffect(() => {
+    (async () => {
+      let res = await isliked(productid);
+      if (!res) return;
+
+      setliked(res);
+    })();
+  }, []);
 
   let link;
   if (typeof window !== "undefined") {
@@ -93,6 +106,35 @@ function Topimages({ images, name }) {
       {/* share button */}
       <button
         className="absolute right-[20px] top-[20px] "
+        title="Add to favourites"
+        onClick={async () => {
+          let res = await likeproduct(productid, liked);
+          if (res)
+            if (res.message == "Added to favourites") {
+              setliked(true);
+            }
+          if (res.message == "Removed to favourites") {
+            setliked(false);
+          }
+
+          setnotifictionarr([
+            ...notifictionarr,
+            {
+              id: new Date() + new Date().getMilliseconds(),
+              content: res.message,
+            },
+          ]);
+        }}
+      >
+        <Heart
+          styles={`h-[25px]  stroke-textcolor ${
+            liked ? "fill-red-500 stroke-none" : "fill-white stroke-[4px]"
+          }`}
+        />
+      </button>
+      {/* like button */}
+      <button
+        className="absolute right-[20px]  top-[60px] "
         title="Copy Link"
         onClick={sharepage}
       >

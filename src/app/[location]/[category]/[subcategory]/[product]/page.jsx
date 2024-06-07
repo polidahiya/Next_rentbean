@@ -83,7 +83,7 @@ async function page({ params }) {
       </div>
       <div className="flex flex-col lg:flex-row items-start gap-[30px] lg:gap-[10px] px-[10px] lg:px-[40px] ">
         {/* imagecontainer */}
-        <Topimages images={product.image} name={product.name} />
+        <Topimages images={product.image} name={product.name} productid={productid}/>
         {/* product setting */}
         <Settings
           product={product}
