@@ -103,38 +103,41 @@ function Topimages({ images, name, productid }) {
           );
         })}
       </div>
-      {/* share button */}
+      {/* like button */}
       <button
         className="absolute right-[20px] top-[20px] "
         title="Add to favourites"
         onClick={async () => {
           let res = await likeproduct(productid, liked);
-          if (res)
+          if (res) {
             if (res.message == "Added to favourites") {
               setliked(true);
             }
-          if (res.message == "Removed to favourites") {
-            setliked(false);
-          }
+            if (res.message == "Removed from favourites") {
+              setliked(false);
+            }
 
-          setnotifictionarr([
-            ...notifictionarr,
-            {
-              id: new Date() + new Date().getMilliseconds(),
-              content: res.message,
-            },
-          ]);
+            setnotifictionarr([
+              ...notifictionarr,
+              {
+                id: new Date() + new Date().getMilliseconds(),
+                content: res.message,
+              },
+            ]);
+          }
         }}
       >
         <Heart
-          styles={`h-[25px]  stroke-textcolor ${
-            liked ? "fill-red-500 stroke-none" : "fill-white stroke-[4px]"
+          styles={`h-[30px]  w-[30px]  ${
+            liked
+              ? "fill-red-500 stroke-none"
+              : "fill-white stroke-[5px] stroke-textcolor "
           }`}
         />
       </button>
-      {/* like button */}
+      {/* share button */}
       <button
-        className="absolute right-[20px]  top-[60px] "
+        className="absolute right-[20px]  top-[60px]"
         title="Copy Link"
         onClick={sharepage}
       >

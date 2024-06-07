@@ -9,9 +9,9 @@ export async function isliked(productid) {
     if (!cookies().get("token")) {
       return false;
     }
-    const tekenres = await verifyToken(cookies().get("token").value);
+    const tokenres = await verifyToken(cookies().get("token").value);
 
-    const result = await users.findOne({ email: tekenres.email });
+    const result = await users.findOne({ email: tokenres.email });
 
     if (result?.favourites.includes(productid)) {
       return true;
@@ -38,7 +38,7 @@ export async function likeproduct(productid, liked) {
         { new: true }
       );
 
-      if (result) return { message: "Removed to favourites" };
+      if (result) return { message: "Removed from favourites" };
     } else {
       // add to favourite
       const result = await users.findOneAndUpdate(

@@ -16,6 +16,7 @@ export async function Data() {
     cachedData = await sitedata.findOne({});
     lastFetchedTime = currentTime;
   }
+  delete cachedData._id;
 
   return cachedData;
 }

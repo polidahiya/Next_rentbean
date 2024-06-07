@@ -277,7 +277,7 @@ function Usermenu({ toggleusermenu, settoggleusermenu, location }) {
             href={`/${location}/likedproducts`}
             className="p-[5px] flex items-center gap-[10px] lg:hover:bg-slate-100 cursor-pointer"
           >
-            <Heart styles="h-[25px] fill-red-500" />
+            <Heart styles="h-[30px] w-[30px] fill-red-500 " />
             Liked Products
           </Link>
           <div className="w-full h-[1px] bg-slate-300"></div>
