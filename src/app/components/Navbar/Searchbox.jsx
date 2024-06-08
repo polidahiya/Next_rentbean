@@ -2,13 +2,17 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { AppContextfn } from "@/app/Context/Index";
 import Searchicon from "../(svgs)/Searchicon";
 import Searchsuggestionarrow from "../(svgs)/Searchsuggestionarrow";
 
 function Searchbox({ location }) {
   const router = useRouter();
+  const { togglemobilesearch, settogglemobilesearch, searchinputref } =
+    AppContextfn();
   const [search, setSearch] = useState("");
   const [showsuggestions, setshowsuggestions] = useState(false);
+
   const suggestionlist = [
     { name: "Table", link: "Table" },
     { name: "Laptop", link: "Laptop" },
@@ -19,12 +23,17 @@ function Searchbox({ location }) {
   ];
 
   return (
-    <div className="relative top-[15px] ">
+    <div
+      className={`absolute top-[60px] left-0 w-full  py-[5px] lg:py-0  lg:left-auto lg:w-auto lg:relative lg:top-[15px] 
+        lg:block
+    ${togglemobilesearch ? "block" : " hidden"}`}
+    >
       <div
-        className={`relative h-[30px] mx-[10px] flex items-center justify-center border border-slate-300 rounded-full overflow-hidden `}
+        className={`relative h-[30px] mx-[10px] flex items-center justify-center bg-white border border-slate-300 rounded-full overflow-hidden `}
       >
         <input
           type="text"
+          ref={searchinputref}
           className="h-full w-full indent-[20px] outline-none"
           placeholder="Search"
           value={search}
@@ -65,8 +74,8 @@ function Searchbox({ location }) {
                     ? ""
                     : "border-b border-b-slate-300"
                 }`}
-                onClick={()=>{
-                  setSearch(item.name)
+                onClick={() => {
+                  setSearch(item.name);
                 }}
                 key={i}
               >

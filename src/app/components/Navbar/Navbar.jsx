@@ -60,6 +60,7 @@ function Navbar({ data, location, token }) {
           location={location}
           toggleusermenu={toggleusermenu}
           settoggleusermenu={settoggleusermenu}
+          setredirectloginlink={setredirectloginlink}
           token={token}
         />
         <Fakenavbg />
@@ -264,7 +265,12 @@ function Usermenu({ toggleusermenu, settoggleusermenu, location }) {
       )}
       {/* menu */}
       {toggleusermenu && (
-        <div className="fadeup fixed lg:absolute bottom-[55px] right-[10px] lg:bottom-auto lg:top-[50px] lg:right-[40px] flex flex-col gap-[2px] w-[250px]  bg-white border border-slate-300 rounded-[10px] p-[10px] shadow-lg duration-300 ">
+        <div
+          className="fadeup fixed lg:absolute bottom-[55px] right-[10px] lg:bottom-auto lg:top-[50px] lg:right-[40px] flex flex-col gap-[2px] w-[250px]  bg-white border border-slate-300 rounded-[10px] p-[10px] shadow-lg duration-300 "
+          onClick={() => {
+            settoggleusermenu(!toggleusermenu);
+          }}
+        >
           <Link
             href={`/${location}/orderdetails`}
             className="p-[5px] flex items-center gap-[10px] lg:hover:bg-slate-100 cursor-pointer"
@@ -320,6 +326,13 @@ function Mobilenav({
   settoggleusermenu,
   token,
 }) {
+  const {
+    togglemobilesearch,
+    settogglemobilesearch,
+    setredirectloginlink,
+    searchinputref,
+  } = AppContextfn();
+
   return (
     <div className="flex lg:hidden  items-center justify-evenly fixed bottom-0 left-0 h-[50px] w-full border-t border-slate-300 bg-white z-[60]">
       <Link
@@ -332,7 +345,16 @@ function Mobilenav({
       >
         <Homesvg styles="h-[30px] fill-textcolor" />
       </Link>
-      <Mobilesearchsvg styles="h-[26px] stroke-textcolor" />
+      <button
+        onClick={() => {
+          settogglemobilesearch(!togglemobilesearch);
+          setTimeout(() => {
+            searchinputref.current.focus();
+          }, 200);
+        }}
+      >
+        <Mobilesearchsvg styles="h-[26px] stroke-textcolor" />
+      </button>
       <button
         onClick={() => {
           if (togglecategories) {
@@ -388,27 +410,3 @@ function Mobilenav({
   );
 }
 export default React.memo(Navbar);
-
-{
-  /* mobile menu button */
-}
-{
-  /* <svg
-          className="block h-[60px] p-[7px]  lg:hidden"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <g>
-            <g>
-              <path
-                stroke="var(--theme)"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5 17h8m-8-5h14m-8-5h8"
-              ></path>
-            </g>
-          </g>
-        </svg> */
-}

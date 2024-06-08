@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-
 import Imageloading from "../../components/Imageloading/Imageloading";
+
 function Loadingimage({ src,alt,objectfit }) {
   const [imgloading, setimgloading] = useState(true);
   return (

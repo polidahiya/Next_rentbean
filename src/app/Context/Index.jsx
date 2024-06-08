@@ -14,6 +14,8 @@ export function Appwrapper({ children }) {
     show: false,
     productid: null,
   });
+  const [togglemobilesearch, settogglemobilesearch] = useState(false);
+  const searchinputref = useRef();
 
   // admin contexts
   const [ordercomps, setordercomps] = useState(0);
@@ -33,6 +35,9 @@ export function Appwrapper({ children }) {
         settogglelocation,
         toggleorderplacedmenu,
         settoggleorderplacedmenu,
+        togglemobilesearch,
+        settogglemobilesearch,
+        searchinputref,
         notifictionarr,
         setnotifictionarr,
         cartprodremove,
