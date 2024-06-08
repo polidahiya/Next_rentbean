@@ -196,7 +196,7 @@ function Navbar({ data, location, token }) {
 function Navlist({ data, title, listitems, location, settogglecategories }) {
   return (
     <div
-      className="navlistcontainer lg:flex lg:items-center"
+      className="fadeup navlistcontainer lg:flex lg:items-center"
       onClick={() => {
         settogglecategories(false);
       }}
@@ -335,6 +335,7 @@ function Mobilenav({
 
   return (
     <div className="flex lg:hidden  items-center justify-evenly fixed bottom-0 left-0 h-[50px] w-full border-t border-slate-300 bg-white z-[60]">
+      {/* home */}
       <Link
         href={"/" + location}
         onClick={() => {
@@ -345,16 +346,24 @@ function Mobilenav({
       >
         <Homesvg styles="h-[30px] fill-textcolor" />
       </Link>
+
+      {/* search */}
       <button
         onClick={() => {
           settogglemobilesearch(!togglemobilesearch);
           setTimeout(() => {
             searchinputref.current.focus();
-          }, 200);
+          }, 300);
         }}
       >
-        <Mobilesearchsvg styles="h-[26px] stroke-textcolor" />
+        {togglemobilesearch ? (
+          <button className="text-[23px] font-semibold h-[26px] aspect-square">X</button>
+        ) : (
+          <Mobilesearchsvg styles="h-[26px] stroke-textcolor" />
+        )}
       </button>
+
+      {/* categories */}
       <button
         onClick={() => {
           if (togglecategories) {
@@ -371,6 +380,8 @@ function Mobilenav({
           }`}
         />
       </button>
+
+      {/* cart */}
       <Link
         href={"/" + location + "/cart"}
         className="relative"

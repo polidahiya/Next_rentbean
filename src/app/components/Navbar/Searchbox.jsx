@@ -24,10 +24,20 @@ function Searchbox({ location }) {
 
   return (
     <div
-      className={`absolute top-[60px] left-0 w-full  py-[5px] lg:py-0  lg:left-auto lg:w-auto lg:relative lg:top-[15px] 
-        lg:block
+      className={`absolute top-[60px] left-0 w-full  py-[5px] lg:py-0  lg:left-auto lg:w-auto lg:relative lg:top-[15px] lg:block
     ${togglemobilesearch ? "block" : " hidden"}`}
     >
+      {/* cancle button */}
+      {togglemobilesearch && (
+        <button
+          className="fixed lg:hidden top-0 left-0 h-screen w-screen"
+          onClick={() => {
+            settogglemobilesearch(!togglemobilesearch);
+          }}
+        ></button>
+      )}
+
+      {/*  */}
       <div
         className={`relative h-[30px] mx-[10px] flex items-center justify-center bg-white border border-slate-300 rounded-full overflow-hidden `}
       >
@@ -40,6 +50,7 @@ function Searchbox({ location }) {
           onChange={(e) => setSearch(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === "Enter" && search.trim() != "") {
+              settogglemobilesearch(!togglemobilesearch);
               router.push(`/${location}/search?q=${search}`);
             }
           }}
@@ -55,6 +66,7 @@ function Searchbox({ location }) {
         <button
           onClick={() => {
             if (search.trim() != "") {
+              settogglemobilesearch(!togglemobilesearch);
               router.push(`/${location}/search?q=${search}`);
             }
           }}
@@ -64,7 +76,7 @@ function Searchbox({ location }) {
         </button>
       </div>
       {showsuggestions && (
-        <div className="relative mx-[10px] bg-white flex flex-col gap-[5px] p-[5px] mt-[5px] border border-slate-300 rounded-[15px] shadow-md">
+        <div className="fadeup relative mx-[10px] bg-white flex flex-col gap-[5px] p-[5px] mt-[5px] border border-slate-300 rounded-[15px] shadow-md">
           {suggestionlist.map((item, i) => {
             return (
               <Link
@@ -75,6 +87,7 @@ function Searchbox({ location }) {
                     : "border-b border-b-slate-300"
                 }`}
                 onClick={() => {
+                  settogglemobilesearch(!togglemobilesearch);
                   setSearch(item.name);
                 }}
                 key={i}
