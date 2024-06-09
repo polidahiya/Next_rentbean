@@ -9,8 +9,12 @@ import Usersvg from "../../../components/(svgs)/Usersvg";
 function Userdetails({ location }) {
   const router = useRouter();
 
-  const { notifictionarr, setnotifictionarr, redirectloginlink } =
-    AppContextfn();
+  const {
+    notifictionarr,
+    setnotifictionarr,
+    redirectloginlink,
+  } = AppContextfn();
+  
   const [toggleform, settoggleform] = useState(false);
   const [togglepassword, settogglepassword] = useState(true);
   const nameref = useRef("");
@@ -34,6 +38,7 @@ function Userdetails({ location }) {
         return;
       }
     }
+
     if (passwordref.current.value.length < 8) {
       passwordref.current.focus();
       setnotifictionarr([
@@ -72,6 +77,12 @@ function Userdetails({ location }) {
         } else {
           router.push("/" + location);
         }
+        // setlogedinuserdata({
+        //   username: nameref.current.value,
+        //   email: emailref.current.value,
+        //   phonenum: phonenumref.current.value,
+        //   address: addressref.current.value,
+        // });
       }
     } else {
       // login
@@ -96,6 +107,7 @@ function Userdetails({ location }) {
         } else {
           router.push("/" + location);
         }
+        // setlogedinuserdata({ ...reply.userdata });
       }
     }
   };

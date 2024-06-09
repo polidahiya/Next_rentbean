@@ -17,9 +17,11 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   const location = cookies()?.get("Rentbeanloction")?.value || "Gurgaon";
   const token = cookies()?.get("token")?.value;
+  const userdata = cookies()?.get("userdata")?.value;
+  
   return (
     <>
-      <Navbar data={data.data} location={location} token={token} />
+      <Navbar data={data.data} location={location} token={token} userdata={userdata}/>
       <Location removable={true} location={location} />
       <Orderplacedmenu />
       <Notification />

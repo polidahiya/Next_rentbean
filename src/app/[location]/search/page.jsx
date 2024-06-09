@@ -61,12 +61,12 @@ async function page({ params, searchParams }) {
       className="w-full flex flex-col items-center"
       style={{ minHeight: "calc(100dvh - 60px)" }}
     >
-      <div className="px-[100px] py-[2px] text-theme font-recline text-[30px] mt-[10px]">
+      <div className="px-[100px] py-[2px] text-theme font-recline text-[30px] mt-[10px] whitespace-nowrap">
         {words}{" "}
         {allproducts.length != 0 && (
           <>
             -{" "}
-            <span className="text-cyan-500 text-[16px] font-recline">
+            <span className="text-cyan-500 text-[16px] font-recline translate-y-[-3px] inline-block">
               {" "}
               &#40;{allproducts.length} results found &#41;
             </span>

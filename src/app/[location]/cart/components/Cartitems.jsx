@@ -111,7 +111,7 @@ function Cartitems({ item, typeofprices }) {
             {typeofprices[item.pricetype - 1].time[item.time]}{" "}
             {typeofprices[item.pricetype - 1].fullsuffix[0]}
           </div>
-          {/* select location*/}
+          {/* select time*/}
           <Selecttime
             item={item}
             toggletime={toggletime}

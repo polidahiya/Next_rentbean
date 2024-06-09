@@ -1,62 +1,112 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { AppContextfn } from "@/app/Context/Index";
-import { getlikedproducts } from "./Serveractions";
-import { Data } from "@/components/Getdata";
-import { typeofprices } from "@/components/Commondata";
-import Loadingimage from "../[category]/Loadingimage";
-import { likeproduct } from "../[category]/[subcategory]/[product]/serveractions";
-import Heart from "@/app/components/(svgs)/Heart";
+import { getuserorders } from "./Serveractions";
 import Loading from "@/app/components/Imageloading/Imageloading";
+import Image from "next/image";
 
 function Publicpage({ location }) {
-  const [favourites, setfavourites] = useState(null);
+  //   const [orders, setorders] = useState(null);
+  const [orders, setorders] = useState([
+    {
+      name: "Motorized Treadmill SX-2211",
+      image: ["productimages/2211/img1.jpg"],
+      limit: 1,
+      available: 1,
+      prices: [2800, 8400, 14500],
+      pid: "treadmill2",
+      desc: [
+        "For dometic use only",
+        "Moterized treadmill with DC motor",
+        "Hp : 1.5",
+        "Weight Capacity : 110kg max",
+        "Digital Display with time, distance , speed ,calories meter",
+      ],
+      pricetype: 3,
+      refundableprice: 1500,
+      options: [
+        {
+          name: "Quantity",
+          defaultvalue: "1",
+          options: ["1"],
+        },
+      ],
+      metadesc: "",
+      keywords: "",
+      category: "Fitness and Gym",
+      subcat: "Treadmill",
+      _id: "66619595cc38766061300bfe",
+      time: 0,
+      Quantity: 0,
+      product: "treadmill2",
+      orderdate: "2024-06-06T10:55:17.488Z",
+      status: "order",
+      note: "",
+      verified: false,
+      email: "polidahiya830@gmail.com",
+    },
+    {
+      name: "L-Shape Lounger Upholstrey Sofa",
+      image: [
+        "productimages/sofalshape/img1.webp",
+        "productimages/sofalshape/img2.webp",
+      ],
+      limit: 1,
+      available: 1,
+      prices: [2200, 6600, 12800],
+      pid: "sofa5",
+      desc: [
+        "Material : Wooden Frame SleepWell Feather Foam",
+        "Premium Fabric",
+        "5 - Seater",
+        "L Shape",
+      ],
+      pricetype: 3,
+      refundableprice: 2000,
+      options: [
+        {
+          name: "Quantity",
+          defaultvalue: "1",
+          options: ["1"],
+        },
+      ],
+      metadesc: "",
+      keywords: "",
+      category: "Furniture",
+      subcat: "Sofa",
+      _id: "66619595cc38766061300bff",
+      time: 0,
+      Quantity: 0,
+      product: "sofa5",
+      orderdate: "2024-06-06T10:55:17.490Z",
+      status: "order",
+      note: "",
+      verified: false,
+      email: "polidahiya830@gmail.com",
+    },
+  ]);
 
-  useEffect(() => {
-    (async () => {
-      let res = await getlikedproducts();
+  //   useEffect(() => {
+  //     (async () => {
+  //       let res = await getuserorders();
 
-      if (res?.favourites) {
-        const data = await Data();
+  //       if (res?.orders) {
+  //         setorders(res?.orders);
+  //         console.log(res.orders);
+  //       }
+  //     })();
+  //   }, []);
 
-        let updatedfav = [];
-        res?.favourites.forEach((item) => {
-          Object.keys(data.data).forEach((i) => {
-            Object.keys(data.data[i].subcat).forEach((j) => {
-              data.data[i].subcat[j].products.forEach((k) => {
-                if (k.pid == item) {
-                  k.category = i;
-                  k.subcat = j;
-                  updatedfav.push(k);
-                  return;
-                }
-              });
-            });
-          });
-        });
-
-        setfavourites(updatedfav);
-      }
-    })();
-  }, []);
-
-  if (favourites) {
-    if (favourites.length > 0) {
+  if (orders) {
+    if (orders.length > 0) {
       return (
         <>
           <div className="text-[25px] font-semibold text-center font-recline mt-[80px]">
-            Favourites
+            Orders History
           </div>
-          <div className="flex items-center justify-center gap-[20px] flex-wrap px-[5px] md:px-[40px] my-[30px]">
-            {favourites.map((item, i) => {
-              return (
-                <Likeproducts
-                  key={i}
-                  item={item}
-                  location={location}
-                />
-              );
+          <div className="flex flex-col justify-center gap-[20px] px-[5px] md:px-[40px] my-[30px] lg:grid lg:grid-cols-2">
+            {orders.map((item, i) => {
+              return <Ordershistroy key={i} item={item} location={location} />;
             })}
           </div>
         </>
@@ -65,7 +115,7 @@ function Publicpage({ location }) {
       return (
         <div className="h-screen flex flex-col items-center ">
           <div className="text-[25px] font-semibold text-center font-recline mt-[50px]">
-            No Favourites Yet!
+            No orders Yet!
           </div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -106,10 +156,6 @@ function Publicpage({ location }) {
               ></path>
             </g>
           </svg>
-          <div className="text-[14px]  text-center max-w-[500px] p-[20px]">
-            You can add on items to you favourites by clicking on the &#39;heart
-            icon&#39;
-          </div>
         </div>
       );
     }
@@ -125,12 +171,9 @@ function Publicpage({ location }) {
   }
 }
 
-function Likeproducts({ item, location }) {
-  const { notifictionarr, setnotifictionarr } = AppContextfn();
-  const [liked, setliked] = useState(true);
-
-  if (liked) {
-    return (
+function Ordershistroy({ item, location }) {
+  return (
+    <div className="blackshadow1  p-[10px] rounded-[10px]">
       <Link
         href={
           "/" +
@@ -142,76 +185,60 @@ function Likeproducts({ item, location }) {
           "/" +
           item.pid
         }
-        className="productcards blackshadow1 relative lg:w-[250px] rounded-[20px] cursor-pointer p-[10px] flex flex-col gap-[10px] box-content lg:hover:translate-y-[-5px] duration-300 overflow-hidden"
+        className="relative flex h-[150px] lg:h-[200px] w-full overflow-hidden"
       >
-        <Loadingimage
+        <Image
           src={"/" + item.image[0]}
           alt={item.name}
-          objectfit="object-cover"
-        />
-        <div className="text-ellipsis text-center overflow-hidden whitespace-nowrap px-0[10px] ">
-          {item.name}
-        </div>
-        <div className=" h-[30px] min-w-[70%] w-[70%] mx-auto px-[10px] text-[14px] box-content bg-theme text-white whitespace-nowrap rounded-[10px] flex items-center justify-center">
-          Rent : ₹
-          {Math.floor(
-            item.prices[item.prices.length - 1] /
-              typeofprices[item.pricetype - 1].time[
-                typeofprices[item.pricetype - 1].time.length - 1
-              ]
-          )}
-          /{typeofprices[item.pricetype - 1].suffix}
-        </div>
-        <div className="absolute h-[2px] bg-theme w-[50%] rounded-full left-[50%] bottom-[4px] translate-x-[-50%]"></div>
+          height={100}
+          width={100}
+          className="h-[130px] min-w-[130px] lg:h-[180px] lg:min-w-[180px] aspect-square object-cover"
+        ></Image>
 
-        {/* if not available */}
-
-        {item.available == 0 && (
-          <div
-            className="absolute top-0 left-0 h-full w-full flex items-center justify-center text-white"
-            style={{
-              backgroundImage: "linear-gradient(180deg,grey , transparent)",
-            }}
-          >
-            Currently Unavailable
+        {/* descriptions */}
+        <div className="flex flex-col justify-between w-full h-full p-0 lg:p-[10px]">
+          <center>
+            <h2 className="w-full max-w-[200px] lg:max-w-[250px] text-center font-semibold text-[16px] lg:text-[18px] text-ellipsis whitespace-nowrap overflow-hidden font-recline">
+              {item.name}
+            </h2>
+          </center>
+          <div className="h-full w-full flex items-center">
+            <div className="text-[12px] lg:text-[14px] ml-[10px]">
+              Rent : ₹ {item.prices[item.time] * (item.Quantity + 1)}/-
+              <br />
+              Security Deposit : ₹ {item.refundableprice * (item.Quantity + 1)}
+              /- <span className="text-sky-500">(*Refundable)</span>
+              <br />
+              Total : ₹{" "}
+              {item.prices[item.time] * (item.Quantity + 1) +
+                item.refundableprice * (item.Quantity + 1)}
+              /- <span className="text-sky-500">(Rent + Security Deposit)</span>
+            </div>
           </div>
-        )}
-
-        {/* like button */}
-        <button
-          className="absolute right-[20px] top-[20px] bg-white border border-slate-300 rounded-full p-[1px] "
-          title="Remove from favourites"
-          onClick={async (e) => {
-            e.preventDefault();
-            let res = await likeproduct(item.pid, liked);
-            if (res) {
-              if (res.message == "Added to favourites") {
-                setliked(true);
-              }
-              if (res.message == "Removed from favourites") {
-                setliked(false);
-              }
-
-              setnotifictionarr([
-                ...notifictionarr,
-                {
-                  id: new Date() + new Date().getMilliseconds(),
-                  content: res.message,
-                },
-              ]);
-            }
-          }}
-        >
-          <Heart
-            styles={`h-[30px]  w-[30px] translate-y-[1px] ${
-              liked
-                ? "fill-red-500 stroke-none"
-                : "fill-white stroke-[5px] stroke-textcolor "
-            }`}
-          />
-        </button>
+        </div>
       </Link>
-    );
-  }
+      
+      {/*  */}
+      <div className=" w-full flex gap-[10px] ">
+        <div className="w-full flex flex-col items-center">
+          <div>Ordered</div>
+          <div className="h-[3px] w-full bg-slate-300 rounded-[2px]"></div>
+        </div>
+        <div className="w-full flex flex-col items-center">
+          <div>Ordered</div>
+          <div className="h-[3px] w-full bg-slate-300 rounded-[2px]"></div>
+        </div>
+        <div className="w-full flex flex-col items-center">
+          <div>Ordered</div>
+          <div className="h-[3px] w-full bg-slate-300 rounded-[2px]"></div>
+        </div>
+        <div className="w-full flex flex-col items-center">
+          <div>Ordered</div>
+          <div className="h-[3px] w-full bg-slate-300 rounded-[2px]"></div>
+        </div>
+      </div>
+    </div>
+  );
 }
+
 export default Publicpage;

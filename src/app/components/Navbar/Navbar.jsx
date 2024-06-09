@@ -3,20 +3,14 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Fakenavbg from "./Fakenavbarbg";
+import Categories from "./Categories";
+import Mobilenav from "./Mobilenav";
 import Searchbox from "./Searchbox";
+import Usermenu from "./Usermenu";
 import { AppContextfn } from "@/app/Context/Index";
-import { logout } from "../logoutaction";
-import Homesvg from "../(svgs)/Home";
-import Menusvg from "../(svgs)/Menu";
-import Cartsvg from "../(svgs)/Cartstroke";
-import Usersvg from "../(svgs)/Usersvg";
-import Navorders from "../(svgs)/Navorders";
-import Heart from "../(svgs)/Heart";
-import Logout from "../(svgs)/Logout";
-import Mobilesearchsvg from "../(svgs)/Mobilesearch";
-import Updateusersvg from "../(svgs)/Updateuser";
 
-function Navbar({ data, location, token }) {
+
+function Navbar({ data, location, token, userdata }) {
   const {
     cartproducts,
     togglelocation,
@@ -132,7 +126,7 @@ function Navbar({ data, location, token }) {
           {/* categories */}
           {Object.keys(data).map((title, i) => {
             return (
-              <Navlist
+              <Categories
                 key={i}
                 data={data}
                 title={title}
@@ -175,6 +169,7 @@ function Navbar({ data, location, token }) {
             toggleusermenu={toggleusermenu}
             settoggleusermenu={settoggleusermenu}
             location={location}
+            userdata={userdata}
           />
         ) : (
           <Link
@@ -193,231 +188,5 @@ function Navbar({ data, location, token }) {
   );
 }
 
-function Navlist({ data, title, listitems, location, settogglecategories }) {
-  return (
-    <div
-      className="fadeup navlistcontainer lg:flex lg:items-center"
-      onClick={() => {
-        settogglecategories(false);
-      }}
-    >
-      <Link
-        href={"/" + location + "/" + title.replace(/ /g, "_")}
-        className=" titles flex items-center justify-center h-[60px] text-[18px] lg:min-w-[150px] lg:h-[40px] lg:text-sm px-[10px] lg:justify-start font-bold"
-      >
-        {title} :
-      </Link>
-      <div className="flex gap-[10px] w-full px-[10px]  overflow-x-scroll lg:items-center lg:gap-[5px] lg:px-0 ">
-        {listitems.map((list, i) => {
-          return (
-            <Link
-              href={
-                "/" +
-                location +
-                "/" +
-                title.replace(/ /g, "_") +
-                "/" +
-                list.replace(/ /g, "_")
-              }
-              className=" min-w-fit  overflow-hidden text-sm flex px-[10px]  py-[5px] items-center justify-center whitespace-nowrap no-underline cursor-pointer lg:hover:text-theme lg:p-0"
-              key={i}
-            >
-              <div className="flex flex-col items-center justify-between lg:w-full  lg:flex-row lg:justify-start lg:gap-[10px] lg:border lg:border-slate-300 lg:rounded-[10px] lg:p-[5px] lg:pr-[20px]">
-                <Image
-                  src={"/" + data[title].subcat[list].image}
-                  alt={Object.keys(data[title].subcat)}
-                  width={30}
-                  height={30}
-                  className="block h-[50px] w-[50px] object-contain mix-blend-multiply lg:h-[40px] lg:w-[40px]"
-                ></Image>
-                <span>{list}</span>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
 
-function Usermenu({ toggleusermenu, settoggleusermenu, location }) {
-  const { notifictionarr, setnotifictionarr } = AppContextfn();
-
-  return (
-    <>
-      {/* usermenu svg */}
-      <button
-        className="relative top-[15px] hidden lg:flex h-[30px]  ml-[20px] z-20"
-        onClick={() => {
-          settoggleusermenu(!toggleusermenu);
-        }}
-      >
-        <Usersvg styles="h-[30px]  border border-slate-300 rounded-full cursor-pointer" />
-      </button>
-      {/* cancle button */}
-      {toggleusermenu && (
-        <button
-          className="fixed top-0 left-0 h-screen w-screen cursor-default"
-          onClick={() => {
-            settoggleusermenu(!toggleusermenu);
-          }}
-        ></button>
-      )}
-      {/* menu */}
-      {toggleusermenu && (
-        <div
-          className="fadeup fixed lg:absolute bottom-[55px] right-[10px] lg:bottom-auto lg:top-[50px] lg:right-[40px] flex flex-col gap-[2px] w-[250px]  bg-white border border-slate-300 rounded-[10px] p-[10px] shadow-lg duration-300 "
-          onClick={() => {
-            settoggleusermenu(!toggleusermenu);
-          }}
-        >
-          <Link
-            href={`/${location}/orderdetails`}
-            className="p-[5px] flex items-center gap-[10px] lg:hover:bg-slate-100 cursor-pointer"
-          >
-            <Navorders styles="h-[25px]" />
-            Orders Detail
-          </Link>
-          <div className="w-full h-[1px] bg-slate-300"></div>
-          <Link
-            href={`/${location}/likedproducts`}
-            className="p-[5px] flex items-center gap-[10px] lg:hover:bg-slate-100 cursor-pointer"
-          >
-            <Heart styles="h-[30px] w-[30px] fill-red-500 " />
-            Liked Products
-          </Link>
-          <div className="w-full h-[1px] bg-slate-300"></div>
-          <Link
-            href={`/${location}/updateuserdetails`}
-            className="p-[5px] flex items-center gap-[10px] lg:hover:bg-slate-100 cursor-pointer"
-          >
-            <Updateusersvg styles="h-[25px]" />
-            Update User Details
-          </Link>
-          <div className="w-full h-[1px] bg-slate-300"></div>
-          <div
-            className="p-[5px] flex items-center gap-[10px] lg:hover:bg-slate-100 cursor-pointer"
-            onClick={async () => {
-              let res = await logout();
-              setnotifictionarr([
-                ...notifictionarr,
-                {
-                  id: new Date() + new Date().getMilliseconds(),
-                  content: res?.message,
-                },
-              ]);
-            }}
-          >
-            <Logout styles="h-[25px]" />
-            Logout
-          </div>
-        </div>
-      )}
-    </>
-  );
-}
-
-function Mobilenav({
-  cartproducts,
-  togglecategories,
-  settogglecategories,
-  location,
-  toggleusermenu,
-  settoggleusermenu,
-  token,
-}) {
-  const {
-    togglemobilesearch,
-    settogglemobilesearch,
-    setredirectloginlink,
-    searchinputref,
-  } = AppContextfn();
-
-  return (
-    <div className="flex lg:hidden  items-center justify-evenly fixed bottom-0 left-0 h-[50px] w-full border-t border-slate-300 bg-white z-[60]">
-      {/* home */}
-      <Link
-        href={"/" + location}
-        onClick={() => {
-          if (togglecategories) {
-            settogglecategories(false);
-          }
-        }}
-      >
-        <Homesvg styles="h-[30px] fill-textcolor" />
-      </Link>
-
-      {/* search */}
-      <button
-        onClick={() => {
-          settogglemobilesearch(!togglemobilesearch);
-          setTimeout(() => {
-            searchinputref.current.focus();
-          }, 300);
-        }}
-      >
-        {togglemobilesearch ? (
-          <button className="text-[23px] font-semibold h-[26px] aspect-square">X</button>
-        ) : (
-          <Mobilesearchsvg styles="h-[26px] stroke-textcolor" />
-        )}
-      </button>
-
-      {/* categories */}
-      <button
-        onClick={() => {
-          if (togglecategories) {
-            window.history.back();
-          } else {
-            history.pushState(null, "", "");
-            settogglecategories(true);
-          }
-        }}
-      >
-        <Menusvg
-          styles={`h-[30px] ${
-            togglecategories ? "stroke-cyan-500" : "stroke-textcolor"
-          }`}
-        />
-      </button>
-
-      {/* cart */}
-      <Link
-        href={"/" + location + "/cart"}
-        className="relative"
-        onClick={() => {
-          if (togglecategories) {
-            settogglecategories(false);
-          }
-        }}
-      >
-        <Cartsvg styles="h-[30px] fill-none stroke-textcolor" />
-        <div className="cartcounter absolute rounded-full right-0 top-0 h-[18px] w-[18px] translate-x-[40%] translate-y-[-40%] flex items-center justify-center bg-theme text-white text-[10px] box-content">
-          {Object.keys(cartproducts).length}
-        </div>
-      </Link>
-      {/* usermenu svg */}
-      {token ? (
-        <button
-          className="h-[30px]"
-          onClick={() => {
-            settoggleusermenu(!toggleusermenu);
-          }}
-        >
-          <Usersvg styles="h-[30px]  border-[2px] border-slate-300 rounded-full cursor-pointer" />
-        </button>
-      ) : (
-        <Link
-          href={`/${location}/loginlogout`}
-          onClick={() => {
-            const link = new URL(window.location.href);
-            setredirectloginlink(link.pathname);
-          }}
-        >
-          <Usersvg styles="h-[30px]  border-[2px] border-slate-300 rounded-full cursor-pointer" />
-        </Link>
-      )}
-    </div>
-  );
-}
 export default React.memo(Navbar);

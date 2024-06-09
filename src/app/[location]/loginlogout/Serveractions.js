@@ -3,6 +3,8 @@ import { users } from "@/components/mongodb";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 
+const logintime = [3600 * 24 * 2, "48h"];
+
 export const login = async (userdata) => {
   try {
     const user = await users.findOne({ email: userdata.email });
@@ -11,8 +13,18 @@ export const login = async (userdata) => {
     }
 
     if (user.password == userdata.password) {
-      addtoken({ email: userdata.email, password: userdata.password });
-      return { message: "Login successfull" };
+      addtoken(
+        { email: userdata.email },
+        {
+          username: user.username,
+          email: user.email,
+          phonenum: user.phonenum,
+          address: user.address,
+        }
+      );
+      return {
+        message: "Login successfull",
+      };
     } else {
       return { message: "Wrong password" };
     }
@@ -32,7 +44,15 @@ export const signup = async (userdata) => {
 
     const inserteduser = await users.insertOne(userdata);
 
-    addtoken({ email: userdata.email});
+    addtoken(
+      { email: userdata.email },
+      {
+        username: userdata.username,
+        email: userdata.email,
+        phonenum: userdata.phonenum,
+        address: userdata.address,
+      }
+    );
 
     if (inserteduser) return { message: "Signup successfully" };
   } catch (error) {
@@ -41,14 +61,17 @@ export const signup = async (userdata) => {
   }
 };
 
-function addtoken(data) {
+function addtoken(data,userdata) {
   const token = jwt.sign(data, "this-world-is-toxic", {
-    expiresIn: "48h",
+    expiresIn: logintime[1],
   });
 
   cookies().set("token", token, {
-    maxAge: 3600 * 24 * 2,
+    maxAge: logintime[0],
     httpOnly: true,
     secure: true,
+  });
+  cookies().set("userdata", JSON.stringify(userdata), {
+    maxAge: logintime[0],
   });
 }

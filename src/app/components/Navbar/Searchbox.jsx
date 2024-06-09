@@ -39,7 +39,7 @@ function Searchbox({ location }) {
 
       {/*  */}
       <div
-        className={`relative h-[30px] mx-[10px] flex items-center justify-center bg-white border border-slate-300 rounded-full overflow-hidden `}
+        className={`relative h-[40px] lg:h-[30px] mx-[10px] flex items-center justify-center bg-white border border-slate-300 rounded-full overflow-hidden `}
       >
         <input
           type="text"
@@ -70,7 +70,7 @@ function Searchbox({ location }) {
               router.push(`/${location}/search?q=${search}`);
             }
           }}
-          className="h-full px-[15px] border-l border-l-slate-300"
+          className="h-full px-[20px] lg:px-[15px] border-l border-l-slate-300"
         >
           <Searchicon styles="h-[20px]" />
         </button>
