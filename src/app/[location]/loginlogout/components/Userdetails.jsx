@@ -77,12 +77,6 @@ function Userdetails({ location }) {
         } else {
           router.push("/" + location);
         }
-        // setlogedinuserdata({
-        //   username: nameref.current.value,
-        //   email: emailref.current.value,
-        //   phonenum: phonenumref.current.value,
-        //   address: addressref.current.value,
-        // });
       }
     } else {
       // login
@@ -107,7 +101,6 @@ function Userdetails({ location }) {
         } else {
           router.push("/" + location);
         }
-        // setlogedinuserdata({ ...reply.userdata });
       }
     }
   };

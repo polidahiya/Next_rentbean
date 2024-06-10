@@ -42,7 +42,6 @@ export async function getuserorders() {
           });
         });
       });
-      console.log(allorders);
       return { orders: allorders };
     } else {
       return { message: "No Orders Yet!" };

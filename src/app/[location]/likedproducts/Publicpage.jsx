@@ -9,8 +9,11 @@ import Loadingimage from "../[category]/Loadingimage";
 import { likeproduct } from "../[category]/[subcategory]/[product]/serveractions";
 import Heart from "@/app/components/(svgs)/Heart";
 import Loading from "@/app/components/Imageloading/Imageloading";
+import { useRouter } from "next/navigation";
 
 function Publicpage({ location }) {
+  const router = useRouter();
+  const { notifictionarr, setnotifictionarr } = AppContextfn();
   const [favourites, setfavourites] = useState(null);
 
   useEffect(() => {
@@ -38,6 +41,25 @@ function Publicpage({ location }) {
 
         setfavourites(updatedfav);
       }
+      // if no logedin
+      if (res.message) {
+        if (res.message == "Please login") {
+          router.push("/" + location);
+        }
+        if (res.message == "No favourites yet!") {
+          setfavourites(null);
+        }
+        if (res.message == "Server error") {
+          router.push("/" + location);
+        }
+        setnotifictionarr([
+          ...notifictionarr,
+          {
+            id: new Date() + new Date().getMilliseconds(),
+            content: res.message,
+          },
+        ]);
+      }
     })();
   }, []);
 
@@ -50,13 +72,7 @@ function Publicpage({ location }) {
           </div>
           <div className="flex items-center justify-center gap-[20px] flex-wrap px-[5px] md:px-[40px] my-[30px]">
             {favourites.map((item, i) => {
-              return (
-                <Likeproducts
-                  key={i}
-                  item={item}
-                  location={location}
-                />
-              );
+              return <Likeproducts key={i} item={item} location={location} />;
             })}
           </div>
         </>

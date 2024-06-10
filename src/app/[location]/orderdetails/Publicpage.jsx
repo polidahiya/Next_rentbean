@@ -4,98 +4,44 @@ import Link from "next/link";
 import { getuserorders } from "./Serveractions";
 import Loading from "@/app/components/Imageloading/Imageloading";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { typeofprices } from "@/components/Commondata";
+import { AppContextfn } from "@/app/Context/Index";
 
 function Publicpage({ location }) {
-  //   const [orders, setorders] = useState(null);
-  const [orders, setorders] = useState([
-    {
-      name: "Motorized Treadmill SX-2211",
-      image: ["productimages/2211/img1.jpg"],
-      limit: 1,
-      available: 1,
-      prices: [2800, 8400, 14500],
-      pid: "treadmill2",
-      desc: [
-        "For dometic use only",
-        "Moterized treadmill with DC motor",
-        "Hp : 1.5",
-        "Weight Capacity : 110kg max",
-        "Digital Display with time, distance , speed ,calories meter",
-      ],
-      pricetype: 3,
-      refundableprice: 1500,
-      options: [
-        {
-          name: "Quantity",
-          defaultvalue: "1",
-          options: ["1"],
-        },
-      ],
-      metadesc: "",
-      keywords: "",
-      category: "Fitness and Gym",
-      subcat: "Treadmill",
-      _id: "66619595cc38766061300bfe",
-      time: 0,
-      Quantity: 0,
-      product: "treadmill2",
-      orderdate: "2024-06-06T10:55:17.488Z",
-      status: "order",
-      note: "",
-      verified: false,
-      email: "polidahiya830@gmail.com",
-    },
-    {
-      name: "L-Shape Lounger Upholstrey Sofa",
-      image: [
-        "productimages/sofalshape/img1.webp",
-        "productimages/sofalshape/img2.webp",
-      ],
-      limit: 1,
-      available: 1,
-      prices: [2200, 6600, 12800],
-      pid: "sofa5",
-      desc: [
-        "Material : Wooden Frame SleepWell Feather Foam",
-        "Premium Fabric",
-        "5 - Seater",
-        "L Shape",
-      ],
-      pricetype: 3,
-      refundableprice: 2000,
-      options: [
-        {
-          name: "Quantity",
-          defaultvalue: "1",
-          options: ["1"],
-        },
-      ],
-      metadesc: "",
-      keywords: "",
-      category: "Furniture",
-      subcat: "Sofa",
-      _id: "66619595cc38766061300bff",
-      time: 0,
-      Quantity: 0,
-      product: "sofa5",
-      orderdate: "2024-06-06T10:55:17.490Z",
-      status: "order",
-      note: "",
-      verified: false,
-      email: "polidahiya830@gmail.com",
-    },
-  ]);
+  const router = useRouter();
+  const { notifictionarr, setnotifictionarr } = AppContextfn();
+  const [orders, setorders] = useState(null);
 
-  //   useEffect(() => {
-  //     (async () => {
-  //       let res = await getuserorders();
+  useEffect(() => {
+    (async () => {
+      let res = await getuserorders();
 
-  //       if (res?.orders) {
-  //         setorders(res?.orders);
-  //         console.log(res.orders);
-  //       }
-  //     })();
-  //   }, []);
+      if (res?.orders) {
+        setorders(res?.orders);
+      }
+      // if not logedin
+      if (res.message) {
+        if (res.message == "Please login") {
+          router.push("/" + location);
+        }
+        if (res.message == "No Orders Yet!") {
+          setorders(null);
+        }
+        if (res.message == "Server error") {
+          router.push("/" + location);
+        }
+
+        setnotifictionarr([
+          ...notifictionarr,
+          {
+            id: new Date() + new Date().getMilliseconds(),
+            content: res.message,
+          },
+        ]);
+      }
+    })();
+  }, []);
 
   if (orders) {
     if (orders.length > 0) {
@@ -106,7 +52,7 @@ function Publicpage({ location }) {
           </div>
           <div className="flex flex-col justify-center gap-[20px] px-[5px] md:px-[40px] my-[30px] lg:grid lg:grid-cols-2">
             {orders.map((item, i) => {
-              return <Ordershistroy key={i} item={item} location={location} />;
+              return <Orders key={i} item={item} location={location} />;
             })}
           </div>
         </>
@@ -171,9 +117,9 @@ function Publicpage({ location }) {
   }
 }
 
-function Ordershistroy({ item, location }) {
+function Orders({ item, location }) {
   return (
-    <div className="blackshadow1  p-[10px] rounded-[10px]">
+    <div className={`blackshadow1 p-[10px] rounded-[10px] duration-300`}>
       <Link
         href={
           "/" +
@@ -202,8 +148,8 @@ function Ordershistroy({ item, location }) {
               {item.name}
             </h2>
           </center>
-          <div className="h-full w-full flex items-center">
-            <div className="text-[12px] lg:text-[14px] ml-[10px]">
+          <div className="h-full w-full flex flex-col ml-[10px] justify-center text-[12px] lg:text-[14px] ">
+            <div>
               Rent : ₹ {item.prices[item.time] * (item.Quantity + 1)}/-
               <br />
               Security Deposit : ₹ {item.refundableprice * (item.Quantity + 1)}
@@ -214,27 +160,50 @@ function Ordershistroy({ item, location }) {
                 item.refundableprice * (item.Quantity + 1)}
               /- <span className="text-sky-500">(Rent + Security Deposit)</span>
             </div>
+            <div>Quantity : {item.Quantity + 1}</div>
+            <div>
+              Tenure : {typeofprices[item.pricetype - 1].time[item.time]}{" "}
+              {typeofprices[item.pricetype - 1].fullsuffix[0]}
+            </div>
           </div>
         </div>
       </Link>
-      
+
       {/*  */}
-      <div className=" w-full flex gap-[10px] ">
+      <div className=" w-full flex gap-[10px] text-[10px]">
         <div className="w-full flex flex-col items-center">
-          <div>Ordered</div>
-          <div className="h-[3px] w-full bg-slate-300 rounded-[2px]"></div>
+          <div>Order placed</div>
+          <div className="h-[3px] w-full bg-theme rounded-[2px]"></div>
         </div>
         <div className="w-full flex flex-col items-center">
-          <div>Ordered</div>
-          <div className="h-[3px] w-full bg-slate-300 rounded-[2px]"></div>
+          <div>Order varified</div>
+          <div
+            className={`h-[3px] w-full rounded-[2px] ${
+              item.status == "Order varified" ||
+              item.status == "Delivery scheduled" ||
+              item.status == "Delivered"
+                ? "bg-theme"
+                : "bg-slate-300 "
+            }`}
+          ></div>
         </div>
         <div className="w-full flex flex-col items-center">
-          <div>Ordered</div>
-          <div className="h-[3px] w-full bg-slate-300 rounded-[2px]"></div>
+          <div>Delivery scheduled</div>
+          <div
+            className={`h-[3px] w-full rounded-[2px] ${
+              item.status == "Delivery scheduled" || item.status == "Delivered"
+                ? "bg-theme"
+                : "bg-slate-300 "
+            }`}
+          ></div>
         </div>
         <div className="w-full flex flex-col items-center">
-          <div>Ordered</div>
-          <div className="h-[3px] w-full bg-slate-300 rounded-[2px]"></div>
+          <div>Delivered</div>
+          <div
+            className={`h-[3px] w-full rounded-[2px] ${
+              item.status == "Delivered" ? "bg-theme" : "bg-slate-300 "
+            }`}
+          ></div>
         </div>
       </div>
     </div>

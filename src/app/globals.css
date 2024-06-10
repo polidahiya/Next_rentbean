@@ -82,7 +82,7 @@ body {
 
 .sidebar {
   -webkit-animation: showcategories 0.5s forwards;
-          animation: showcategories 0.5s forwards;
+  animation: showcategories 0.5s forwards;
 }
 @-webkit-keyframes showcategories {
   0% {
@@ -356,25 +356,25 @@ input[type="range"]::-webkit-slider-runnable-track {
 /* fadeup */
 .fadeup {
   -webkit-animation: fadeup 0.3s forwards;
-          animation: fadeup 0.3s forwards;
+  animation: fadeup 0.3s forwards;
 }
 @-webkit-keyframes fadeup {
   0% {
-    translate:0 10px;
+    translate: 0 10px;
     opacity: 0.5;
   }
   100% {
-    translate:0 0px;
+    translate: 0 0px;
     opacity: 1;
   }
 }
 @keyframes fadeup {
   0% {
-    translate:0 10px;
+    translate: 0 10px;
     opacity: 0.5;
   }
   100% {
-    translate:0 0px;
+    translate: 0 0px;
     opacity: 1;
   }
 }
