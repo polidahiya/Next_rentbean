@@ -9,12 +9,19 @@ import Usersvg from "../../../components/(svgs)/Usersvg";
 function Userdetails({ location }) {
   const router = useRouter();
 
-  const {
-    notifictionarr,
-    setnotifictionarr,
-    redirectloginlink,
-  } = AppContextfn();
-  
+  const { notifictionarr, setnotifictionarr, redirectloginlink } =
+    AppContextfn();
+
+  const shownotification = (value) => {
+    setnotifictionarr([
+      ...notifictionarr,
+      {
+        id: new Date() + new Date().getMilliseconds(),
+        content: value,
+      },
+    ]);
+  };
+
   const [toggleform, settoggleform] = useState(false);
   const [togglepassword, settogglepassword] = useState(true);
   const nameref = useRef("");
@@ -23,31 +30,73 @@ function Userdetails({ location }) {
   const phonenumref = useRef("");
   const addressref = useRef("");
 
-  const authenticateuser = async () => {
+  const fieldcheck = () => {
+    // if fields are empty
     const refarray = [nameref, emailref, passwordref, phonenumref, addressref];
     for (let i = 0; i < refarray.length; i++) {
       if (refarray[i]?.current?.value == "") {
         refarray[i]?.current?.focus();
-        setnotifictionarr([
-          ...notifictionarr,
-          {
-            id: new Date() + new Date().getMilliseconds(),
-            content: "Please fill this field",
-          },
-        ]);
-        return;
+        shownotification("Please fill this field");
+        return false;
+      }
+    }
+    // name check
+    if (toggleform) {
+      if (nameref.current.value.length < 3) {
+        nameref.current.focus();
+        shownotification("Name is too short");
+        return false;
+      }
+      if (nameref.current.value.length > 50) {
+        nameref.current.focus();
+        shownotification("Name is too big");
+        return false;
       }
     }
 
-    if (passwordref.current.value.length < 8) {
+    // email check
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailref.current.value)) {
+      emailref.current.focus();
+      shownotification("Invalid email");
+      return false;
+    }
+
+    // mobile check
+    if (toggleform) {
+      const mobileregex = /^\d{10}$/;
+      if (!mobileregex.test(phonenumref.current.value)) {
+        emailref.current.focus();
+        shownotification("Invalid mobile number");
+        return false;
+      }
+    }
+
+    // password check
+    const minLength = 8;
+    const maxLength = 100;
+
+    if (passwordref.current.value.length < minLength) {
       passwordref.current.focus();
-      setnotifictionarr([
-        ...notifictionarr,
-        {
-          id: new Date() + new Date().getMilliseconds(),
-          content: "Password is too short ( 8 chars min )*",
-        },
-      ]);
+      shownotification(
+        "Password is too short ( " + minLength + " chars min )*"
+      );
+      return false;
+    }
+
+    if (passwordref.current.value.length > maxLength) {
+      passwordref.current.focus();
+      shownotification("Password is too big ( " + maxLength + " chars min )*");
+      return false;
+    }
+
+    // pass test
+    return true;
+  };
+
+  const authenticateuser = async () => {
+    const filedcheckvalue = fieldcheck();
+    if (!filedcheckvalue) {
       return;
     }
     // send data
