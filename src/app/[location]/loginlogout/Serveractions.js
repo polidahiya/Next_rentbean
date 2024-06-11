@@ -2,8 +2,9 @@
 import { users } from "@/components/mongodb";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import {logintime} from "../../../components/Commondata"
 
-const logintime = [3600 * 24 * 2, "48h"];
 
 export const login = async (userdata) => {
   try {
@@ -12,7 +13,10 @@ export const login = async (userdata) => {
       return { message: "User not found" };
     }
 
-    if (user.password == userdata.password) {
+    // check salted password
+    const match = await bcrypt.compare(userdata.password, user.password);
+
+    if (match) {
       addtoken(
         { email: userdata.email },
         {
@@ -42,6 +46,9 @@ export const signup = async (userdata) => {
     const checkmobile = await users.findOne({ email: userdata.email });
     if (checkmobile) return { message: "Mobile number already registered" };
 
+    // hash password
+    userdata.password = await bcrypt.hash(userdata.password, 12);
+
     const inserteduser = await users.insertOne(userdata);
 
     addtoken(
@@ -61,7 +68,7 @@ export const signup = async (userdata) => {
   }
 };
 
-function addtoken(data,userdata) {
+function addtoken(data, userdata) {
   const token = jwt.sign(data, "this-world-is-toxic", {
     expiresIn: logintime[1],
   });

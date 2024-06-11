@@ -11,7 +11,7 @@ export default async function verifyToken(token) {
       if (err) {
         resolve({ message: "Invalid token" });
       } else {
-        resolve({ message: "Token verified", email: decoded.email });
+        resolve({ message: "Token verified", email: decoded?.email });
       }
     });
   });

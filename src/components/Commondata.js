@@ -44,3 +44,6 @@ export const typeofprices = {
     name: "Daily Rent",
   }, //upto week
 };
+
+// login time
+export const logintime = [3600 * 24 * 2, "48h"];

@@ -1,19 +1,68 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
+import Image from "next/image";
+import { AppContextfn } from "@/app/Context/Index";
 import { updateuserdetails } from "./Serveractions";
+import Updateusersvg from "../../components/(svgs)/Updateuser";
 
-function Form() {
+function Form({ userdata }) {
+  const { notifictionarr, setnotifictionarr } = AppContextfn();
+
   const nameref = useRef("");
   const phonenumref = useRef("");
   const addressref = useRef("");
 
+  useEffect(() => {
+    nameref.current.value = userdata.username;
+    phonenumref.current.value = userdata.phonenum;
+    addressref.current.value = userdata.address;
+  }, []);
+
   const updateuserfn = async () => {
-    const res = await updateuserdetails();
+    const refarray = [nameref, phonenumref, addressref];
+    for (let i = 0; i < refarray.length; i++) {
+      if (refarray[i]?.current?.value == "") {
+        refarray[i]?.current?.focus();
+        setnotifictionarr([
+          ...notifictionarr,
+          {
+            id: new Date() + new Date().getMilliseconds(),
+            content: "Please fill this field",
+          },
+        ]);
+        return;
+      }
+    }
+
+    const userdetails = {
+      username: nameref.current.value,
+      phonenum: phonenumref.current.value,
+      address: addressref.current.value,
+    };
+
+    const res = await updateuserdetails(userdetails);
+    if (res.message) {
+      setnotifictionarr([
+        ...notifictionarr,
+        {
+          id: new Date() + new Date().getMilliseconds(),
+          content: res.message,
+        },
+      ]);
+    }
   };
 
   return (
-    <div className="blackshadow1 w-full md:w-[700px] bg-white p-[10px] py-[30px] md:p-[30px] rounded-[20px]">
-      <div className="text-[25px] font-semibold text-center font-recline ">
+    <div className="blackshadow1 w-full md:w-[700px] bg-white p-[30px] rounded-[20px]">
+      <Image
+        src="/logo&ui/minlogo.png"
+        alt="rentbean.in logo image"
+        className=" top-[20px] left-[30px] h-[50px] w-[50px]"
+        width={156}
+        height={60}
+      ></Image>
+      <div className="flex items-center justify-center gap-[10px] text-[25px] font-semibold  font-recline ">
+        <Updateusersvg styles="h-[30px] translate-y-[-3px]" />
         Update Details
       </div>
       <div className="mt-[20px] lg:grid lg:grid-cols-2 lg:gap-x-[30px] ">
