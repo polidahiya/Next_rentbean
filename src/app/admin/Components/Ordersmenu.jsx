@@ -1,51 +1,25 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Orderscomp from "../Components/Orders";
-import { AppContextfn } from "../../Context/Index";
 import Imageloading from "@/app/components/Imageloading/Imageloading";
 import { getallorders } from "../loginandordersaction";
+import { AppContextfn } from "@/app/Context/Index";
 
-function Ordersmenu() {
-  const { ordercomps, setordercomps, ordercompsref, refresh } = AppContextfn();
+function Ordersmenu({ ordershowtype }) {
+  const { refresh } = AppContextfn();
   const [allorders, setallorders] = useState(null);
-  const [runningorders, setrunningorders] = useState(null);
-  const [completedorders, setcompletedorders] = useState(null);
 
   useEffect(() => {
-    if (ordercomps == 0) {
-      (async () => {
-        setallorders(await getallorders({ status: "order" }))
-      })();
-    }
-    
-    if (ordercomps == 1) {
-      (async () => {
-        setrunningorders(await getallorders({ status: "running" }))
-      })();
-    }
-    
-    if (ordercomps == 2) {
-      (async () => {
-        setcompletedorders(await getallorders({ status: "completed" }))
-      })();
-    }
-  }, [ordercomps, refresh]);
+    setallorders(null);
+    (async () => {
+      setallorders(await getallorders({ status: ordershowtype }));
+    })();
+  }, [ordershowtype, refresh]);
 
   return (
-    <div
-      className="flex items-start  min-w-full overflow-x-scroll snap-x snap-mandatory snap-always scroll-smooth"
-      ref={ordercompsref}
-      onScroll={(e) => {
-        setordercomps(
-          Math.floor(
-            (e.target.scrollLeft + e.target.clientWidth / 2) /
-              e.target.clientWidth
-          )
-        );
-      }}
-    >
+    <div className="flex items-start ">
       <div
-        className=" min-w-full  snap-start px-[10px] md:px-[40px] py-[20px] overflow-y-scroll "
+        className="w-full  px-[10px] md:px-[40px] py-[20px] overflow-y-scroll "
         style={{ height: "calc(100dvh - 60px)" }}
       >
         {allorders ? (
@@ -53,34 +27,6 @@ function Ordersmenu() {
             <Noitems />
           ) : (
             allorders?.map((item, i) => <Orderscomp key={i} item={item} />)
-          )
-        ) : (
-          <Loading />
-        )}
-      </div>
-      <div
-        className=" min-w-full  snap-start px-[10px] md:px-[40px] py-[20px] overflow-y-scroll "
-        style={{ height: "calc(100dvh - 60px)" }}
-      >
-        {runningorders ? (
-          runningorders?.length == 0 ? (
-            <Noitems />
-          ) : (
-            runningorders?.map((item, i) => <Orderscomp key={i} item={item} />)
-          )
-        ) : (
-          <Loading />
-        )}
-      </div>
-      <div
-        className=" min-w-full  snap-start px-[10px] md:px-[40px] py-[20px] overflow-y-scroll "
-        style={{ height: "calc(100dvh - 60px)" }}
-      >
-       {completedorders ? (
-          completedorders?.length == 0 ? (
-            <Noitems />
-          ) : (
-            completedorders?.map((item, i) => <Orderscomp key={i} item={item} />)
           )
         ) : (
           <Loading />

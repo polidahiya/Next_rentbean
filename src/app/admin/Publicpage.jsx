@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Components/Navbar";
 import Ordersmenu from "./Components/Ordersmenu";
 import Loginpage from "./Components/Loginpage";
@@ -10,27 +10,27 @@ function Publicpage() {
   const { showlogin, setshowlogin, notifictionarr, setnotifictionarr } =
     AppContextfn();
 
+  const [ordershowtype, setordershowtype] = useState("0");
+
+  const shownotification = (value) => {
+    setnotifictionarr([
+      ...notifictionarr,
+      {
+        id: new Date() + new Date().getMilliseconds(),
+        content: value || "Unknown error",
+      },
+    ]);
+  };
+
   useEffect(() => {
     (async () => {
       let res = await autologin();
-      
+
       if (res.message == "Login successfull") {
         setshowlogin(false);
-        setnotifictionarr([
-          ...notifictionarr,
-          {
-            id: new Date() + new Date().getMilliseconds(),
-            content: res.message,
-          },
-        ]);
+        shownotification(res.message);
       } else {
-        setnotifictionarr([
-          ...notifictionarr,
-          {
-            id: new Date() + new Date().getMilliseconds(),
-            content: res?.message || "Unknown error",
-          },
-        ]);
+        shownotification(res.message);
       }
     })();
   }, []);
@@ -41,8 +41,13 @@ function Publicpage() {
         <Loginpage />
       ) : (
         <div className="bg-bg1">
-          <Navbar />
-          <Ordersmenu />
+          <Navbar
+            ordershowtype={ordershowtype}
+            setordershowtype={setordershowtype}
+          />
+          <Ordersmenu
+            ordershowtype={ordershowtype}
+          />
         </div>
       )}
     </>

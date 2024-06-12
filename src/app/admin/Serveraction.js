@@ -1,46 +1,23 @@
 "use server";
 import { orders, ObjectId } from "@/components/mongodb";
 
-// set verified
-export const setverifiedorder = async (documentId) => {
-  const filter = { _id: new ObjectId(documentId) };
-  const data = await orders.findOne(filter);
-  if (data.verified) {
-    await orders.updateOne(filter, {
-      $set: {
-        verified: false,
-      },
-    });
-  } else {
-    await orders.updateOne(filter, {
-      $set: {
-        verified: true,
-      },
-    });
-  }
-};
-
 // add to running orders
 export const changestatus = async (documentId, status) => {
   const filter = { _id: new ObjectId(documentId) };
 
   await orders.updateOne(filter, { $set: { status: status } });
-  if (status == "running") {
-    await orders.updateOne(filter, { $set: { orderstartdate: new Date() } });
+  if (status == "3") {
+    await orders.updateOne(filter, { $set: { delivered_date: new Date() } });
   }
-
-  
+  return { message: "Status Updated" };
 };
 
 // delete orders function
 export const deleteorder = async (documentId) => {
   const filter = { _id: new ObjectId(documentId) };
-  await orders.deleteOne(filter, (deleteErr, result) => {
-    if (deleteErr) {
-      console.error("Failed to delete document:", deleteErr);
-    }
-  });
-  
+
+  await orders.deleteOne(filter);
+  return { message: "Order deleted" };
 };
 
 // update note

@@ -21,9 +21,8 @@ async function placeorder(data) {
       delete data.products[item].link;
       data.products[item].product=item
       data.products[item].orderdate = new Date();
-      data.products[item].status = "order"; //order,verified,finished
+      data.products[item].status = "0"; //order,verified,finished
       data.products[item].note = "";
-      data.products[item].verified = false;
       data.products[item].email = tokendata.email;
 
       await orders.insertOne(data.products[item]);

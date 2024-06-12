@@ -18,11 +18,9 @@ export function Appwrapper({ children }) {
   const searchinputref = useRef();
 
   // admin contexts
-  const [ordercomps, setordercomps] = useState(0);
-  const ordercompsref = useRef();
   const [invoicedata, setinvoicedata] = useState({});
   const [showlogin, setshowlogin] = useState(true);
-  const [refresh, refreshfn] = useState(0);
+  const [refresh, setrefresh] = useState(0);
 
   return (
     <AppContext.Provider
@@ -42,15 +40,12 @@ export function Appwrapper({ children }) {
         setnotifictionarr,
         cartprodremove,
         setcartprodremove,
-        ordercomps,
-        setordercomps,
-        ordercompsref,
         invoicedata,
         setinvoicedata,
         showlogin,
         setshowlogin,
         refresh,
-        refreshfn,
+        setrefresh,
       }}
     >
       {children}

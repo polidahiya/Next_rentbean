@@ -10,7 +10,6 @@ function Loginpage() {
   const passwordinput = useRef();
 
   const loginfn = () => {
-    //
     (async () => {
       if (password == "") {
         setnotifictionarr([

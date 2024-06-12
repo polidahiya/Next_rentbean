@@ -3,18 +3,26 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AppContextfn } from "../../Context/Index";
-import {
-  setverifiedorder,
-  changestatus,
-  deleteorder,
-  updatenote,
-} from "../Serveraction";
+import { changestatus, deleteorder, updatenote } from "../Serveraction";
 import { typeofprices } from "../../../components/Commondata";
 
 function Orders({ item }) {
-  const { notifictionarr, setnotifictionarr, setinvoicedata, refreshfn } =
+  const { notifictionarr, setnotifictionarr, setinvoicedata, setrefresh } =
     AppContextfn();
+
   const [note, setnote] = useState(item.note);
+  const [orderstatus, setorderstatus] = useState(item.status);
+
+  // notifier
+  const shownotification = (value) => {
+    setnotifictionarr([
+      ...notifictionarr,
+      {
+        id: new Date() + new Date().getMilliseconds(),
+        content: value,
+      },
+    ]);
+  };
   // date formater
   const dateformater = (value) => {
     const date = new Date(value);
@@ -41,92 +49,33 @@ function Orders({ item }) {
           {item._id}
         </span>
         <div className="ml-auto flex gap-[10px]">
-          {/* verify button */}
-          {item.status == "order" && (
-            <button
-              className={`px-[10px] py-[5px] border border-slate-300 ${
-                item.verified ? "bg-green-500 text-white" : ""
-              }`}
-              onClick={async () => {
-                await setverifiedorder(item._id);
-                refreshfn((pre) => {
-                  return pre + 1;
-                });
-              }}
-            >
-              Verified
-            </button>
-          )}
-          {/* add to running orders button */}
-          {item.status == "order" && (
-            <button
-              className={`px-[10px] py-[5px] border border-slate-300`}
-              onClick={async () => {
-                if (item.verified) {
-                  await changestatus(item._id, "running");
-                  refreshfn((pre) => {
-                    return pre + 1;
-                  });
-                }
-              }}
-            >
-              Start Order
-            </button>
-          )}
-          {/* add to orders button */}
-          {item.status == "running" && (
-            <button
-              className={`px-[10px] py-[5px] border border-slate-300`}
-              onClick={async () => {
-                if (item.verified) {
-                  await changestatus(item._id, "order");
-                  refreshfn((pre) => {
-                    return pre + 1;
-                  });
-                }
-              }}
-            >
-              Set back to Orders
-            </button>
-          )}
-          {/* add to completed orders button */}
-          {item.status == "running" && (
-            <button
-              className={`px-[10px] py-[5px] border border-slate-300`}
-              onClick={async () => {
-                if (item.verified) {
-                  await changestatus(item._id, "completed");
-                  refreshfn((pre) => {
-                    return pre + 1;
-                  });
-                }
-              }}
-            >
-              Set Completed
-            </button>
-          )}
-          {/* add to running orders button */}
-          {item.status == "completed" && (
-            <button
-              className={`px-[10px] py-[5px] border border-slate-300`}
-              onClick={async () => {
-                if (item.verified) {
-                  await changestatus(item._id, "running");
-                  refreshfn((pre) => {
-                    return pre + 1;
-                  });
-                }
-              }}
-            >
-              Set Not Completed
-            </button>
-          )}
+          {/* status updater */}
+          <select
+            name="orderstatus"
+            id="orderstatus"
+            value={orderstatus}
+            className="cursor-pointer border border-slate-300 px-[5px] outline-none"
+            onInput={async (e) => {
+              setorderstatus(e.target.value);
+              const res = await changestatus(item._id, e.target.value);
+              shownotification(res?.message);
+              setrefresh((pre) => {
+                return pre + 1;
+              });
+            }}
+          >
+            <option value="0">Order placed</option>
+            <option value="1">Order varified</option>
+            <option value="2">Delivery scheduled</option>
+            <option value="3">Delivered</option>
+          </select>
           {/* delete button */}
           <button
-            className="px-[10px] py-[5px] bg-red-400 text-white border border-slate-300"
+            className="px-[10px] py-[5px] bg-red-500 text-white border border-slate-300"
             onClick={async () => {
-              await deleteorder(item._id);
-              refreshfn((pre) => {
+              const res = await deleteorder(item._id);
+              shownotification(res?.message);
+              setrefresh((pre) => {
                 return pre + 1;
               });
             }}
@@ -197,56 +146,47 @@ function Orders({ item }) {
           className="py-[5px] px-[20px] rounded-full bg-green-600 text-white"
           onClick={async () => {
             let res = await updatenote(item._id, note);
-            setnotifictionarr([
-              ...notifictionarr,
-              {
-                id: new Date() + new Date().getMilliseconds(),
-                content: res.message,
-              },
-            ]);
+            shownotification(res.message);
           }}
         >
           Update note
         </button>
       </div>
       <div className="flex flex-wrap gap-[5px]">
-       {/*  */}
-            <div className="border border-slate-300 my-[10px] p-[5px]">
-              <Image
-                src={"/" + item.image[0]}
-                className="h-[200px] w-[200px] object-contain"
-                alt="product image"
-                height={200}
-                width={200}
-              ></Image>
-              <div>
-                <div>Product Name : {item.name}</div>
-                <div>Product Id : {item.pid}</div>
-                <div>
-                  Duration :{" "}
-                  {typeofprices[item.pricetype - 1].time[item.time]}{" "}
-                  {typeofprices[item.pricetype - 1].suffix}
-                </div>
-                <div>Quantity : {item.Quantity + 1}</div>
-                <div>
-                  Rent : ₹{" "}
-                  {item.prices[item.time] * (item.Quantity + 1)}
-                  /-
-                </div>
-                <div>
-                  Security Deposit : ₹{" "}
-                  {item.refundableprice * (item.Quantity + 1)}
-                  /-
-                </div>
-                <div>
-                  Total : ₹{" "}
-                  {item.prices[item.time] * (item.Quantity + 1) +
-                    item.refundableprice * (item.Quantity + 1)}
-                  /-
-                </div>
-              </div>
+        {/*  */}
+        <div className="border border-slate-300 my-[10px] p-[5px]">
+          <Image
+            src={"/" + item.image[0]}
+            className="h-[200px] w-[200px] object-contain"
+            alt="product image"
+            height={200}
+            width={200}
+          ></Image>
+          <div>
+            <div>Product Name : {item.name}</div>
+            <div>Product Id : {item.pid}</div>
+            <div>
+              Duration : {typeofprices[item.pricetype - 1].time[item.time]}{" "}
+              {typeofprices[item.pricetype - 1].suffix}
             </div>
-         {/*  */}
+            <div>Quantity : {item.Quantity + 1}</div>
+            <div>
+              Rent : ₹ {item.prices[item.time] * (item.Quantity + 1)}
+              /-
+            </div>
+            <div>
+              Security Deposit : ₹ {item.refundableprice * (item.Quantity + 1)}
+              /-
+            </div>
+            <div>
+              Total : ₹{" "}
+              {item.prices[item.time] * (item.Quantity + 1) +
+                item.refundableprice * (item.Quantity + 1)}
+              /-
+            </div>
+          </div>
+        </div>
+        {/*  */}
       </div>
       {/* invoice link */}
       {/* <Link

@@ -179,11 +179,7 @@ function Orders({ item, location }) {
           <div>Order varified</div>
           <div
             className={`h-[3px] w-full rounded-[2px] ${
-              item.status == "Order varified" ||
-              item.status == "Delivery scheduled" ||
-              item.status == "Delivered"
-                ? "bg-theme"
-                : "bg-slate-300 "
+              item.status >= 1 ? "bg-theme" : "bg-slate-300 "
             }`}
           ></div>
         </div>
@@ -191,9 +187,7 @@ function Orders({ item, location }) {
           <div>Delivery scheduled</div>
           <div
             className={`h-[3px] w-full rounded-[2px] ${
-              item.status == "Delivery scheduled" || item.status == "Delivered"
-                ? "bg-theme"
-                : "bg-slate-300 "
+              item.status >= 2 ? "bg-theme" : "bg-slate-300 "
             }`}
           ></div>
         </div>
@@ -201,7 +195,7 @@ function Orders({ item, location }) {
           <div>Delivered</div>
           <div
             className={`h-[3px] w-full rounded-[2px] ${
-              item.status == "Delivered" ? "bg-theme" : "bg-slate-300 "
+              item.status >= 3 ? "bg-theme" : "bg-slate-300 "
             }`}
           ></div>
         </div>
