@@ -4,35 +4,120 @@ import Orderscomp from "../Components/Orders";
 import Imageloading from "@/app/components/Imageloading/Imageloading";
 import { getallorders } from "../loginandordersaction";
 import { AppContextfn } from "@/app/Context/Index";
+import { deleteorder } from "../Serveraction";
 
 function Ordersmenu({ ordershowtype }) {
-  const { refresh } = AppContextfn();
+  const { refresh, setrefresh, notifictionarr, setnotifictionarr } =
+    AppContextfn();
   const [allorders, setallorders] = useState(null);
+  const [deleteconf, setdeleteconf] = useState({ show: false, id: "" });
+
+  // notifier
+  const shownotification = (value) => {
+    setnotifictionarr([
+      ...notifictionarr,
+      {
+        id: new Date() + new Date().getMilliseconds(),
+        content: value,
+      },
+    ]);
+  };
 
   useEffect(() => {
     setallorders(null);
     (async () => {
       setallorders(await getallorders({ status: ordershowtype }));
     })();
+
+    // delete confirmation
+    const handleBackButton = () => {
+      setdeleteconf({ ...deleteconf, show: false });
+    };
+    window.addEventListener("popstate", handleBackButton);
+    return () => {
+      window.removeEventListener("popstate", handleBackButton);
+    };
   }, [ordershowtype, refresh]);
 
   return (
-    <div className="flex items-start ">
-      <div
-        className="w-full  px-[10px] md:px-[40px] py-[20px] overflow-y-scroll "
-        style={{ height: "calc(100dvh - 60px)" }}
-      >
-        {allorders ? (
-          allorders?.length == 0 ? (
-            <Noitems />
+    <>
+      <div className="flex items-start ">
+        <div
+          className="w-full  px-[10px] md:px-[40px] py-[20px] overflow-y-scroll "
+          style={{ height: "calc(100dvh - 60px)" }}
+        >
+          {allorders ? (
+            allorders?.length == 0 ? (
+              <Noitems />
+            ) : (
+              allorders?.map((item, i) => (
+                <Orderscomp
+                  key={i}
+                  item={item}
+                  deleteconf={deleteconf}
+                  setdeleteconf={setdeleteconf}
+                />
+              ))
+            )
           ) : (
-            allorders?.map((item, i) => <Orderscomp key={i} item={item} />)
-          )
-        ) : (
-          <Loading />
-        )}
+            <Loading />
+          )}
+        </div>
       </div>
-    </div>
+      {/* delte confirmation */}
+      <div
+        className={`fixed top-0 left-0 flex items-center justify-center h-full w-full bg-black bg-opacity-[40%]  z-20 duration-300
+        ${
+          deleteconf?.show
+            ? "opacity-1 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        }`}
+      >
+        {/* cancle button */}
+        <button
+          className="absolute top-0 left-0 h-full w-full cursor-auto z-[-1]"
+          onClick={() => {
+            window.history.back();
+          }}
+        ></button>
+        {/*  */}
+        <div
+          className={`bg-white rounded-[20px] w-[90%] md:w-[400px] aspect-[4/3] flex flex-col items-center justify-center gap-[30px] duration-300
+          ${
+            deleteconf?.show
+              ? "translate-y-[-10%] opacity-1"
+              : "translate-y-[0%] opacity-0 "
+          }`}
+        >
+          <p className="text-center px-[20px] text-[22px] font-recline">
+            Do you want to remove this order?
+          </p>
+          <div className="flex justify-center gap-[20px]">
+            <button
+              className="px-[30px] py-[5px] border border-slate-300 rounded-full text-red-500"
+              onClick={async () => {
+                window.history.back();
+                const res = await deleteorder(deleteconf.id);
+                shownotification(res?.message);
+                setrefresh((pre) => {
+                  return pre + 1;
+                });
+              }}
+            >
+              Remove
+            </button>
+            <button
+              className="px-[30px] py-[5px] border border-slate-300 rounded-full"
+              onClick={() => {
+                window.history.back();
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 

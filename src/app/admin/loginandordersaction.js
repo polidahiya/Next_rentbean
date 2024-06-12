@@ -8,11 +8,11 @@ import { Data } from "../../components/Getdata";
 // auto login
 export async function autologin() {
   try {
-    if (!cookies().get("token")) {
+    if (!cookies().get("admintoken")) {
       return { message: "Please enter password" };
     }
 
-    let token = cookies().get("token").value;
+    let token = cookies().get("admintoken").value;
     let result = await verifyToken(token);
 
     if (result.email == "admin@vishal.com") {
@@ -40,7 +40,7 @@ export async function passwordlogin(req) {
       }
     );
 
-    cookies().set("token", token, {
+    cookies().set("admintoken", token, {
       maxAge: 3600 * 24,
       httpOnly: true,
       secure: true,

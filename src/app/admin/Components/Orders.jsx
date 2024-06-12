@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AppContextfn } from "../../Context/Index";
-import { changestatus, deleteorder, updatenote } from "../Serveraction";
+import { changestatus, updatenote } from "../Serveraction";
 import { typeofprices } from "../../../components/Commondata";
+import Deletedvg from "../../components/(svgs)/Delete";
 
-function Orders({ item }) {
+function Orders({ item, setdeleteconf }) {
   const { notifictionarr, setnotifictionarr, setinvoicedata, setrefresh } =
     AppContextfn();
 
@@ -71,16 +72,13 @@ function Orders({ item }) {
           </select>
           {/* delete button */}
           <button
-            className="px-[10px] py-[5px] bg-red-500 text-white border border-slate-300"
-            onClick={async () => {
-              const res = await deleteorder(item._id);
-              shownotification(res?.message);
-              setrefresh((pre) => {
-                return pre + 1;
-              });
+            className="p-[5px] border border-slate-300 "
+            onClick={() => {
+              history.pushState(null, "", "");
+              setdeleteconf({ show: true, id: item._id });
             }}
           >
-            Delete Order
+            <Deletedvg styles="h-[25px] fill-red-500" />
           </button>
         </div>
       </div>
@@ -113,23 +111,23 @@ function Orders({ item }) {
         {dateformater(item.orderdate).ampm}
       </div>
       {/* order start date */}
-      {item.orderstartdate && (
+      {item.delivered_date && (
         <>
           <div>
             <span className="min-w-[130px] inline-block text-green-600">
               Order Start Date{" "}
             </span>{" "}
-            : {dateformater(item.orderstartdate).day}/
-            {dateformater(item.orderstartdate).month}/
-            {dateformater(item.orderstartdate).year}
+            : {dateformater(item.delivered_date).day}/
+            {dateformater(item.delivered_date).month}/
+            {dateformater(item.delivered_date).year}
           </div>
           <div>
             <span className="min-w-[130px] inline-block text-green-600">
               Order Start Time{" "}
             </span>{" "}
-            : {dateformater(item.orderstartdate).hours}:
-            {dateformater(item.orderstartdate).minutes}{" "}
-            {dateformater(item.orderstartdate).ampm}
+            : {dateformater(item.delivered_date).hours}:
+            {dateformater(item.delivered_date).minutes}{" "}
+            {dateformater(item.delivered_date).ampm}
           </div>
         </>
       )}
@@ -152,41 +150,43 @@ function Orders({ item }) {
           Update note
         </button>
       </div>
-      <div className="flex flex-wrap gap-[5px]">
-        {/*  */}
-        <div className="border border-slate-300 my-[10px] p-[5px]">
-          <Image
-            src={"/" + item.image[0]}
-            className="h-[200px] w-[200px] object-contain"
-            alt="product image"
-            height={200}
-            width={200}
-          ></Image>
+      <div className="flex flex-col md:flex-row gap-[20px] items-center  border border-slate-300 my-[10px] p-[5px]">
+        <Image
+          src={"/" + item.image[0]}
+          className="h-[200px] w-[200px] object-contain"
+          alt="product image"
+          height={200}
+          width={200}
+        ></Image>
+        <div>
+          <div>Product Name : {item.name}</div>
+          <div>Product Id : {item.pid}</div>
           <div>
-            <div>Product Name : {item.name}</div>
-            <div>Product Id : {item.pid}</div>
+            Duration : {typeofprices[item.pricetype - 1].time[item.time]}{" "}
+            {typeofprices[item.pricetype - 1].suffix}
+          </div>
+          <div>Quantity : {item.Quantity + 1}</div>
+
+          {item["Quantity of Controlers"] && (
             <div>
-              Duration : {typeofprices[item.pricetype - 1].time[item.time]}{" "}
-              {typeofprices[item.pricetype - 1].suffix}
+              Number of controlers : {item["Quantity of Controlers"] + 1}
             </div>
-            <div>Quantity : {item.Quantity + 1}</div>
-            <div>
-              Rent : ₹ {item.prices[item.time] * (item.Quantity + 1)}
-              /-
-            </div>
-            <div>
-              Security Deposit : ₹ {item.refundableprice * (item.Quantity + 1)}
-              /-
-            </div>
-            <div>
-              Total : ₹{" "}
-              {item.prices[item.time] * (item.Quantity + 1) +
-                item.refundableprice * (item.Quantity + 1)}
-              /-
-            </div>
+          )}
+          <div>
+            Rent : ₹ {item.prices[item.time] * (item.Quantity + 1)}
+            /-
+          </div>
+          <div>
+            Security Deposit : ₹ {item.refundableprice * (item.Quantity + 1)}
+            /-
+          </div>
+          <div>
+            Total : ₹{" "}
+            {item.prices[item.time] * (item.Quantity + 1) +
+              item.refundableprice * (item.Quantity + 1)}
+            /-
           </div>
         </div>
-        {/*  */}
       </div>
       {/* invoice link */}
       {/* <Link

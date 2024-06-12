@@ -37,10 +37,11 @@ async function placeorder(data) {
 }
 
 async function page({ params }) {
+  const userdata = cookies()?.get("userdata")?.value;
   let location = params?.location.replace(/_/g, " ");
   const data = await Data();
   return (
-    <Publicpage placeorder={placeorder} location={location} data={data.data} />
+    <Publicpage placeorder={placeorder} location={location} data={data.data} userdata={userdata}/>
   );
 }
 

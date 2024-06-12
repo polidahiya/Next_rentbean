@@ -7,7 +7,7 @@ import Userdetails from "./components/Userdetails";
 import { typeofprices } from "../../../components/Commondata";
 import Removeprodialoge from "./components/Removeprodialoge";
 
-function Publicpage({ placeorder, data, location }) {
+function Publicpage({ placeorder, data, location ,userdata}) {
   const { cartproducts } = AppContextfn();
   let total = 0;
 
@@ -40,7 +40,7 @@ function Publicpage({ placeorder, data, location }) {
           })}
         </div>
         {/* customer details and payments */}
-        <Userdetails placeorder={placeorder} total={total} location={location}/>
+        <Userdetails placeorder={placeorder} total={total} location={location} userdata={userdata}/>
       </div>
     );
   }
