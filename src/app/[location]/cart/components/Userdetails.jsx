@@ -100,31 +100,34 @@ function Userdetails({ placeorder, total, location, userdata }) {
           </div>
           <hr className="border-gray-400" />
           {/* address checkout */}
-          <div className="relative border  border-slate-300  text-center mt-[20px] p-[15px] text-slate-400 rounded-[10px]">
-            <span className="absolute top-0 left-[20px] translate-y-[-50%] bg-white px-[10px] text-textcolor">
-              Delivery Address
-            </span>
-            {JSON.parse(userdata).address}
-            {/* edit svg */}
-            <Link
-              href={"/"+location+"/updateuserdetails"}
-              className="absolute right-[10px] top-[50%] h-[30px] aspect-square bg-slate-300 rounded-[5px] p-[5px] cursor-pointer translate-y-[-50%]"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
+          {userdata && (
+            <div className="relative border  border-slate-300  text-center mt-[20px] p-[15px] px-[50px] text-slate-400 rounded-[10px]">
+              <span className="absolute top-0 left-[20px] translate-y-[-50%] bg-white px-[10px] text-textcolor">
+                Delivery Address
+              </span>
+              {JSON.parse(userdata).address}
+              {/* edit svg */}
+              <Link
+                href={"/" + location + "/updateuserdetails"}
+                className="absolute right-[10px] top-[50%] h-[30px] aspect-square bg-slate-100 rounded-[5px] p-[5px] cursor-pointer translate-y-[-50%]"
               >
-                <path
-                  stroke="#000"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="1.5"
-                  d="M20.15 7.94L8.28 19.81c-1.06 1.07-4.23 1.56-4.95.85-.72-.71-.21-3.88.85-4.95L16.05 3.84a2.9 2.9 0 014.1 4.1v0z"
-                ></path>
-              </svg>
-            </Link>
-          </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="#000"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
+                    d="M20.15 7.94L8.28 19.81c-1.06 1.07-4.23 1.56-4.95.85-.72-.71-.21-3.88.85-4.95L16.05 3.84a2.9 2.9 0 014.1 4.1v0z"
+                  ></path>
+                </svg>
+              </Link>
+            </div>
+          )}
+
           {/* order button */}
           <div className="flex flex-col items-center py-[10px]">
             <button

@@ -111,8 +111,7 @@ function Posteradds({ location }) {
       <div className="aspect-[9/16] h-full w-[30%]  hidden lg:block  rounded-[10px] overflow-hidden">
         <video
           className="h-full w-full object-cover "
-          src="\ADS\Picsart_24-05-01_19-27-09-065.mp4"
-          poster="\ADS\Screenshot 2024-05-01 195538.png"
+          src="https://polidahiya.github.io/rentbeanimages/portraitad2.mp4"
           autoPlay
           muted
           loop

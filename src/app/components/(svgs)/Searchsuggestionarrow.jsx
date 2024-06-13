@@ -17,4 +17,4 @@ function Icon({ styles }) {
   );
 }
 
-export default Icon;
+export default React.memo(Icon);

@@ -33,4 +33,4 @@ function Searchicon({ styles }) {
   );
 }
 
-export default Searchicon;
+export default React.memo(Searchicon);

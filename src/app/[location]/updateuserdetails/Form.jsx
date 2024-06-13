@@ -65,7 +65,7 @@ function Form({ userdata }) {
         <Updateusersvg styles="h-[30px] translate-y-[-3px]" />
         Update Details
       </div>
-      <div className="mt-[20px] lg:grid lg:grid-cols-2 lg:gap-x-[30px] ">
+      <div className="mt-[50px] lg:grid lg:grid-cols-2 lg:gap-x-[30px] ">
         <div className=" relative h-[35px] w-full my-[30px] lg:my-[15px] bg-transparent">
           <input
             ref={nameref}
