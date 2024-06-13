@@ -9,6 +9,7 @@ import { deleteorder } from "../Serveraction";
 function Ordersmenu({ ordershowtype }) {
   const { refresh, setrefresh, notifictionarr, setnotifictionarr } =
     AppContextfn();
+
   const [allorders, setallorders] = useState(null);
   const [deleteconf, setdeleteconf] = useState({ show: false, id: "" });
 
@@ -26,7 +27,13 @@ function Ordersmenu({ ordershowtype }) {
   useEffect(() => {
     setallorders(null);
     (async () => {
-      setallorders(await getallorders({ status: ordershowtype }));
+      let res = await getallorders({ status: ordershowtype });
+      if (res.allorders) {
+        setallorders(res.allorders);
+      }
+      if (res.message) {
+        shownotification(res.message);
+      }
     })();
 
     // delete confirmation

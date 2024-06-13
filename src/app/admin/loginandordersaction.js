@@ -54,7 +54,7 @@ export async function passwordlogin(req) {
 // get orders
 export async function getallorders(req) {
   const productsdata = await Data();
-  let token = cookies().get("token").value;
+  let token = cookies().get("admintoken").value;
 
   if (!token) {
     return { message: "User error" };
@@ -105,7 +105,7 @@ export async function getallorders(req) {
       });
     });
 
-    return allorders;
+    return { allorders: allorders };
   } else {
     return { message: "User error" };
   }
