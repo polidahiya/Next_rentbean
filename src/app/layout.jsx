@@ -11,7 +11,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <script
-        src="//code.tidio.co/kmdbtvn0njqmk275lhudh2rvm1kbbaba.js"
+        src="//code.tidio.co/tv03bzistwn9yxnea3kk39bdbffty3fp.js"
         async
       ></script>
       <body>
