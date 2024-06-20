@@ -99,23 +99,21 @@ function Orders({ item, location }) {
           "/" +
           item.pid
         }
-        className="relative flex h-[150px] lg:h-[200px] w-full overflow-hidden"
+        className="h-[150px] lg:h-[200px] overflow-hidden"
       >
-        <Image
-          src={"/" + item.image[0]}
-          alt={item.name}
-          height={100}
-          width={100}
-          className="h-[130px] min-w-[130px] lg:h-[180px] lg:min-w-[180px] aspect-square object-cover"
-        ></Image>
+        <h2 className="max-w-full text-center font-semibold text-[16px] lg:text-[18px] text-ellipsis whitespace-nowrap overflow-hidden font-recline">
+          {item.name}
+        </h2>
+        <div className="flex gap-[10px] items-center">
+          <Image
+            src={"/" + item.image[0]}
+            alt={item.name}
+            height={100}
+            width={100}
+            className="h-[130px] min-w-[130px] lg:h-[180px] lg:min-w-[180px] aspect-square object-cover"
+          ></Image>
 
-        {/* descriptions */}
-        <div className="flex flex-col justify-between w-full h-full p-0 lg:p-[10px]">
-          <center>
-            <h2 className="w-full max-w-[200px] lg:max-w-[250px] text-center font-semibold text-[16px] lg:text-[18px] text-ellipsis whitespace-nowrap overflow-hidden font-recline">
-              {item.name}
-            </h2>
-          </center>
+          {/* descriptions */}
           <div className="h-full w-full flex flex-col ml-[10px] justify-center text-[12px] lg:text-[14px] ">
             <div>
               Rent : ₹ {item.prices[item.time] * (item.Quantity + 1)}/-

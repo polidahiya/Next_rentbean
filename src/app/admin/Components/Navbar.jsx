@@ -1,6 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { AppContextfn } from "@/app/Context/Index";
 
 function Navbar({ ordershowtype, setordershowtype }) {
@@ -15,12 +16,15 @@ function Navbar({ ordershowtype, setordershowtype }) {
         height={60}
         priority
       ></Image>
+      {/* to the updoucts page */}
+      <Link href="/admin/updateproducts"
+      className="h-[30px] aspect-square bg-blue-700 text-white text-[25px] flex items-center justify-center ml-auto rounded-[10px]">+</Link>
       {/* status updater */}
       <select
         name="orderstatus"
         id="orderstatus"
         value={ordershowtype}
-        className="h-[30px] ml-auto cursor-pointer border border-slate-300 px-[5px] outline-none"
+        className="h-[30px] ml-[10px] cursor-pointer border border-slate-300 px-[5px] outline-none"
         onInput={async (e) => {
           setordershowtype(e.target.value);
         }}

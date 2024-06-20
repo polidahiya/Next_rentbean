@@ -7,11 +7,11 @@ let lastFetchedTime = null;
 
 export async function Data() {
   const currentTime = new Date().getTime();
-  const oneHour = 60 * 60 * 1000;
+  const cachetime = 10 * 60 * 1000;
   if (
     !cachedData ||
     !lastFetchedTime ||
-    currentTime - lastFetchedTime >= oneHour
+    currentTime - lastFetchedTime >= cachetime
   ) {
     cachedData = await sitedata.findOne({});
     lastFetchedTime = currentTime;
