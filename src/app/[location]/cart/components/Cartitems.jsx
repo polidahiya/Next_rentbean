@@ -7,8 +7,7 @@ function Cartitems({ item, typeofprices }) {
   const {
     cartproducts,
     setcartproducts,
-    notifictionarr,
-    setnotifictionarr,
+    shownotification,
     setcartprodremove,
   } = AppContextfn();
   const [toggletime, settoggletime] = useState(false);
@@ -61,13 +60,7 @@ function Cartitems({ item, typeofprices }) {
               className="flex items-center justify-center w-[30%] h-full bg-slate-100"
               onClick={() => {
                 if (cartproducts[item.pid].Quantity <= 0) {
-                  setnotifictionarr([
-                    ...notifictionarr,
-                    {
-                      id: new Date() + new Date().getMilliseconds(),
-                      content: "Quantity is minimum",
-                    },
-                  ]);
+                  shownotification("Quantity is minimum")
                   return;
                 }
                 const updatedCartProducts = { ...cartproducts };
@@ -84,13 +77,7 @@ function Cartitems({ item, typeofprices }) {
               className="flex items-center justify-center w-[30%] h-full bg-slate-100"
               onClick={() => {
                 if (cartproducts[item.pid].Quantity >= item.limit - 1) {
-                  setnotifictionarr([
-                    ...notifictionarr,
-                    {
-                      id: new Date() + new Date().getMilliseconds(),
-                      content: "Quantity is maximum",
-                    },
-                  ]);
+                  shownotification("Quantity is maximum")
                   return;
                 }
                 const updatedCartProducts = { ...cartproducts };

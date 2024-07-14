@@ -14,8 +14,7 @@ function Userdetails({ placeorder, total, location, userdata }) {
   const {
     cartproducts,
     settoggleorderplacedmenu,
-    notifictionarr,
-    setnotifictionarr,
+    shownotification,
     setredirectloginlink,
   } = AppContextfn();
 
@@ -28,26 +27,14 @@ function Userdetails({ placeorder, total, location, userdata }) {
     if (res.message == "Please login first!") {
       setredirectloginlink(`/${location}/cart`);
       router.push(`/${location}/loginlogout`);
-      setnotifictionarr([
-        ...notifictionarr,
-        {
-          id: new Date() + new Date().getMilliseconds(),
-          content: res.message,
-        },
-      ]);
+      shownotification(res?.message);
       return;
     }
 
     if (res.message == "order placed") {
       settoggleorderplacedmenu(true);
     } else {
-      setnotifictionarr([
-        ...notifictionarr,
-        {
-          id: new Date() + new Date().getMilliseconds(),
-          content: res.message ? res.message : "Unable to place order",
-        },
-      ]);
+      shownotification(res.message ? res.message : "Unable to place order");
     }
   };
 

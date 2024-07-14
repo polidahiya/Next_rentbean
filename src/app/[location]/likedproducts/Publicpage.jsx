@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 
 function Publicpage({ location }) {
   const router = useRouter();
-  const { notifictionarr, setnotifictionarr } = AppContextfn();
+  const { shownotification } = AppContextfn();
   const [favourites, setfavourites] = useState(null);
 
   useEffect(() => {
@@ -52,13 +52,7 @@ function Publicpage({ location }) {
         if (res.message == "Server error") {
           router.push("/" + location);
         }
-        setnotifictionarr([
-          ...notifictionarr,
-          {
-            id: new Date() + new Date().getMilliseconds(),
-            content: res.message,
-          },
-        ]);
+        shownotification(res?.message);
       }
     })();
   }, []);
@@ -142,7 +136,7 @@ function Publicpage({ location }) {
 }
 
 function Likeproducts({ item, location }) {
-  const { notifictionarr, setnotifictionarr } = AppContextfn();
+  const { shownotification } = AppContextfn();
   const [liked, setliked] = useState(true);
 
   if (liked) {
@@ -207,14 +201,7 @@ function Likeproducts({ item, location }) {
               if (res.message == "Removed from favourites") {
                 setliked(false);
               }
-
-              setnotifictionarr([
-                ...notifictionarr,
-                {
-                  id: new Date() + new Date().getMilliseconds(),
-                  content: res.message,
-                },
-              ]);
+              shownotification(res?.message);
             }
           }}
         >

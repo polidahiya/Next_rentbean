@@ -63,7 +63,7 @@ function Productupdater({ data }) {
 }
 
 function Product({ category, subcategory, product, i }) {
-  const { notifictionarr, setnotifictionarr } = AppContextfn();
+  const { shownotification } = AppContextfn();
 
   const [productdata, setproductdata] = useState({ ...product });
 
@@ -157,13 +157,7 @@ function Product({ category, subcategory, product, i }) {
               i
             );
             if (res?.message) {
-              setnotifictionarr([
-                ...notifictionarr,
-                {
-                  id: new Date() + new Date().getMilliseconds(),
-                  content: res?.message,
-                },
-              ]);
+              shownotification(res?.message);
             }
           }}
         >

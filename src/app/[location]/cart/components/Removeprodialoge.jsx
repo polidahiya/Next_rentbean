@@ -6,8 +6,7 @@ function Removeprodialoge() {
     cartprodremove,
     setcartprodremove,
     setcartproducts,
-    notifictionarr,
-    setnotifictionarr,
+    shownotification,
   } = AppContextfn();
 
   useEffect(() => {
@@ -60,13 +59,7 @@ function Removeprodialoge() {
                 return updatedCartProducts;
               });
               // notification
-              setnotifictionarr([
-                ...notifictionarr,
-                {
-                  id: new Date() + new Date().getMilliseconds(),
-                  content: "Removed Successfully",
-                },
-              ]);
+              shownotification("Removed Successfully")
             }}
           >
             Remove

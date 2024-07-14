@@ -10,7 +10,7 @@ import { AppContextfn } from "@/app/Context/Index";
 
 function Publicpage({ location }) {
   const router = useRouter();
-  const { notifictionarr, setnotifictionarr } = AppContextfn();
+  const { shownotification} = AppContextfn();
   const [orders, setorders] = useState(null);
 
   useEffect(() => {
@@ -32,13 +32,7 @@ function Publicpage({ location }) {
           router.push("/" + location);
         }
 
-        setnotifictionarr([
-          ...notifictionarr,
-          {
-            id: new Date() + new Date().getMilliseconds(),
-            content: res.message,
-          },
-        ]);
+        shownotification(res?.message);
       }
     })();
   }, []);

@@ -7,22 +7,11 @@ import { AppContextfn } from "@/app/Context/Index";
 import { deleteorder } from "../Serveraction";
 
 function Ordersmenu({ ordershowtype }) {
-  const { refresh, setrefresh, notifictionarr, setnotifictionarr } =
+  const { refresh, setrefresh, shownotification } =
     AppContextfn();
 
   const [allorders, setallorders] = useState(null);
   const [deleteconf, setdeleteconf] = useState({ show: false, id: "" });
-
-  // notifier
-  const shownotification = (value) => {
-    setnotifictionarr([
-      ...notifictionarr,
-      {
-        id: new Date() + new Date().getMilliseconds(),
-        content: value,
-      },
-    ]);
-  };
 
   useEffect(() => {
     setallorders(null);

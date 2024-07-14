@@ -10,7 +10,7 @@ import Logout from "../(svgs)/Logout";
 import Updateusersvg from "../(svgs)/Updateuser";
 
 function Usermenu({ toggleusermenu, settoggleusermenu, location, userdata }) {
-  const { notifictionarr, setnotifictionarr } = AppContextfn();
+  const { shownotification } = AppContextfn();
   const router = useRouter();
 
   return (
@@ -77,13 +77,8 @@ function Usermenu({ toggleusermenu, settoggleusermenu, location, userdata }) {
               className="p-[5px] flex items-center gap-[10px] lg:hover:bg-slate-100 cursor-pointer"
               onClick={async () => {
                 let res = await logout();
-                setnotifictionarr([
-                  ...notifictionarr,
-                  {
-                    id: new Date() + new Date().getMilliseconds(),
-                    content: res?.message,
-                  },
-                ]);
+                shownotification(res?.message);
+                
                 router.push("/" + location);
                 window.location.reload();
               }}

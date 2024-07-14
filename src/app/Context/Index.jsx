@@ -22,6 +22,18 @@ export function Appwrapper({ children }) {
   const [showlogin, setshowlogin] = useState(true);
   const [refresh, setrefresh] = useState(0);
 
+  // fucntions
+  const shownotification = (value) => {
+    setnotifictionarr([
+      ...notifictionarr,
+      {
+        id: new Date() + new Date().getMilliseconds(),
+        content: value || "Unknown error",
+      },
+    ]);
+  };
+
+
   return (
     <AppContext.Provider
       value={{
@@ -38,6 +50,7 @@ export function Appwrapper({ children }) {
         searchinputref,
         notifictionarr,
         setnotifictionarr,
+        shownotification,
         cartprodremove,
         setcartprodremove,
         invoicedata,

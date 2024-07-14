@@ -4,7 +4,7 @@ import { AppContextfn } from "../../Context/Index";
 import { passwordlogin } from "../loginandordersaction";
 
 function Loginpage() {
-  const { setshowlogin, notifictionarr, setnotifictionarr } = AppContextfn();
+  const { setshowlogin, shownotification } = AppContextfn();
   const [password, setpassword] = useState("");
   const [showpassword, setshowpassword] = useState(false);
   const passwordinput = useRef();
@@ -12,37 +12,19 @@ function Loginpage() {
   const loginfn = () => {
     (async () => {
       if (password == "") {
-        setnotifictionarr([
-          ...notifictionarr,
-          {
-            id: new Date() + new Date().getMilliseconds(),
-            content: "Please enter password",
-          },
-        ]);
+        shownotification("Please enter password");
         return;
       }
       let res = await passwordlogin({ password: password });
 
-      if (res.message == "Login successfull") {
+      if (res?.message == "Login successfull") {
         setshowlogin(false);
-        setnotifictionarr([
-          ...notifictionarr,
-          {
-            id: new Date() + new Date().getMilliseconds(),
-            content: res.message,
-          },
-        ]);
+        shownotification(res?.message);
       }
 
-      if (res.message == "Wrong password") {
+      if (res?.message == "Wrong password") {
         setshowlogin(true);
-        setnotifictionarr([
-          ...notifictionarr,
-          {
-            id: new Date() + new Date().getMilliseconds(),
-            content: res.message,
-          },
-        ]);
+        shownotification(res?.message);
       }
     })();
   };

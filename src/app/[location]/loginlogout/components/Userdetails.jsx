@@ -9,18 +9,9 @@ import Usersvg from "../../../components/(svgs)/Usersvg";
 function Userdetails({ location }) {
   const router = useRouter();
 
-  const { notifictionarr, setnotifictionarr, redirectloginlink } =
+  const { shownotification, redirectloginlink } =
     AppContextfn();
 
-  const shownotification = (value) => {
-    setnotifictionarr([
-      ...notifictionarr,
-      {
-        id: new Date() + new Date().getMilliseconds(),
-        content: value,
-      },
-    ]);
-  };
 
   const [toggleform, settoggleform] = useState(false);
   const [togglepassword, settogglepassword] = useState(true);
@@ -111,14 +102,7 @@ function Userdetails({ location }) {
       };
 
       const reply = await signup(userdata);
-
-      setnotifictionarr([
-        ...notifictionarr,
-        {
-          id: new Date() + new Date().getMilliseconds(),
-          content: reply?.message,
-        },
-      ]);
+      shownotification(reply?.message)
 
       if (reply.message == "Signup successfully") {
         if (redirectloginlink) {
@@ -136,13 +120,7 @@ function Userdetails({ location }) {
 
       const reply = await login(userdata);
 
-      setnotifictionarr([
-        ...notifictionarr,
-        {
-          id: new Date() + new Date().getMilliseconds(),
-          content: reply?.message,
-        },
-      ]);
+      shownotification(reply?.message)
 
       if (reply.message == "Login successfull") {
         if (redirectloginlink) {

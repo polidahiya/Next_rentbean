@@ -6,8 +6,7 @@ import Cart from "../../../../components/(svgs)/Cart";
 import Delete from "../../../../components/(svgs)/Delete";
 
 function Settings({ product, typeofprices, link }) {
-  const { cartproducts, setcartproducts, notifictionarr, setnotifictionarr } =
-    AppContextfn();
+  const { cartproducts, setcartproducts, shownotification } = AppContextfn();
   const [productdata, setproductdata] = useState({ time: 0, link: link });
 
   //set initial options value
@@ -33,7 +32,9 @@ function Settings({ product, typeofprices, link }) {
 
   return (
     <div className="blackshadow1 p-[20px] bg-bg1 w-[100%] lg:w-[30%] rounded-[20px]">
-      <h3 className="text-center text-[22px] font-medium font-recline">{product.name}</h3>
+      <h3 className="text-center text-[22px] font-medium font-recline">
+        {product.name}
+      </h3>
       {/* otions */}
       {product.options.map((item, i) => {
         return (
@@ -49,8 +50,10 @@ function Settings({ product, typeofprices, link }) {
       {/* tenure */}
       <div className="flex items-center gap-[10px]">
         <span>Choose Tenure</span>{" "}
-        <span className="h-[15px] aspect-square border border-cyan-500 text-cyan-500 text-[12px] rounded-full  flex items-center justify-center cursor-pointer"
-        title="Higher the tenure lower the monthly and daily price">
+        <span
+          className="h-[15px] aspect-square border border-cyan-500 text-cyan-500 text-[12px] rounded-full  flex items-center justify-center cursor-pointer"
+          title="Higher the tenure lower the monthly and daily price"
+        >
           i
         </span>
       </div>
@@ -121,34 +124,17 @@ function Settings({ product, typeofprices, link }) {
                 if (updatedCartProducts[product.pid]) {
                   // delete
                   delete updatedCartProducts[product.pid];
-                  setnotifictionarr([
-                    ...notifictionarr,
-                    {
-                      id: new Date() + new Date().getMilliseconds(),
-                      content: "Removed from the cart",
-                    },
-                  ]);
+
+                  shownotification("Removed from the cart");
                 } else {
                   // add
                   updatedCartProducts[product.pid] = { ...productdata };
-                  setnotifictionarr([
-                    ...notifictionarr,
-                    {
-                      id: new Date() + new Date().getMilliseconds(),
-                      content: "Added to the cart",
-                    },
-                  ]);
+                  shownotification("Added to the cart");
                 }
                 return updatedCartProducts;
               });
             } else {
-              setnotifictionarr([
-                ...notifictionarr,
-                {
-                  id: new Date() + new Date().getMilliseconds(),
-                  content: "This item is currently unavailable",
-                },
-              ]);
+              shownotification("This item is currently unavailable");
             }
           }}
         >

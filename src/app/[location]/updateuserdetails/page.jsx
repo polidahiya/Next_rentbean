@@ -3,14 +3,15 @@ import { cookies } from "next/headers";
 import Form from "./Form";
 import { redirect } from "next/navigation";
 
-function page({ params }) {
+function page() {
   let token = cookies().get("token");
+  if (!token) redirect("/");
+  
   let userdata = cookies().get("userdata")?.value;
   if (userdata) {
     userdata = JSON.parse(cookies().get("userdata")?.value);
   }
 
-  if (!token) redirect("/" + params.location);
 
   return (
     <div

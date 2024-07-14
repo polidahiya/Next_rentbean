@@ -7,20 +7,10 @@ import { autologin } from "./loginandordersaction";
 import { AppContextfn } from "../Context/Index";
 
 function Publicpage() {
-  const { showlogin, setshowlogin, notifictionarr, setnotifictionarr } =
+  const { showlogin, setshowlogin, shownotification } =
     AppContextfn();
 
   const [ordershowtype, setordershowtype] = useState("0");
-
-  const shownotification = (value) => {
-    setnotifictionarr([
-      ...notifictionarr,
-      {
-        id: new Date() + new Date().getMilliseconds(),
-        content: value || "Unknown error",
-      },
-    ]);
-  };
 
   useEffect(() => {
     (async () => {

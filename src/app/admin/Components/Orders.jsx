@@ -8,22 +8,11 @@ import { typeofprices } from "../../../components/Commondata";
 import Deletedvg from "../../components/(svgs)/Delete";
 
 function Orders({ item, setdeleteconf }) {
-  const { notifictionarr, setnotifictionarr, setinvoicedata, setrefresh } =
-    AppContextfn();
+  const { shownotification, setinvoicedata, setrefresh } = AppContextfn();
 
   const [note, setnote] = useState(item.note);
   const [orderstatus, setorderstatus] = useState(item.status);
 
-  // notifier
-  const shownotification = (value) => {
-    setnotifictionarr([
-      ...notifictionarr,
-      {
-        id: new Date() + new Date().getMilliseconds(),
-        content: value,
-      },
-    ]);
-  };
   // date formater
   const dateformater = (value) => {
     const date = new Date(value);

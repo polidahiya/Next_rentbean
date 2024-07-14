@@ -6,7 +6,7 @@ import { updateuserdetails } from "./Serveractions";
 import Updateusersvg from "../../components/(svgs)/Updateuser";
 
 function Form({ userdata }) {
-  const { notifictionarr, setnotifictionarr } = AppContextfn();
+  const { shownotification } = AppContextfn();
 
   const nameref = useRef("");
   const phonenumref = useRef("");
@@ -23,13 +23,7 @@ function Form({ userdata }) {
     for (let i = 0; i < refarray.length; i++) {
       if (refarray[i]?.current?.value == "") {
         refarray[i]?.current?.focus();
-        setnotifictionarr([
-          ...notifictionarr,
-          {
-            id: new Date() + new Date().getMilliseconds(),
-            content: "Please fill this field",
-          },
-        ]);
+        shownotification("Please fill this field");
         return;
       }
     }
@@ -42,13 +36,7 @@ function Form({ userdata }) {
 
     const res = await updateuserdetails(userdetails);
     if (res.message) {
-      setnotifictionarr([
-        ...notifictionarr,
-        {
-          id: new Date() + new Date().getMilliseconds(),
-          content: res.message,
-        },
-      ]);
+      shownotification(res.message);
     }
   };
 

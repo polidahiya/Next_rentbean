@@ -10,10 +10,6 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   return (
     <html lang="en">
-      <script
-        src="//code.tidio.co/tv03bzistwn9yxnea3kk39bdbffty3fp.js"
-        async
-      ></script>
       <body>
         <Appwrapper>
           <div>{children}</div>

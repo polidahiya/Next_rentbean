@@ -46,7 +46,7 @@ const catandsubcat = {
 };
 
 function Productupdater() {
-  const { notifictionarr, setnotifictionarr } = AppContextfn();
+  const { shownotification } = AppContextfn();
 
   const [category, setCategory] = useState(Object.keys(catandsubcat)[0]);
   const [subcategory, setSubcategory] = useState(catandsubcat[category][0]);
@@ -421,13 +421,7 @@ function Productupdater() {
                   .then((res) => {
                     console.log(res);
                     if (res?.message) {
-                      setnotifictionarr([
-                        ...notifictionarr,
-                        {
-                          id: new Date() + new Date().getMilliseconds(),
-                          content: res?.message,
-                        },
-                      ]);
+                      shownotification(res?.message);
                     }
                   });
               }}

@@ -8,7 +8,7 @@ import Imageloading from "@/app/components/Imageloading/Imageloading";
 import Heart from "@/app/components/(svgs)/Heart";
 
 function Topimages({ images, name, productid }) {
-  const { notifictionarr, setnotifictionarr } = AppContextfn();
+  const { shownotification} = AppContextfn();
   const [dotnum, setdotnum] = useState(0);
   const [liked, setliked] = useState(false);
   const imagesscrollref = useRef();
@@ -32,13 +32,7 @@ function Topimages({ images, name, productid }) {
       navigator.clipboard
         .writeText(link)
         .then(function () {
-          setnotifictionarr([
-            ...notifictionarr,
-            {
-              id: new Date() + new Date().getMilliseconds(),
-              content: "Link copied!",
-            },
-          ]);
+          shownotification("Link copied!")
         })
         .catch(function (err) {
           fallbackCopyTextToClipboard(link);
@@ -54,13 +48,7 @@ function Topimages({ images, name, productid }) {
     textArea.select();
     document.execCommand("copy");
     document.body.removeChild(textArea);
-    setnotifictionarr([
-      ...notifictionarr,
-      {
-        id: new Date() + new Date().getMilliseconds(),
-        content: "Link copied!",
-      },
-    ]);
+    shownotification("Link copied!")
   }
 
   return (
@@ -116,14 +104,7 @@ function Topimages({ images, name, productid }) {
             if (res.message == "Removed from favourites") {
               setliked(false);
             }
-
-            setnotifictionarr([
-              ...notifictionarr,
-              {
-                id: new Date() + new Date().getMilliseconds(),
-                content: res.message,
-              },
-            ]);
+            shownotification(res?.message)
           }
         }}
       >
