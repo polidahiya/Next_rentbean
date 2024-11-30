@@ -1,7 +1,6 @@
 import { MongoClient, ObjectId } from "mongodb";
 
-const db_link =
-  "mongodb+srv://polidahiya830:12er56ui90%40Poli@cluster0.pvrgiqn.mongodb.net/?retryWrites=true&w=majority";
+const db_link = process.env.DB_LINK;
 
 const client = new MongoClient(db_link);
 
